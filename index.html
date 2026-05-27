@@ -25,6 +25,13 @@ html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden;}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;background-size:150px;}
 
+/* SYNC INDICATOR */
+.sync-bar{position:fixed;top:56px;left:0;right:0;height:2px;background:transparent;z-index:999;transition:all 0.3s;}
+.sync-bar.syncing{background:linear-gradient(90deg,transparent,var(--inhaber-accent),transparent);animation:syncpulse 1s infinite;}
+.sync-bar.saved{background:var(--green);animation:fadeout 0.8s forwards 0.5s;}
+@keyframes syncpulse{0%{background-position:-200px 0}100%{background-position:200px 0}}
+@keyframes fadeout{to{opacity:0}}
+
 /* TOPBAR */
 .topbar{position:sticky;top:0;z-index:400;background:rgba(8,8,8,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 2rem;height:56px;}
 .topbar-logo{display:flex;align-items:center;gap:10px;margin-right:2.5rem;flex-shrink:0;}
@@ -176,7 +183,6 @@ body.is-admin .ht-admin-bar{display:flex;}
 .ht-adm-btn{width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:12px;border:1px solid var(--border-hi);background:rgba(0,0,0,0.7);color:var(--text-muted);cursor:pointer;transition:all 0.12s;}
 .ht-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
 .ht-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
-.ht-adm-btn.edit-card:hover{color:var(--inhaber-accent);border-color:var(--inhaber-border);}
 
 /* DASHBOARD */
 .dash-header{background:linear-gradient(135deg,rgba(155,141,255,0.08) 0%,rgba(8,8,8,0) 60%);border:1px solid rgba(155,141,255,0.2);padding:24px 28px;margin-bottom:2rem;position:relative;overflow:hidden;}
@@ -205,7 +211,7 @@ body.is-admin .ht-admin-bar{display:flex;}
 .v-admin-dot{position:absolute;bottom:0;right:0;width:12px;height:12px;border-radius:50%;background:var(--inhaber-accent);border:2px solid var(--card);display:flex;align-items:center;justify-content:center;}
 .v-admin-dot i{font-size:6px;color:#000;}
 .v-info{flex:1;min-width:0;}
-.v-name{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.v-name{font-size:13px;font-weight:700;color:var(--text);}
 .v-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);}
 .v-meta{text-align:right;flex-shrink:0;}
 .v-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);}
@@ -216,7 +222,7 @@ body.is-admin .ht-admin-bar{display:flex;}
 .log-row:last-child{border-bottom:none;}
 .log-avatar img{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border-hi);object-fit:cover;}
 .log-avatar-ph{width:28px;height:28px;border-radius:50%;background:var(--card-hi);border:1.5px solid var(--border-hi);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--text-muted);}
-.log-name{flex:1;font-size:12px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.log-name{flex:1;font-size:12px;color:var(--text-dim);}
 .log-name strong{color:var(--text);font-weight:700;}
 .log-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);flex-shrink:0;}
 .log-admin-dot{width:6px;height:6px;border-radius:50%;background:var(--inhaber-accent);flex-shrink:0;}
@@ -225,7 +231,6 @@ body.is-admin .ht-admin-bar{display:flex;}
 .dash-refresh:hover{color:var(--text);border-color:var(--text-muted);}
 .dash-refresh.spinning i{animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-/* Dashboard admin actions */
 .dash-admin-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:2rem;}
 .dash-admin-card{background:var(--card);border:1px solid var(--border-hi);padding:18px 20px;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden;}
 .dash-admin-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background 0.15s;}
@@ -292,7 +297,7 @@ body.is-admin .add-rule-btn,body.is-admin .add-member-btn{display:flex;}
 .add-rank-section-btn{display:none;width:100%;padding:13px;border:1px dashed rgba(192,132,252,0.3);background:transparent;color:rgba(192,132,252,0.6);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;margin-top:1rem;align-items:center;justify-content:center;gap:8px;}
 body.is-admin .add-rank-section-btn{display:flex;}
 .add-rank-section-btn:hover{border-color:#c084fc;color:#c084fc;background:rgba(192,132,252,0.06);}
-.rank-section-del-btn{display:none;background:rgba(0,0,0,0.7);border:1px solid rgba(224,60,60,0.4);color:rgba(224,60,60,0.7);width:22px;height:22px;border-radius:0;cursor:pointer;font-size:11px;align-items:center;justify-content:center;transition:all 0.12s;flex-shrink:0;}
+.rank-section-del-btn{display:none;background:rgba(0,0,0,0.7);border:1px solid rgba(224,60,60,0.4);color:rgba(224,60,60,0.7);width:22px;height:22px;cursor:pointer;font-size:11px;align-items:center;justify-content:center;transition:all 0.12s;flex-shrink:0;}
 body.is-admin .rank-section-del-btn{display:flex;}
 .rank-section-del-btn:hover{color:#ff6060;border-color:rgba(224,60,60,0.7);}
 
@@ -351,9 +356,6 @@ body.is-admin .rank-section-del-btn{display:flex;}
 footer{border-top:1px solid var(--border);padding:1.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.12em;background:var(--surface);}
 footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightness(0.5);}
 
-/* Drag highlight */
-.rule.drag-over{border-left-color:var(--inhaber-accent)!important;background:rgba(210,140,10,0.08)!important;}
-
 @media(max-width:700px){
   .topbar{padding:0 1rem;}
   .topbar-logo{margin-right:1rem;}
@@ -372,6 +374,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 </style>
 </head>
 <body>
+
+<div class="sync-bar" id="sync-bar"></div>
 
 <!-- AUTH SCREEN -->
 <div id="auth-screen">
@@ -535,7 +539,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         <tr><td><div class="vname" data-editable>Cheating / Hacks</div><div class="vdesc" data-editable>Einsatz externer Tools oder Exploits</div></td><td><span class="zb perm" data-editable>Permanent</span></td><td data-editable>Nutzung von Cheats, Hacks oder Exploits jeglicher Art.</td></tr>
       </tbody>
     </table>
-    <!-- Admin: add row button -->
     <button class="add-rule-btn" id="add-strafe-btn" style="display:none;" onclick="adminAddStrafeRow()"><i class="ti ti-plus"></i> Eintrag hinzufügen</button>
   </div>
 
@@ -554,14 +557,14 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           <i class="ti ti-crown ht-rank-icon inhaber"></i>
           <span class="ht-rank-pill inhaber" data-editable>Inhaber</span>
           <div class="ht-rank-line inhaber"></div>
-          <button class="rank-section-del-btn" onclick="deleteRankSection(this)" title="Kategorie löschen"><i class="ti ti-trash"></i></button>
+          <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
         </div>
         <div class="ht-grid" data-rank="inhaber">
           <div class="ht-card inhaber" data-member-id="inhaber-1">
             <div class="ht-admin-bar">
-              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('inhaber-1')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-              <button class="ht-adm-btn" onclick="openLanyardModal('inhaber-1')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-              <button class="ht-adm-btn del" onclick="deleteMember('inhaber-1')" title="Löschen"><i class="ti ti-trash"></i></button>
+              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('inhaber-1')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('inhaber-1')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('inhaber-1')"><i class="ti ti-trash"></i></button>
             </div>
             <div class="ht-card-inner">
               <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">P</div><span class="dc-status" id="status-inhaber-1"></span></div>
@@ -576,9 +579,9 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           </div>
           <div class="ht-card inhaber" data-member-id="inhaber-2">
             <div class="ht-admin-bar">
-              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('inhaber-2')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-              <button class="ht-adm-btn" onclick="openLanyardModal('inhaber-2')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-              <button class="ht-adm-btn del" onclick="deleteMember('inhaber-2')" title="Löschen"><i class="ti ti-trash"></i></button>
+              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('inhaber-2')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('inhaber-2')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('inhaber-2')"><i class="ti ti-trash"></i></button>
             </div>
             <div class="ht-card-inner">
               <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">Q</div><span class="dc-status" id="status-inhaber-2"></span></div>
@@ -600,14 +603,14 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           <i class="ti ti-shield-half ht-rank-icon sl"></i>
           <span class="ht-rank-pill sl" data-editable>Serverleitung</span>
           <div class="ht-rank-line sl"></div>
-          <button class="rank-section-del-btn" onclick="deleteRankSection(this)" title="Kategorie löschen"><i class="ti ti-trash"></i></button>
+          <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
         </div>
         <div class="ht-grid" data-rank="sl">
           <div class="ht-card sl" data-member-id="sl-1">
             <div class="ht-admin-bar">
-              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('sl-1')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-              <button class="ht-adm-btn" onclick="openLanyardModal('sl-1')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-              <button class="ht-adm-btn del" onclick="deleteMember('sl-1')" title="Löschen"><i class="ti ti-trash"></i></button>
+              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('sl-1')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('sl-1')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('sl-1')"><i class="ti ti-trash"></i></button>
             </div>
             <div class="ht-card-inner">
               <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">B</div><span class="dc-status" id="status-sl-1"></span></div>
@@ -622,9 +625,9 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           </div>
           <div class="ht-card sl" data-member-id="sl-2">
             <div class="ht-admin-bar">
-              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('sl-2')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-              <button class="ht-adm-btn" onclick="openLanyardModal('sl-2')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-              <button class="ht-adm-btn del" onclick="deleteMember('sl-2')" title="Löschen"><i class="ti ti-trash"></i></button>
+              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('sl-2')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('sl-2')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('sl-2')"><i class="ti ti-trash"></i></button>
             </div>
             <div class="ht-card-inner">
               <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">L</div><span class="dc-status" id="status-sl-2"></span></div>
@@ -646,14 +649,14 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           <i class="ti ti-users-group ht-rank-icon tl"></i>
           <span class="ht-rank-pill tl" data-editable>Teamleitung</span>
           <div class="ht-rank-line tl"></div>
-          <button class="rank-section-del-btn" onclick="deleteRankSection(this)" title="Kategorie löschen"><i class="ti ti-trash"></i></button>
+          <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
         </div>
         <div class="ht-grid" data-rank="tl">
           <div class="ht-card tl" data-member-id="tl-1">
             <div class="ht-admin-bar">
-              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('tl-1')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-              <button class="ht-adm-btn" onclick="openLanyardModal('tl-1')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-              <button class="ht-adm-btn del" onclick="deleteMember('tl-1')" title="Löschen"><i class="ti ti-trash"></i></button>
+              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('tl-1')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('tl-1')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('tl-1')"><i class="ti ti-trash"></i></button>
             </div>
             <div class="ht-card-inner">
               <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">A</div><span class="dc-status" id="status-tl-1"></span></div>
@@ -668,9 +671,9 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           </div>
           <div class="ht-card tl" data-member-id="tl-2">
             <div class="ht-admin-bar">
-              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('tl-2')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-              <button class="ht-adm-btn" onclick="openLanyardModal('tl-2')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-              <button class="ht-adm-btn del" onclick="deleteMember('tl-2')" title="Löschen"><i class="ti ti-trash"></i></button>
+              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('tl-2')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('tl-2')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('tl-2')"><i class="ti ti-trash"></i></button>
             </div>
             <div class="ht-card-inner">
               <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">L</div><span class="dc-status" id="status-tl-2"></span></div>
@@ -685,9 +688,9 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           </div>
           <div class="ht-card tl" data-member-id="tl-3">
             <div class="ht-admin-bar">
-              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('tl-3')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-              <button class="ht-adm-btn" onclick="openLanyardModal('tl-3')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-              <button class="ht-adm-btn del" onclick="deleteMember('tl-3')" title="Löschen"><i class="ti ti-trash"></i></button>
+              <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('tl-3')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('tl-3')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('tl-3')"><i class="ti ti-trash"></i></button>
             </div>
             <div class="ht-card-inner">
               <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">S</div><span class="dc-status" id="status-tl-3"></span></div>
@@ -702,7 +705,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           </div>
         </div>
       </div>
-    </div><!-- end ht-rank-sections -->
+    </div>
 
     <button class="add-rank-section-btn" id="add-rank-section-btn" onclick="adminAddRankSection()">
       <i class="ti ti-plus"></i> Neue Rang-Kategorie hinzufügen
@@ -716,18 +719,16 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
           <div class="dash-header-title">Admin Dashboard</div>
-          <div class="dash-header-sub">Besucherübersicht · localStorage Tracking · Nur für Admins</div>
+          <div class="dash-header-sub">Besucherübersicht · Shared Storage · Alle Admins</div>
         </div>
-        <button class="dash-refresh" id="dash-refresh-btn" onclick="loadDashboard()" title="Aktualisieren"><i class="ti ti-refresh"></i></button>
+        <button class="dash-refresh" id="dash-refresh-btn" onclick="loadDashboard()"><i class="ti ti-refresh"></i></button>
       </div>
     </div>
-
-    <!-- Quick Admin Actions -->
     <div class="dash-admin-strip">
       <div class="dash-admin-card" style="--c:var(--inhaber-accent)" onclick="showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));setTimeout(()=>document.getElementById('adm-edit-btn').click(),300)">
         <div class="dac-ico" style="color:var(--inhaber-accent)"><i class="ti ti-pencil"></i></div>
         <div class="dac-title">Regelwerk bearbeiten</div>
-        <div class="dac-desc">Zu Regelwerk-Tab + Edit-Modus</div>
+        <div class="dac-desc">Edit-Modus aktivieren</div>
       </div>
       <div class="dash-admin-card" style="--c:var(--tl-accent)" onclick="showTab('highteam',document.querySelector('[data-tab=highteam]'))">
         <div class="dac-ico" style="color:var(--tl-accent)"><i class="ti ti-crown"></i></div>
@@ -740,7 +741,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         <div class="dac-desc">Alle Änderungen zurücksetzen</div>
       </div>
     </div>
-
     <div class="dash-stats" id="dash-stats">
       <div class="dash-stat"><div class="dash-stat-n purple" id="ds-total">–</div><div class="dash-stat-l">Besucher gesamt</div></div>
       <div class="dash-stat"><div class="dash-stat-n green" id="ds-today">–</div><div class="dash-stat-l">Heute</div></div>
@@ -765,7 +765,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     </div>
   </div>
 
-</div><!-- end content -->
+</div>
 
 <!-- LANYARD MODAL -->
 <div class="modal-overlay" id="lanyard-modal-overlay">
@@ -785,13 +785,12 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 <div class="modal-overlay" id="member-edit-overlay">
   <div class="modal" style="width:440px;">
     <div class="modal-title">Mitglied bearbeiten</div>
-    <div class="modal-sub" id="member-edit-sub">High-Team · Name · Rang · Titel</div>
+    <div class="modal-sub" id="member-edit-sub">High-Team</div>
     <label class="modal-label">Name</label>
     <input class="modal-input" id="me-name" type="text" placeholder="P I Name">
-    <label class="modal-label">Rang-Kategorie <span style="color:var(--text-muted);font-size:9px;">(bei neuem Rang → neue Kategorie)</span></label>
-    <input class="modal-input" id="me-rank" type="text" placeholder="z.B. Teamleitung, Serverleitung, Moderator...">
-    <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--tl-accent);margin-top:5px;letter-spacing:0.08em;">→ Bekannte Ränge: Inhaber, Serverleitung, Teamleitung – oder gib einen neuen Rang ein!</div>
-    <label class="modal-label">Titel (unter dem Namen)</label>
+    <label class="modal-label">Rang-Kategorie</label>
+    <input class="modal-input" id="me-rank" type="text" placeholder="z.B. Teamleitung, Serverleitung...">
+    <label class="modal-label">Titel</label>
     <input class="modal-input" id="me-title" type="text" placeholder="z.B. Projektinhaber">
     <div class="modal-actions">
       <button class="modal-btn modal-btn-confirm" onclick="saveMemberEdit()">Speichern</button>
@@ -828,7 +827,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 
 <footer>
   <img src="https://cdn.discordapp.com/attachments/1477088048499134575/1509206572314919095/90186232-73a4-40ad-bb23-8c423dafdbc2.png?ex=6a1855a6&is=6a170426&hm=27ddcc6e0288d62469ee438720a43f3366b7f7a68ae073049ad6a55e3edf022e&" alt="Logo">
-  PRADA CRIMELIFE V2 · INTERNES TEAM-REGELWERK V1.0 · ALLE RECHTE VORBEHALTEN
+  PRADA CRIMELIFE V2 · INTERNES TEAM-REGELWERK V1.0
 </footer>
 
 <!-- ADMIN TOOLBAR -->
@@ -858,14 +857,12 @@ const CLIENT_ID = '1505344005054005428';
 const REDIRECT_URI = window.location.origin + window.location.pathname;
 const SCOPES = 'identify';
 
-// ══ STORAGE KEYS ══
-const STORAGE = {
-  content: 'prada_v2_content',
-  visitors: 'prada_v2_visitors',
-  visitLog: 'prada_v2_visitlog',
-  lanyardIds: 'prada_v2_lanyard_ids',
-  user: 'prada_v2_dc_user',
-  token: 'prada_v2_dc_token'
+// ══ SHARED STORAGE KEYS (für alle Besucher sichtbar) ══
+const SHARED_KEYS = {
+  content: 'prada-content-v2',       // HTML der Sektionen
+  lanyardIds: 'prada-lanyard-ids',   // Discord IDs der Mitglieder
+  visitors: 'prada-visitors',         // Besucherliste
+  visitLog: 'prada-visitlog',         // Besuchslog
 };
 
 // ══ STATE ══
@@ -876,8 +873,44 @@ let adminModalCallback = null;
 let confirmCallback = null;
 let currentLanyardMember = null;
 let currentEditMemberId = null;
-const IDS = JSON.parse(localStorage.getItem(STORAGE.lanyardIds) || '{}');
+let IDS = {}; // wird aus shared storage geladen
 const STATUS_LABELS = {online:'Online',idle:'Abwesend',dnd:'Nicht stören',offline:'Offline',streaming:'Am Streamen'};
+
+// ══════════════════════════════════════════════
+// SHARED STORAGE HELPERS
+// ══════════════════════════════════════════════
+async function sharedGet(key) {
+  try {
+    const result = await window.storage.get(key, true);
+    if (!result || result.value === undefined || result.value === null) return null;
+    return JSON.parse(result.value);
+  } catch(e) {
+    return null;
+  }
+}
+
+async function sharedSet(key, value) {
+  try {
+    await window.storage.set(key, JSON.stringify(value), true);
+    return true;
+  } catch(e) {
+    console.error('sharedSet error:', e);
+    return false;
+  }
+}
+
+async function sharedDelete(key) {
+  try {
+    await window.storage.delete(key, true);
+    return true;
+  } catch(e) { return false; }
+}
+
+function syncBar(state) {
+  const bar = document.getElementById('sync-bar');
+  bar.className = 'sync-bar ' + state;
+  if (state === 'saved') setTimeout(() => bar.className = 'sync-bar', 1200);
+}
 
 // ══════════════════════════════════════════════
 // OAUTH / AUTH
@@ -903,15 +936,15 @@ async function handleCallback() {
     const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } });
     if (!res.ok) return false;
     const user = await res.json();
-    sessionStorage.setItem(STORAGE.token, token);
-    sessionStorage.setItem(STORAGE.user, JSON.stringify(user));
+    sessionStorage.setItem('prada_token', token);
+    sessionStorage.setItem('prada_user', JSON.stringify(user));
     showApp(user, token);
     return true;
   } catch { return false; }
 }
 
 async function showApp(user, token) {
-  dcToken = token || sessionStorage.getItem(STORAGE.token);
+  dcToken = token || sessionStorage.getItem('prada_token');
   currentUser = user;
   document.getElementById('auth-screen').style.display = 'none';
   const avatarUrl = user.avatar
@@ -921,13 +954,17 @@ async function showApp(user, token) {
   document.getElementById('topbar-username').textContent = user.global_name || user.username;
   document.getElementById('topbar-user').style.display = 'flex';
 
-  // Track visit (localStorage)
-  trackVisitLocal(user);
+  // Lade shared content (für alle sichtbar)
+  await loadSharedContent();
 
-  // Load saved content
-  loadSavedContent();
+  // Track visit (shared)
+  trackVisit(user);
 
-  // Lanyard
+  // Lade Lanyard IDs aus shared storage
+  const ids = await sharedGet(SHARED_KEYS.lanyardIds);
+  if (ids) IDS = ids;
+
+  // Lanyard starten
   loadAllLanyard();
   setInterval(loadAllLanyard, 30000);
 
@@ -940,8 +977,8 @@ async function showApp(user, token) {
 }
 
 function logout() {
-  sessionStorage.removeItem(STORAGE.token);
-  sessionStorage.removeItem(STORAGE.user);
+  sessionStorage.removeItem('prada_token');
+  sessionStorage.removeItem('prada_user');
   document.getElementById('auth-screen').style.display = 'flex';
   document.getElementById('topbar-user').style.display = 'none';
   document.getElementById('dash-tab-btn').style.display = 'none';
@@ -951,22 +988,23 @@ function logout() {
 }
 
 (async function initAuth() {
-  const saved = sessionStorage.getItem(STORAGE.user);
-  if (saved) { showApp(JSON.parse(saved), sessionStorage.getItem(STORAGE.token)); return; }
+  const saved = sessionStorage.getItem('prada_user');
+  if (saved) { showApp(JSON.parse(saved), sessionStorage.getItem('prada_token')); return; }
   const handled = await handleCallback();
   if (!handled) document.getElementById('auth-screen').style.display = 'flex';
 })();
 
 // ══════════════════════════════════════════════
-// LOCAL VISITOR TRACKING
+// SHARED VISITOR TRACKING
 // ══════════════════════════════════════════════
-function trackVisitLocal(user) {
+async function trackVisit(user) {
   try {
     const isAdmin = user.id === ADMIN_ID;
-    // Visitors list
-    let visitors = JSON.parse(localStorage.getItem(STORAGE.visitors) || '[]');
-    const idx = visitors.findIndex(v => v.id === user.id);
     const now = Date.now();
+
+    // Visitors list
+    let visitors = (await sharedGet(SHARED_KEYS.visitors)) || [];
+    const idx = visitors.findIndex(v => v.id === user.id);
     if (idx >= 0) {
       visitors[idx].lastSeen = now;
       visitors[idx].visitCount = (visitors[idx].visitCount || 1) + 1;
@@ -979,36 +1017,33 @@ function trackVisitLocal(user) {
         firstSeen: now, lastSeen: now, visitCount: 1, isAdmin
       });
     }
-    localStorage.setItem(STORAGE.visitors, JSON.stringify(visitors));
+    await sharedSet(SHARED_KEYS.visitors, visitors);
 
     // Visit log (max 100)
-    let log = JSON.parse(localStorage.getItem(STORAGE.visitLog) || '[]');
+    let log = (await sharedGet(SHARED_KEYS.visitLog)) || [];
     log.unshift({ userId: user.id, username: user.global_name || user.username, avatar: user.avatar, ts: now, isAdmin });
     if (log.length > 100) log = log.slice(0, 100);
-    localStorage.setItem(STORAGE.visitLog, JSON.stringify(log));
+    await sharedSet(SHARED_KEYS.visitLog, log);
   } catch(e) { console.error('Track error:', e); }
 }
 
 // ══════════════════════════════════════════════
-// PERSISTENT CONTENT (localStorage)
+// SHARED CONTENT STORAGE
 // ══════════════════════════════════════════════
-function loadSavedContent() {
+async function loadSharedContent() {
   try {
-    const saved = localStorage.getItem(STORAGE.content);
-    if (!saved) return;
-    const c = JSON.parse(saved);
+    const c = await sharedGet(SHARED_KEYS.content);
+    if (!c) return;
     if (c.einfuehrung) document.getElementById('einfuehrung').innerHTML = c.einfuehrung;
     if (c.regelwerk) document.getElementById('regelwerk').innerHTML = c.regelwerk;
     if (c.strafen) document.getElementById('strafen').innerHTML = c.strafen;
     if (c.highteam) document.getElementById('highteam').innerHTML = c.highteam;
-    // Re-init admin bars after load
-    if (document.body.classList.contains('is-admin')) {
-      initAdminMode();
-    }
+    if (document.body.classList.contains('is-admin')) initAdminMode();
   } catch(e) { console.error('Load content error:', e); }
 }
 
-function saveContentLocal() {
+async function saveSharedContent() {
+  syncBar('syncing');
   try {
     const c = {
       einfuehrung: document.getElementById('einfuehrung').innerHTML,
@@ -1016,9 +1051,14 @@ function saveContentLocal() {
       strafen: document.getElementById('strafen').innerHTML,
       highteam: document.getElementById('highteam').innerHTML
     };
-    localStorage.setItem(STORAGE.content, JSON.stringify(c));
-    return true;
-  } catch(e) { console.error('Save error:', e); return false; }
+    const ok = await sharedSet(SHARED_KEYS.content, c);
+    if (ok) { syncBar('saved'); return true; }
+    else { syncBar(''); return false; }
+  } catch(e) { console.error('Save error:', e); syncBar(''); return false; }
+}
+
+async function saveIdsShared() {
+  await sharedSet(SHARED_KEYS.lanyardIds, IDS);
 }
 
 // ══════════════════════════════════════════════
@@ -1038,16 +1078,16 @@ window.addEventListener('scroll', () => {
 });
 
 // ══════════════════════════════════════════════
-// DASHBOARD (all local)
+// DASHBOARD (shared data)
 // ══════════════════════════════════════════════
-function loadDashboard() {
+async function loadDashboard() {
   if (!currentUser || currentUser.id !== ADMIN_ID) return;
   const btn = document.getElementById('dash-refresh-btn');
   btn.classList.add('spinning');
 
   try {
-    const visitors = JSON.parse(localStorage.getItem(STORAGE.visitors) || '[]');
-    const log = JSON.parse(localStorage.getItem(STORAGE.visitLog) || '[]');
+    const visitors = (await sharedGet(SHARED_KEYS.visitors)) || [];
+    const log = (await sharedGet(SHARED_KEYS.visitLog)) || [];
 
     const today = new Date(); today.setHours(0,0,0,0);
     const todayCount = visitors.filter(v => v.lastSeen >= today.getTime()).length;
@@ -1081,7 +1121,6 @@ function loadDashboard() {
           <div class="v-meta">
             <div class="v-time">${formatTime(v.lastSeen)}</div>
             <div class="v-count">${v.visitCount||1}× besucht</div>
-            <div class="v-time" style="font-size:8px;margin-top:2px">seit ${formatDate(v.firstSeen)}</div>
           </div>
         </div>`;
       }).join('');
@@ -1095,7 +1134,7 @@ function loadDashboard() {
         const avatarUrl = entry.avatar ? `https://cdn.discordapp.com/avatars/${entry.userId}/${entry.avatar}.png?size=56` : null;
         const letter = (entry.username||'?').charAt(0).toUpperCase();
         return `<div class="log-row">
-          ${entry.isAdmin ? '<div class="log-admin-dot" title="Admin"></div>' : ''}
+          ${entry.isAdmin ? '<div class="log-admin-dot"></div>' : ''}
           <div class="log-avatar">
             ${avatarUrl ? `<img src="${avatarUrl}" onerror="this.style.display='none'">` : `<div class="log-avatar-ph">${letter}</div>`}
           </div>
@@ -1117,15 +1156,10 @@ function formatTime(ts) {
   const d = new Date(ts);
   return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'}) + ' ' + d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
 }
-function formatDate(ts) {
-  return new Date(ts).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'2-digit'});
-}
 
 // ══════════════════════════════════════════════
 // LANYARD
 // ══════════════════════════════════════════════
-function saveIds() { localStorage.setItem(STORAGE.lanyardIds, JSON.stringify(IDS)); }
-
 async function fetchLanyard(discordId, memberId) {
   try {
     const res = await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
@@ -1146,8 +1180,8 @@ async function fetchLanyard(discordId, memberId) {
       if (!img) {
         img = document.createElement('img');
         img.className = 'dc-avatar';
-        const rank = card.dataset.rank || (card.classList.contains('inhaber')?'inhaber':card.classList.contains('sl')?'sl':'tl');
-        img.classList.add(rank);
+        const cls = card.classList.contains('inhaber')?'inhaber':card.classList.contains('sl')?'sl':card.classList.contains('tl')?'tl':'custom';
+        img.classList.add(cls);
         wrap.insertBefore(img, wrap.firstChild);
       }
       img.src = url;
@@ -1176,15 +1210,17 @@ function closeLanyardModal() {
   document.getElementById('lanyard-modal-overlay').classList.remove('open');
   currentLanyardMember = null;
 }
-function saveLanyardId() {
+async function saveLanyardId() {
   const val = document.getElementById('lanyard-input').value.trim();
   if (!currentLanyardMember) return;
   if (val && /^\d{17,20}$/.test(val)) {
-    IDS[currentLanyardMember] = val; saveIds();
+    IDS[currentLanyardMember] = val;
+    await saveIdsShared(); // ← shared für alle!
     fetchLanyard(val, currentLanyardMember);
-    closeLanyardModal(); showToast('Discord ID gespeichert');
+    closeLanyardModal(); showToast('Discord ID gespeichert – für alle sichtbar ✓');
   } else if (val === '') {
-    delete IDS[currentLanyardMember]; saveIds();
+    delete IDS[currentLanyardMember];
+    await saveIdsShared();
     const card = document.querySelector(`[data-member-id="${currentLanyardMember}"]`);
     if (card) {
       const wrap = card.querySelector('.dc-avatar-wrap');
@@ -1198,8 +1234,8 @@ function saveLanyardId() {
       }
       const sd = document.getElementById(`status-${currentLanyardMember}`);
       if (sd) sd.className = 'dc-status';
-      const sl = document.getElementById(`statuslabel-${currentLanyardMember}`);
-      if (sl) sl.innerHTML = '<span class="ht-card-status-dot"></span><span>Offline</span>';
+      const sl2 = document.getElementById(`statuslabel-${currentLanyardMember}`);
+      if (sl2) sl2.innerHTML = '<span class="ht-card-status-dot"></span><span>Offline</span>';
     }
     closeLanyardModal(); showToast('Discord ID entfernt');
   } else {
@@ -1211,7 +1247,7 @@ document.getElementById('lanyard-modal-overlay').addEventListener('click', funct
 document.getElementById('lanyard-input').addEventListener('keydown', function(e){ if(e.key==='Enter') saveLanyardId(); if(e.key==='Escape') closeLanyardModal(); });
 
 // ══════════════════════════════════════════════
-// MEMBER EDIT MODAL (name, rank, title)
+// MEMBER EDIT MODAL
 // ══════════════════════════════════════════════
 function openMemberEditModal(memberId) {
   if (!document.body.classList.contains('is-admin')) return;
@@ -1232,7 +1268,7 @@ function closeMemberEditModal() {
   document.getElementById('member-edit-overlay').classList.remove('open');
   currentEditMemberId = null;
 }
-function saveMemberEdit() {
+async function saveMemberEdit() {
   if (!currentEditMemberId) return;
   const card = document.querySelector(`[data-member-id="${currentEditMemberId}"]`);
   if (!card) { closeMemberEditModal(); return; }
@@ -1240,35 +1276,21 @@ function saveMemberEdit() {
   const newName = document.getElementById('me-name').value.trim();
   const newRankInput = document.getElementById('me-rank').value.trim();
   const newTitle = document.getElementById('me-title').value.trim();
-
   if (!newName) { showToast('Name darf nicht leer sein', true); return; }
 
-  // Determine if rank changed
   const currentRankEl = card.querySelector('.ht-card-rank-tag');
   const currentRank = currentRankEl?.textContent.trim() || '';
-
-  // Update name
   const nameEl = card.querySelector('.ht-card-name');
   if (nameEl) nameEl.textContent = newName;
-
-  // Update placeholder letter
   const ph = card.querySelector('.dc-avatar-placeholder');
   if (ph) ph.textContent = newName.charAt(newName.lastIndexOf(' ')+1).toUpperCase() || newName.charAt(0).toUpperCase();
-
-  // Update title
   const titleEl = card.querySelector('.ht-card-title');
   if (titleEl) titleEl.textContent = newTitle;
-
-  // Update rank tag label
   if (currentRankEl) currentRankEl.textContent = newRankInput;
 
-  // Check if rank is actually different → move card to correct section or create new one
   if (newRankInput && newRankInput.toLowerCase() !== currentRank.toLowerCase()) {
     const rankSections = document.querySelectorAll('#ht-rank-sections .ht-rank-section');
-    let targetGrid = null;
-    let targetRankKey = null;
-
-    // Try to find existing section by pill text
+    let targetGrid = null, targetRankKey = null;
     rankSections.forEach(sec => {
       const pill = sec.querySelector('.ht-rank-pill');
       if (pill && pill.textContent.trim().toLowerCase() === newRankInput.toLowerCase()) {
@@ -1276,86 +1298,58 @@ function saveMemberEdit() {
         targetRankKey = sec.dataset.rank;
       }
     });
-
     if (targetGrid && targetRankKey) {
-      // Move card to that section
-      // Update card classes
       card.classList.remove('inhaber','sl','tl','custom');
       card.classList.add(getRankClass(newRankInput, targetRankKey));
-      // Update rank tag + title classes
-      updateCardRankClasses(card, targetRankKey);
-      // Move
+      updateCardRankClasses(card);
       const addBtn = targetGrid.querySelector('.add-member-btn');
       if (addBtn) targetGrid.insertBefore(card, addBtn); else targetGrid.appendChild(card);
-      showToast(`"${newName}" zu "${newRankInput}" verschoben`);
     } else {
-      // Create NEW rank section for this rank
       const newRankKey = 'custom-' + Date.now();
       const newSection = createRankSection(newRankInput, newRankKey);
-      const sectionsContainer = document.getElementById('ht-rank-sections');
-      sectionsContainer.appendChild(newSection);
-
-      // Move card
+      document.getElementById('ht-rank-sections').appendChild(newSection);
       const newGrid = newSection.querySelector('.ht-grid');
       card.classList.remove('inhaber','sl','tl','custom');
       card.classList.add('custom');
-      newSection.setAttribute('data-rank', newRankKey);
-      newGrid.setAttribute('data-rank', newRankKey);
-      updateCardRankClasses(card, 'custom');
+      updateCardRankClasses(card);
       const addBtn = newGrid.querySelector('.add-member-btn');
       if (addBtn) newGrid.insertBefore(card, addBtn); else newGrid.appendChild(card);
-
-      // Also setup the add-member button in new section
-      const addMemberBtn = newGrid.querySelector('.add-member-btn');
-      if (!addMemberBtn) {
-        const btn = document.createElement('button');
-        btn.className = 'add-member-btn';
-        btn.innerHTML = '<i class="ti ti-user-plus"></i> Mitglied hinzufügen';
-        btn.onclick = () => adminAddMemberToGrid(newGrid);
-        newGrid.appendChild(btn);
-      }
-
-      showToast(`Neue Rang-Kategorie "${newRankInput}" erstellt!`, false, true);
-      // Navigate to highteam
-      showTab('highteam', document.querySelector('[data-tab=highteam]'));
     }
   }
 
   closeMemberEditModal();
-  markUnsaved();
+  await adminSaveAll(); // auto-save nach Änderung
 }
 
-function getRankClass(rankName, rankKey) {
+function getRankClass(rankName) {
   const n = rankName.toLowerCase();
   if (n.includes('inhaber')) return 'inhaber';
-  if (n.includes('serverleitung') || n.includes('sl')) return 'sl';
-  if (n.includes('teamleitung') || n.includes('tl')) return 'tl';
+  if (n.includes('serverleitung') || n === 'sl') return 'sl';
+  if (n.includes('teamleitung') || n === 'tl') return 'tl';
   return 'custom';
 }
-
-function updateCardRankClasses(card, rankKey) {
+function updateCardRankClasses(card) {
   const cls = card.classList.contains('inhaber') ? 'inhaber'
              : card.classList.contains('sl') ? 'sl'
              : card.classList.contains('tl') ? 'tl' : 'custom';
   const rankTagEl = card.querySelector('.ht-card-rank-tag');
   const titleEl = card.querySelector('.ht-card-title');
-  if (rankTagEl) { rankTagEl.className = `ht-card-rank-tag ${cls}`; }
-  if (titleEl) { titleEl.className = `ht-card-title ${cls}`; }
+  if (rankTagEl) rankTagEl.className = `ht-card-rank-tag ${cls}`;
+  if (titleEl) titleEl.className = `ht-card-title ${cls}`;
 }
-
 function createRankSection(rankName, rankKey) {
   const sec = document.createElement('div');
   sec.className = 'ht-rank-section';
   sec.setAttribute('data-rank', rankKey);
-  const cls = rankKey.startsWith('custom') ? 'custom' : rankKey;
-  const icons = {inhaber:'ti-crown',sl:'ti-shield-half',tl:'ti-users-group',custom:'ti-star'};
+  const cls = rankKey === 'inhaber' ? 'inhaber' : rankKey === 'sl' ? 'sl' : rankKey === 'tl' ? 'tl' : 'custom';
+  const icons = {inhaber:'ti-crown',sl:'ti-shield-half',tl:'ti-users-group'};
   const icon = icons[cls] || 'ti-star';
   sec.innerHTML = `
     <div class="ht-rank-header">
       <i class="ti ${icon} ht-rank-icon ${cls}"></i>
       <span class="ht-rank-pill ${cls}" data-editable>${rankName}</span>
       <div class="ht-rank-line ${cls}"></div>
-      <button class="rank-section-del-btn" onclick="deleteRankSection(this)" title="Kategorie löschen"><i class="ti ti-trash"></i></button>
+      <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
     </div>
     <div class="ht-grid" data-rank="${rankKey}"></div>
   `;
@@ -1367,11 +1361,10 @@ function createRankSection(rankName, rankKey) {
   grid.appendChild(addBtn);
   return sec;
 }
-
 document.getElementById('member-edit-overlay').addEventListener('click', function(e){ if(e.target===this) closeMemberEditModal(); });
 
 // ══════════════════════════════════════════════
-// CONFIRM DIALOG
+// CONFIRM
 // ══════════════════════════════════════════════
 function confirmOpen(title, sub, onYes, yesLabel='Löschen') {
   document.getElementById('confirm-title').textContent = title;
@@ -1393,7 +1386,7 @@ function showToast(msg, isErr=false, isInfo=false) {
   t.className = 'save-toast' + (isErr?' err':isInfo?' warn':'');
   t.classList.add('show');
   clearTimeout(t._to);
-  t._to = setTimeout(() => t.classList.remove('show'), 2500);
+  t._to = setTimeout(() => t.classList.remove('show'), 3000);
 }
 function markUnsaved() { document.body.classList.add('has-unsaved'); }
 function clearUnsaved() { document.body.classList.remove('has-unsaved'); }
@@ -1406,32 +1399,26 @@ function initAdminMode() {
   setupAllRuleAdminBars();
   addAllAddButtons();
 }
-
 function setupAllEditables() {
   document.querySelectorAll('[data-editable]').forEach(el => {
-    if (!el.hasAttribute('contenteditable') || !el._editListenerAdded) {
-      el.setAttribute('contenteditable', editModeOn ? 'true' : 'false');
-      if (!el._editListenerAdded) {
-        el.addEventListener('input', markUnsaved);
-        el._editListenerAdded = true;
-      }
+    el.setAttribute('contenteditable', editModeOn ? 'true' : 'false');
+    if (!el._editListenerAdded) {
+      el.addEventListener('input', markUnsaved);
+      el._editListenerAdded = true;
     }
   });
 }
-
 function setupAllRuleAdminBars() {
   document.querySelectorAll('.rule').forEach(rule => {
     let bar = rule.querySelector('.rule-admin-bar');
     if (!bar) { bar = document.createElement('div'); bar.className='rule-admin-bar'; rule.appendChild(bar); }
     bar.innerHTML = `
-      <button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
-      <button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
-      <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
+      <button class="rule-adm-btn" onclick="moveRule(this,'up')"><i class="ti ti-arrow-up"></i></button>
+      <button class="rule-adm-btn" onclick="moveRule(this,'down')"><i class="ti ti-arrow-down"></i></button>
+      <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)"><i class="ti ti-trash"></i></button>`;
   });
 }
-
 function addAllAddButtons() {
-  // Rules containers
   document.querySelectorAll('.rules').forEach(c => {
     if (!c.querySelector('.add-rule-btn')) {
       const btn = document.createElement('button');
@@ -1441,7 +1428,6 @@ function addAllAddButtons() {
       c.appendChild(btn);
     }
   });
-  // Member grids
   document.querySelectorAll('.ht-grid').forEach(g => {
     if (!g.querySelector('.add-member-btn')) {
       const btn = document.createElement('button');
@@ -1451,7 +1437,6 @@ function addAllAddButtons() {
       g.appendChild(btn);
     }
   });
-  // Strafe add button
   const sb = document.getElementById('add-strafe-btn');
   if (sb) sb.style.display = 'flex';
 }
@@ -1466,15 +1451,16 @@ function toggleEditMode() {
   if (!editModeOn) adminSaveAll();
 }
 
-function adminSaveAll() {
-  const ok = saveContentLocal();
-  if (ok) { clearUnsaved(); showToast('Gespeichert – für alle sichtbar!'); }
+async function adminSaveAll() {
+  const ok = await saveSharedContent();
+  if (ok) { clearUnsaved(); showToast('Gespeichert – für ALLE Besucher sichtbar ✓'); }
   else showToast('Speichern fehlgeschlagen', true);
 }
 
-function adminResetConfirm() {
-  confirmOpen('Alle Änderungen zurücksetzen?', 'Das Regelwerk wird auf den Originalstand zurückgesetzt.', () => {
-    localStorage.removeItem(STORAGE.content);
+async function adminResetConfirm() {
+  confirmOpen('Alle Änderungen zurücksetzen?', 'Das Regelwerk wird auf den Originalstand zurückgesetzt.', async () => {
+    await sharedDelete(SHARED_KEYS.content);
+    await sharedDelete(SHARED_KEYS.lanyardIds);
     clearUnsaved();
     showToast('Zurückgesetzt – Seite lädt neu...');
     setTimeout(() => location.reload(), 900);
@@ -1490,11 +1476,10 @@ function moveRule(btn, dir) {
   else { const n=rule.nextElementSibling; if(n&&!n.classList.contains('add-rule-btn')) c.insertBefore(n,rule); }
   markUnsaved();
 }
-
 function deleteRuleBtn(btn) {
   const rule = btn.closest('.rule');
   const title = rule.querySelector('.rule-title')?.textContent || 'Regel';
-  confirmOpen('Regel löschen?', `"${title}" wird entfernt. Nicht rückgängig machbar.`,
+  confirmOpen('Regel löschen?', `"${title}" wird entfernt.`,
     () => { rule.remove(); markUnsaved(); showToast('Regel gelöscht'); });
 }
 
@@ -1513,18 +1498,20 @@ function adminAddRule() {
   const visible = document.querySelector('.section.visible');
   const target = visible?.querySelector('.rules:last-of-type');
   if (target) adminAddRuleToContainer(target);
-  else showToast('Wechsle zuerst zu einem Tab mit Regeln', true);
+  else showToast('Wechsle zu einem Tab mit Regeln', true);
 }
+
+const FIELD_STYLE = `style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"`;
 
 function adminAddRuleToContainer(container) {
   adminModalOpen('Neue Regel', 'Regel hinzufügen',
-    `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Badge-Typ</label><select id="af-badge" style="width:100%;background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;"><option value="b-std">Standard</option><option value="b-ok">Pflicht</option><option value="b-warn">Wichtig</option><option value="b-ban">Verboten</option><option value="b-info">Info</option></select></div>
-     <div class="admin-field"><label>Badge-Text</label><input id="af-badge-text" type="text" placeholder="Grundregel" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Titel</label><input id="af-title" type="text" placeholder="Regelname" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Beschreibung</label><textarea id="af-text" rows="4" placeholder="Regeltext..." style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"></textarea></div>
-     <div class="admin-field"><label>Stil</label><select id="af-type" style="width:100%;background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;"><option value="">Normal</option><option value="danger">Danger (Rot)</option></select></div>`,
-    () => {
+    `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Badge-Typ</label><select id="af-badge" ${FIELD_STYLE}><option value="b-std">Standard</option><option value="b-ok">Pflicht</option><option value="b-warn">Wichtig</option><option value="b-ban">Verboten</option><option value="b-info">Info</option></select></div>
+     <div class="admin-field"><label>Badge-Text</label><input id="af-badge-text" type="text" placeholder="Grundregel" ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Titel</label><input id="af-title" type="text" placeholder="Regelname" ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Beschreibung</label><textarea id="af-text" rows="4" placeholder="Regeltext..." ${FIELD_STYLE} style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"></textarea></div>
+     <div class="admin-field"><label>Stil</label><select id="af-type" ${FIELD_STYLE}><option value="">Normal</option><option value="danger">Danger (Rot)</option></select></div>`,
+    async () => {
       const id = document.getElementById('af-id')?.value.trim() || 'TR — ?';
       const badge = document.getElementById('af-badge')?.value || 'b-std';
       const badgeText = document.getElementById('af-badge-text')?.value.trim() || 'Standard';
@@ -1533,11 +1520,13 @@ function adminAddRuleToContainer(container) {
       const type = document.getElementById('af-type')?.value || '';
       const rule = document.createElement('div');
       rule.className = `rule${type?' '+type:''}`;
-      rule.innerHTML = `<div class="rule-top"><span class="rule-id" data-editable="true" contenteditable="${editModeOn}">${id}</span><span class="badge ${badge}">${badgeText}</span></div><div class="rule-title" data-editable="true" contenteditable="${editModeOn}">${title}</div><div class="rule-text" data-editable="true" contenteditable="${editModeOn}">${text}</div><div class="rule-admin-bar"><button class="rule-adm-btn" onclick="moveRule(this,'up')"><i class="ti ti-arrow-up"></i></button><button class="rule-adm-btn" onclick="moveRule(this,'down')"><i class="ti ti-arrow-down"></i></button><button class="rule-adm-btn del" onclick="deleteRuleBtn(this)"><i class="ti ti-trash"></i></button></div>`;
-      rule.querySelectorAll('[data-editable]').forEach(el => { el.addEventListener('input', markUnsaved); });
+      rule.innerHTML = `<div class="rule-top"><span class="rule-id" data-editable>${id}</span><span class="badge ${badge}">${badgeText}</span></div><div class="rule-title" data-editable>${title}</div><div class="rule-text" data-editable>${text}</div><div class="rule-admin-bar"><button class="rule-adm-btn" onclick="moveRule(this,'up')"><i class="ti ti-arrow-up"></i></button><button class="rule-adm-btn" onclick="moveRule(this,'down')"><i class="ti ti-arrow-down"></i></button><button class="rule-adm-btn del" onclick="deleteRuleBtn(this)"><i class="ti ti-trash"></i></button></div>`;
+      rule.querySelectorAll('[data-editable]').forEach(el => { el.setAttribute('contenteditable', editModeOn?'true':'false'); el.addEventListener('input', markUnsaved); });
       const addBtn = container.querySelector('.add-rule-btn');
       if (addBtn) container.insertBefore(rule, addBtn); else container.appendChild(rule);
-      adminModalClose(); markUnsaved(); showToast('Regel hinzugefügt');
+      adminModalClose();
+      await adminSaveAll(); // auto-save
+      showToast('Regel hinzugefügt & gespeichert');
     }
   );
 }
@@ -1546,13 +1535,13 @@ function adminAddRuleToContainer(container) {
 // STRAFEN TABLE
 // ══════════════════════════════════════════════
 function adminAddStrafeRow() {
-  adminModalOpen('Neuer Strafe-Eintrag', 'Zur Strafen-Tabelle hinzufügen',
-    `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Vergehen (Beschreibung kurz)</label><input id="sf-desc" type="text" placeholder="Kurze Beschreibung" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Zeit / Strafe</label><input id="sf-time" type="text" placeholder="z.B. 25 Min." style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Schwere</label><select id="sf-sev" style="width:100%;background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;"><option value="low">Niedrig (blau)</option><option value="mid">Mittel (gelb)</option><option value="high">Hoch (rot)</option><option value="perm">Permanent (dunkelrot)</option></select></div>
-     <div class="admin-field"><label>Beschreibung (lang)</label><textarea id="sf-long" rows="3" placeholder="Beschreibung..." style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"></textarea></div>`,
-    () => {
+  adminModalOpen('Neuer Strafe-Eintrag', 'Zur Strafen-Tabelle',
+    `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Kurze Beschreibung</label><input id="sf-desc" type="text" placeholder="Beschreibung" ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Zeit / Strafe</label><input id="sf-time" type="text" placeholder="z.B. 25 Min." ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Schwere</label><select id="sf-sev" ${FIELD_STYLE}><option value="low">Niedrig (blau)</option><option value="mid">Mittel (gelb)</option><option value="high">Hoch (rot)</option><option value="perm">Permanent</option></select></div>
+     <div class="admin-field"><label>Beschreibung (lang)</label><textarea id="sf-long" rows="3" placeholder="..." ${FIELD_STYLE} style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"></textarea></div>`,
+    async () => {
       const name = document.getElementById('sf-name')?.value.trim() || 'Vergehen';
       const desc = document.getElementById('sf-desc')?.value.trim() || '';
       const time = document.getElementById('sf-time')?.value.trim() || '?';
@@ -1561,10 +1550,12 @@ function adminAddStrafeRow() {
       const tbody = document.getElementById('strafen-tbody');
       if (!tbody) { adminModalClose(); return; }
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td><div class="vname" data-editable="true">${name}</div><div class="vdesc" data-editable="true">${desc}</div></td><td><span class="zb ${sev}" data-editable="true">${time}</span></td><td data-editable="true">${long}</td>`;
+      tr.innerHTML = `<td><div class="vname" data-editable>${name}</div><div class="vdesc" data-editable>${desc}</div></td><td><span class="zb ${sev}" data-editable>${time}</span></td><td data-editable>${long}</td>`;
       tr.querySelectorAll('[data-editable]').forEach(el => { el.addEventListener('input', markUnsaved); el.setAttribute('contenteditable', editModeOn?'true':'false'); });
       tbody.appendChild(tr);
-      adminModalClose(); markUnsaved(); showToast('Eintrag hinzugefügt');
+      adminModalClose();
+      await adminSaveAll(); // auto-save
+      showToast('Eintrag hinzugefügt & gespeichert');
     }
   );
 }
@@ -1573,7 +1564,6 @@ function adminAddStrafeRow() {
 // MEMBER MANAGEMENT
 // ══════════════════════════════════════════════
 function adminAddMember() {
-  // Go to highteam and find a grid
   showTab('highteam', document.querySelector('[data-tab=highteam]'));
   setTimeout(() => {
     const grid = document.querySelector('#ht-rank-sections .ht-grid');
@@ -1586,17 +1576,18 @@ function adminAddMemberToGrid(grid) {
   const pill = section?.querySelector('.ht-rank-pill');
   const rankLabel = pill?.textContent.trim() || 'Teamleitung';
   const rankKey = grid.getAttribute('data-rank') || 'tl';
-  const rankCls = section?.querySelector('.ht-card')?.classList.contains('inhaber') ? 'inhaber'
-                : section?.querySelector('.ht-card')?.classList.contains('sl') ? 'sl'
-                : rankKey.startsWith('custom') ? 'custom' : 'tl';
+  const existingCard = section?.querySelector('.ht-card');
+  const rankCls = existingCard?.classList.contains('inhaber') ? 'inhaber'
+                : existingCard?.classList.contains('sl') ? 'sl'
+                : existingCard?.classList.contains('tl') ? 'tl' : 'custom';
   const decoMap = {inhaber:'INH', sl:'SL', tl:'TL', custom:'★'};
   const deco = decoMap[rankCls] || rankLabel.slice(0,3).toUpperCase();
 
   adminModalOpen('Mitglied hinzufügen', `Rang: ${rankLabel}`,
-    `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"></div>
-     <div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"><div class="field-hint">Leer lassen wenn nicht bekannt – später über den Discord-Button einstellbar.</div></div>`,
-    () => {
+    `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FIELD_STYLE}></div>
+     <div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FIELD_STYLE}><div class="field-hint">Leer lassen → später über Discord-Button setzen.</div></div>`,
+    async () => {
       const name = document.getElementById('mf-name')?.value.trim() || 'Neues Mitglied';
       const title = document.getElementById('mf-title')?.value.trim() || rankLabel;
       const dcid = document.getElementById('mf-dcid')?.value.trim() || '';
@@ -1608,9 +1599,9 @@ function adminAddMemberToGrid(grid) {
       card.setAttribute('data-member-id', uid);
       card.innerHTML = `
         <div class="ht-admin-bar">
-          <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('${uid}')" title="Bearbeiten"><i class="ti ti-pencil"></i></button>
-          <button class="ht-adm-btn" onclick="openLanyardModal('${uid}')" title="Discord ID"><i class="ti ti-brand-discord"></i></button>
-          <button class="ht-adm-btn del" onclick="deleteMember('${uid}')" title="Löschen"><i class="ti ti-trash"></i></button>
+          <button class="ht-adm-btn edit-card" onclick="openMemberEditModal('${uid}')"><i class="ti ti-pencil"></i></button>
+          <button class="ht-adm-btn" onclick="openLanyardModal('${uid}')"><i class="ti ti-brand-discord"></i></button>
+          <button class="ht-adm-btn del" onclick="deleteMember('${uid}')"><i class="ti ti-trash"></i></button>
         </div>
         <div class="ht-card-inner">
           <div class="dc-avatar-wrap">
@@ -1618,30 +1609,39 @@ function adminAddMemberToGrid(grid) {
             <span class="dc-status" id="status-${uid}"></span>
           </div>
           <div class="ht-card-info">
-            <div class="ht-card-rank-tag ${rankCls}" data-editable="true" contenteditable="${editModeOn}">${rankLabel}</div>
-            <div class="ht-card-name" data-editable="true" contenteditable="${editModeOn}">${name}</div>
-            <div class="ht-card-title ${rankCls}" data-editable="true" contenteditable="${editModeOn}">${title}</div>
+            <div class="ht-card-rank-tag ${rankCls}" data-editable>${rankLabel}</div>
+            <div class="ht-card-name" data-editable>${name}</div>
+            <div class="ht-card-title ${rankCls}" data-editable>${title}</div>
             <div class="ht-card-status" id="statuslabel-${uid}"><span class="ht-card-status-dot"></span><span>Offline</span></div>
           </div>
         </div>
         <div class="ht-card-deco">${deco}</div>`;
-      card.querySelectorAll('[data-editable]').forEach(el => { el.addEventListener('input', markUnsaved); });
+      card.querySelectorAll('[data-editable]').forEach(el => { el.addEventListener('input', markUnsaved); el.setAttribute('contenteditable', editModeOn?'true':'false'); });
 
       const addBtn = grid.querySelector('.add-member-btn');
       if (addBtn) grid.insertBefore(card, addBtn); else grid.appendChild(card);
 
-      if (dcid && /^\d{17,20}$/.test(dcid)) { IDS[uid]=dcid; saveIds(); fetchLanyard(dcid,uid); }
-      adminModalClose(); markUnsaved(); showToast('Mitglied hinzugefügt');
+      if (dcid && /^\d{17,20}$/.test(dcid)) { IDS[uid]=dcid; await saveIdsShared(); fetchLanyard(dcid,uid); }
+
+      adminModalClose();
+      await adminSaveAll(); // auto-save
+      showToast('Mitglied hinzugefügt & für alle gespeichert');
     }
   );
 }
 
-function deleteMember(memberId) {
+async function deleteMember(memberId) {
   const card = document.querySelector(`[data-member-id="${memberId}"]`);
   if (!card) return;
   const name = card.querySelector('.ht-card-name')?.textContent || 'Mitglied';
   confirmOpen('Mitglied entfernen?', `"${name}" wird aus dem High-Team entfernt.`,
-    () => { card.remove(); delete IDS[memberId]; saveIds(); markUnsaved(); showToast('Mitglied entfernt'); });
+    async () => {
+      card.remove();
+      delete IDS[memberId];
+      await saveIdsShared();
+      await adminSaveAll();
+      showToast('Mitglied entfernt & gespeichert');
+    });
 }
 
 // ══════════════════════════════════════════════
@@ -1649,61 +1649,39 @@ function deleteMember(memberId) {
 // ══════════════════════════════════════════════
 function adminAddRankSection() {
   showTab('highteam', document.querySelector('[data-tab=highteam]'));
-  adminModalOpen('Neue Rang-Kategorie', 'Neue Kategorie im High-Team erstellen',
-    `<div class="admin-field"><label>Rang-Name</label><input id="rs-name" type="text" placeholder="z.B. Co-Inhaber, Moderator, Support..." style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"><div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(155,141,255,0.7);margin-top:6px;">Bestehende Ränge: Inhaber, Serverleitung, Teamleitung – oder gib einen neuen ein!</div></div>`,
-    () => {
+  adminModalOpen('Neue Rang-Kategorie', 'Neue Kategorie erstellen',
+    `<div class="admin-field"><label>Rang-Name</label><input id="rs-name" type="text" placeholder="z.B. Co-Inhaber, Moderator..." ${FIELD_STYLE}></div>`,
+    async () => {
       const name = document.getElementById('rs-name')?.value.trim();
       if (!name) { showToast('Name darf nicht leer sein', true); return; }
       const rankKey = 'custom-' + Date.now();
       const newSection = createRankSection(name, rankKey);
       document.getElementById('ht-rank-sections').appendChild(newSection);
-      adminModalClose(); markUnsaved();
-      showToast(`Kategorie "${name}" erstellt`, false, true);
-      showTab('highteam', document.querySelector('[data-tab=highteam]'));
+      adminModalClose();
+      await adminSaveAll();
+      showToast(`Kategorie "${name}" erstellt & gespeichert`);
     }
   );
 }
 
-function deleteRankSection(btn) {
+async function deleteRankSection(btn) {
   const section = btn.closest('.ht-rank-section');
   const name = section?.querySelector('.ht-rank-pill')?.textContent.trim() || 'Kategorie';
   const memberCount = section?.querySelectorAll('.ht-card').length || 0;
   confirmOpen(
     `Kategorie "${name}" löschen?`,
-    memberCount > 0 ? `Diese Kategorie enthält ${memberCount} Mitglied(er). Alle werden entfernt.` : 'Die Kategorie wird entfernt.',
-    () => {
-      // Remove lanyard IDs for members in this section
+    memberCount > 0 ? `${memberCount} Mitglied(er) werden entfernt.` : 'Die Kategorie wird entfernt.',
+    async () => {
       section.querySelectorAll('[data-member-id]').forEach(card => {
-        const mid = card.getAttribute('data-member-id');
-        delete IDS[mid];
+        delete IDS[card.getAttribute('data-member-id')];
       });
-      saveIds();
+      await saveIdsShared();
       section.remove();
-      markUnsaved();
-      showToast(`Kategorie "${name}" gelöscht`);
+      await adminSaveAll();
+      showToast(`Kategorie entfernt & gespeichert`);
     }
   );
 }
-
-// ══════════════════════════════════════════════
-// RANK → CATEGORY NAVIGATION
-// When clicking a rank pill, navigate to that section
-// ══════════════════════════════════════════════
-document.addEventListener('click', function(e) {
-  // If clicking a rank label on a card (while not in edit mode), scroll to section
-  if (!editModeOn && e.target.classList.contains('ht-card-rank-tag')) {
-    const rankText = e.target.textContent.trim().toLowerCase();
-    const sections = document.querySelectorAll('#ht-rank-sections .ht-rank-section');
-    sections.forEach(sec => {
-      const pill = sec.querySelector('.ht-rank-pill');
-      if (pill && pill.textContent.trim().toLowerCase() === rankText) {
-        sec.scrollIntoView({behavior:'smooth', block:'start'});
-        sec.style.outline = '1px solid rgba(210,140,10,0.4)';
-        setTimeout(() => sec.style.outline = '', 1500);
-      }
-    });
-  }
-});
 </script>
 </body>
 </html>
