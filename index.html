@@ -857,6 +857,53 @@ const CLIENT_ID = '1505344005054005428';
 const REDIRECT_URI = window.location.origin + window.location.pathname;
 const SCOPES = 'identify';
 
+// Optional: Firebase config for central shared storage (recommended when hosting on Vercel)
+// Replace null with your Firebase config object, e.g.
+// const FIREBASE_CONFIG = { apiKey: '...', authDomain: '...', projectId: '...', ... };
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBqstLMCa2QsUHjOWCelMTgfIgUMNNZoIY",
+  authDomain: "pradateamregelwerk.firebaseapp.com",
+  projectId: "pradateamregelwerk",
+  storageBucket: "pradateamregelwerk.firebasestorage.app",
+  messagingSenderId: "767635495179",
+  appId: "1:767635495179:web:f72f254c3cb91bb3bc2a0e",
+  measurementId: "G-LPXW5H1LBN"
+};
+let firebaseDb = null;
+
+// Load Firebase modular SDK dynamically if a config is provided
+if (FIREBASE_CONFIG) {
+  const mod = document.createElement('script');
+  mod.type = 'module';
+  mod.textContent = `
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js';
+    import { getFirestore, doc, getDoc, setDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js';
+    try {
+      const app = initializeApp(${JSON.stringify(FIREBASE_CONFIG)});
+      const db = getFirestore(app);
+      // expose simple helpers for non-module code
+      window.firebaseShared = {
+        get: async (key) => {
+          try {
+            const d = await getDoc(doc(db, 'prada_shared', key));
+            return d.exists() ? d.data().value : null;
+          } catch(e){ console.error('firebaseShared.get error', e); return null; }
+        },
+        set: async (key, value) => {
+          try { await setDoc(doc(db, 'prada_shared', key), { value: value }, { merge: true }); return true; }
+          catch(e){ console.error('firebaseShared.set error', e); return false; }
+        },
+        delete: async (key) => {
+          try { await deleteDoc(doc(db, 'prada_shared', key)); return true; }
+          catch(e){ console.error('firebaseShared.delete error', e); return false; }
+        }
+      };
+      console.info('Firebase modular initialized for shared storage');
+    } catch(e){ console.error('Firebase modular init error', e); }
+  `;
+  document.head.appendChild(mod);SS
+}
+
 // ══ SHARED STORAGE KEYS (für alle Besucher sichtbar) ══
 const SHARED_KEYS = {
   content: 'prada-content-v2',       // HTML der Sektionen
@@ -881,17 +928,40 @@ const STATUS_LABELS = {online:'Online',idle:'Abwesend',dnd:'Nicht stören',offli
 // ══════════════════════════════════════════════
 async function sharedGet(key) {
   try {
-    const result = await window.storage.get(key, true);
-    if (!result || result.value === undefined || result.value === null) return null;
-    return JSON.parse(result.value);
+    // 1) Prefer platform-provided shared storage (e.g. Vercel edge storage / environment)
+    if (window.storage && typeof window.storage.get === 'function') {
+      const result = await window.storage.get(key, true);
+      if (!result || result.value === undefined || result.value === null) return null;
+      return JSON.parse(result.value);
+    }
+    // 2) If Firebase modular helpers are available, use them
+    if (window.firebaseShared && typeof window.firebaseShared.get === 'function') {
+      try { return await window.firebaseShared.get(key); } catch(e){ console.error('firebaseShared.get error', e); }
+    }
+    // 3) Fallback to localStorage (local only)
+    const v = localStorage.getItem(key);
+    if (!v) return null;
+    return JSON.parse(v);
   } catch(e) {
+    console.error('sharedGet error:', e);
     return null;
   }
 }
 
 async function sharedSet(key, value) {
   try {
-    await window.storage.set(key, JSON.stringify(value), true);
+    const str = JSON.stringify(value);
+    // 1) Prefer platform shared storage
+    if (window.storage && typeof window.storage.set === 'function') {
+      await window.storage.set(key, str, true);
+      return true;
+    }
+    // 2) If Firebase modular helpers are available, use them
+    if (window.firebaseShared && typeof window.firebaseShared.set === 'function') {
+      try { return await window.firebaseShared.set(key, value); } catch(e){ console.error('firebaseShared.set error', e); }
+    }
+    // 3) Local fallback
+    localStorage.setItem(key, str);
     return true;
   } catch(e) {
     console.error('sharedSet error:', e);
@@ -901,9 +971,16 @@ async function sharedSet(key, value) {
 
 async function sharedDelete(key) {
   try {
-    await window.storage.delete(key, true);
+    if (window.storage && typeof window.storage.delete === 'function') {
+      await window.storage.delete(key, true);
+      return true;
+    }
+    if (window.firebaseShared && typeof window.firebaseShared.delete === 'function') {
+      try { return await window.firebaseShared.delete(key); } catch(e){ console.error('firebaseShared.delete error', e); }
+    }
+    localStorage.removeItem(key);
     return true;
-  } catch(e) { return false; }
+  } catch(e) { console.error('sharedDelete error:', e); return false; }
 }
 
 function syncBar(state) {
@@ -1453,8 +1530,16 @@ function toggleEditMode() {
 
 async function adminSaveAll() {
   const ok = await saveSharedContent();
-  if (ok) { clearUnsaved(); showToast('Gespeichert – für ALLE Besucher sichtbar ✓'); }
-  else showToast('Speichern fehlgeschlagen', true);
+  if (ok) {
+    clearUnsaved();
+    if (window.storage && typeof window.storage.get === 'function') {
+      showToast('Gespeichert – für ALLE Besucher sichtbar ✓');
+    } else if (firebaseDb) {
+      showToast('Gespeichert – für ALLE Besucher sichtbar (via Firebase) ✓');
+    } else {
+      showToast('Gespeichert (nur lokal) – Shared Storage nicht verfügbar', false, true);
+    }
+  } else showToast('Speichern fehlgeschlagen', true);
 }
 
 async function adminResetConfirm() {
