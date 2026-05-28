@@ -160,10 +160,21 @@ body.is-admin .admin-badge{display:flex;}
 .zb.high{color:#ff9090;border-color:rgba(224,60,60,0.45);background:rgba(224,60,60,0.1);}
 .zb.perm{color:#ff6060;border-color:rgba(255,60,60,0.6);background:rgba(255,60,60,0.12);font-weight:700;}
 
-/* ── ADMIN CONTROLS (only visible in edit mode) ── */
+/* ══════════════════════════════════════════════════
+   SECURITY: Admin-only controls
+   Alle Edit-Buttons/Aktionen nur sichtbar wenn:
+   1. body.is-admin (eingeloggter Admin)
+   2. body.admin-edit-on (Editor-Modus aktiv)
+   Normale Spieler sehen NIEMALS diese Elemente.
+   ══════════════════════════════════════════════════ */
+
+/* Strafe-Tabelle Admin-Spalte: standardmäßig versteckt */
 .stra-admin-th{display:none;}
 .stra-admin-td{display:none;width:90px;text-align:right;white-space:nowrap;}
-body.admin-edit-on .stra-admin-th,body.admin-edit-on .stra-admin-td{display:table-cell;}
+/* Nur sichtbar wenn Admin UND Edit-Modus */
+body.is-admin.admin-edit-on .stra-admin-th,
+body.is-admin.admin-edit-on .stra-admin-td{display:table-cell;}
+
 .stra-adm-btn{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;border:1px solid var(--border-hi);background:rgba(0,0,0,0.6);color:var(--text-muted);cursor:pointer;transition:all 0.12s;margin-left:2px;vertical-align:middle;}
 .stra-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
 .stra-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
@@ -193,7 +204,8 @@ body.admin-edit-on .stra-admin-th,body.admin-edit-on .stra-admin-td{display:tabl
 .ht-card-status-dot.online{background:#23a559;}.ht-card-status-dot.idle{background:#f0b232;}.ht-card-status-dot.dnd{background:#f23f43;}.ht-card-status-dot.streaming{background:#593695;}
 .ht-card-deco{position:absolute;bottom:-8px;right:6px;font-family:'Bebas Neue',sans-serif;font-size:54px;pointer-events:none;line-height:1;opacity:0.04;letter-spacing:0.05em;color:#fff;}
 
-/* ── ADMIN-ONLY CONTROLS (only visible in edit mode) ── */
+/* ── ADMIN-ONLY CONTROLS ── 
+   Sämtliche Edit-Steuerelemente: nur sichtbar für Admins im Edit-Modus */
 .ht-admin-bar{display:none;position:absolute;top:8px;right:8px;gap:4px;}
 .rule-admin-bar{display:none;position:absolute;top:8px;right:8px;gap:4px;align-items:center;}
 .rank-section-del-btn{display:none;background:rgba(0,0,0,0.7);border:1px solid rgba(224,60,60,0.4);color:rgba(224,60,60,0.7);width:22px;height:22px;cursor:pointer;font-size:11px;align-items:center;justify-content:center;transition:all 0.12s;flex-shrink:0;}
@@ -208,17 +220,30 @@ body.admin-edit-on .stra-admin-th,body.admin-edit-on .stra-admin-td{display:tabl
 .rule-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
 .rule-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
 
-/* ── EDIT MODE REVEALS ── */
-body.admin-edit-on .ht-admin-bar{display:flex;}
-body.admin-edit-on .rule-admin-bar{display:flex;}
-body.admin-edit-on .rank-section-del-btn{display:flex;}
-body.admin-edit-on .add-rule-btn,body.admin-edit-on .add-member-btn{display:flex;}
-body.admin-edit-on .add-rank-section-btn{display:flex;}
-body.admin-edit-on .rule-top{padding-right:84px;}
-body.admin-edit-on [data-editable]{outline:1px dashed rgba(210,140,10,0.35);cursor:text;}
-body.admin-edit-on [data-editable]:hover{outline:1px solid rgba(210,140,10,0.7);background:rgba(210,140,10,0.04);}
-body.admin-edit-on [data-editable]:focus{outline:1px solid var(--inhaber-accent);background:rgba(210,140,10,0.07);}
-body.admin-edit-on .add-strafe-row-btn{display:flex;}
+/* Edit-Mode Reveals: NUR Admin + Edit-Mode zusammen */
+body.is-admin.admin-edit-on .ht-admin-bar{display:flex;}
+body.is-admin.admin-edit-on .rule-admin-bar{display:flex;}
+body.is-admin.admin-edit-on .rank-section-del-btn{display:flex;}
+body.is-admin.admin-edit-on .add-rule-btn,
+body.is-admin.admin-edit-on .add-member-btn{display:flex;}
+body.is-admin.admin-edit-on .add-rank-section-btn{display:flex;}
+body.is-admin.admin-edit-on .rule-top{padding-right:84px;}
+body.is-admin.admin-edit-on [data-editable]{outline:1px dashed rgba(210,140,10,0.35);cursor:text;}
+body.is-admin.admin-edit-on [data-editable]:hover{outline:1px solid rgba(210,140,10,0.7);background:rgba(210,140,10,0.04);}
+body.is-admin.admin-edit-on [data-editable]:focus{outline:1px solid var(--inhaber-accent);background:rgba(210,140,10,0.07);}
+body.is-admin.admin-edit-on .add-strafe-row-btn{display:flex;}
+
+/* SECURITY: data-editable Felder für Nicht-Admins komplett gesperrt */
+body:not(.is-admin) [data-editable]{
+  user-select:text;
+  pointer-events:none; /* Kein Klick möglich */
+  cursor:default;
+}
+/* Für Admins außerhalb Edit-Modus: lesbar aber nicht editierbar */
+body.is-admin:not(.admin-edit-on) [data-editable]{
+  pointer-events:none;
+  cursor:default;
+}
 
 /* ── DASHBOARD ── */
 .dash-header{background:linear-gradient(135deg,rgba(155,141,255,0.08) 0%,rgba(8,8,8,0) 60%);border:1px solid rgba(155,141,255,0.2);padding:24px 28px;margin-bottom:2rem;position:relative;overflow:hidden;}
@@ -322,7 +347,7 @@ body.admin-edit-on .add-strafe-row-btn{display:flex;}
 .announcement-send-btn:hover{background:rgba(210,140,10,0.22);}
 .announcement-send-btn:disabled{opacity:0.4;cursor:default;}
 
-/* ── ADMIN TOOLBAR (always present for admins, content changes with edit mode) ── */
+/* ── ADMIN TOOLBAR: nur sichtbar für is-admin ── */
 #admin-toolbar{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:8000;background:rgba(13,10,4,0.97);border:1px solid var(--inhaber-border);box-shadow:0 0 40px rgba(210,140,10,0.2),0 8px 32px rgba(0,0,0,0.6);padding:8px 12px;gap:6px;align-items:center;backdrop-filter:blur(12px);transition:all 0.2s;}
 body.is-admin #admin-toolbar{display:flex;}
 .adm-btn{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--border-hi);background:transparent;color:var(--text-muted);cursor:pointer;transition:all 0.14s;white-space:nowrap;}
@@ -334,7 +359,6 @@ body.is-admin #admin-toolbar{display:flex;}
 .adm-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.22em;text-transform:uppercase;color:var(--inhaber-accent);padding:0 4px;}
 .unsaved-dot{display:none;width:6px;height:6px;border-radius:50%;background:var(--amber);animation:blink 1.5s infinite;}
 body.has-unsaved .unsaved-dot{display:inline-block;}
-/* Edit-mode indicator on toolbar */
 #admin-toolbar.edit-active{border-color:var(--inhaber-accent);box-shadow:0 0 40px rgba(210,140,10,0.35),0 8px 32px rgba(0,0,0,0.6);}
 
 /* ── MODALS ── */
@@ -365,7 +389,7 @@ body.has-unsaved .unsaved-dot{display:inline-block;}
 .admin-field select option{background:var(--card);}
 .admin-field .field-hint{font-family:'DM Mono',monospace;font-size:8px;color:var(--text-muted);margin-top:5px;letter-spacing:0.08em;}
 .admin-modal-actions{display:flex;gap:8px;margin-top:20px;}
-.admin-modal-btn{flex:1;padding:10px;border:1px solid;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;}
+.admin-modal-btn{flex:1;padding:10px;border:1px solid;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.14px;}
 .admin-modal-btn.confirm{background:rgba(210,140,10,0.12);border-color:var(--inhaber-border);color:var(--inhaber-accent);}
 .admin-modal-btn.confirm:hover{background:rgba(210,140,10,0.22);}
 .admin-modal-btn.cancel{background:transparent;border-color:var(--border-hi);color:var(--text-muted);}
@@ -379,7 +403,7 @@ body.has-unsaved .unsaved-dot{display:inline-block;}
 .confirm-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.08em;color:var(--white);margin-bottom:8px;}
 .confirm-sub{font-size:12px;color:var(--text-muted);margin-bottom:20px;line-height:1.5;}
 .confirm-actions{display:flex;gap:8px;}
-.confirm-btn{flex:1;padding:10px;border:1px solid;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;}
+.confirm-btn{flex:1;padding:10px;border:1px solid;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.14px;}
 .confirm-btn.del{background:rgba(224,60,60,0.12);border-color:rgba(224,60,60,0.5);color:#ff9090;}
 .confirm-btn.del:hover{background:rgba(224,60,60,0.22);}
 .confirm-btn.cancel{background:transparent;border-color:var(--border-hi);color:var(--text-muted);}
@@ -795,8 +819,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         <button class="dash-refresh" id="dash-refresh-btn" onclick="loadDashboard()"><i class="ti ti-refresh"></i></button>
       </div>
     </div>
-
-    <!-- QUICK ACTIONS -->
     <div class="dash-admin-strip" id="dash-admin-strip">
       <div class="dash-admin-card" style="--c:var(--inhaber-accent)" onclick="activateEditMode()">
         <div class="dac-ico" style="color:var(--inhaber-accent)"><i class="ti ti-pencil" id="dac-edit-ico"></i></div>
@@ -829,16 +851,12 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         <div class="dac-desc">Alle Logs löschen</div>
       </div>
     </div>
-
-    <!-- STATS -->
     <div class="dash-stats" id="dash-stats">
       <div class="dash-stat"><div class="dash-stat-n purple" id="ds-total">–</div><div class="dash-stat-l">Besucher gesamt</div></div>
       <div class="dash-stat"><div class="dash-stat-n green" id="ds-today">–</div><div class="dash-stat-l">Heute</div></div>
       <div class="dash-stat"><div class="dash-stat-n amber" id="ds-admins">–</div><div class="dash-stat-l">Admin-Besuche</div></div>
       <div class="dash-stat"><div class="dash-stat-n red" id="ds-log">–</div><div class="dash-stat-l">Log-Einträge</div></div>
     </div>
-
-    <!-- ANNOUNCEMENT PANEL -->
     <div class="announcement-admin-panel" id="announcement-admin-panel" style="display:none;">
       <div class="announcement-admin-hdr"><i class="ti ti-speakerphone"></i>Ankündigung verwalten</div>
       <div class="announcement-admin-body">
@@ -859,8 +877,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         </div>
       </div>
     </div>
-
-    <!-- RESET PANEL -->
     <div class="reset-panel" id="reset-panel" style="display:none;">
       <div class="reset-panel-hdr">
         <div class="reset-panel-title"><i class="ti ti-history"></i>Snapshots & Reset-Optionen</div>
@@ -893,8 +909,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         </div>
       </div>
     </div>
-
-    <!-- CHANGELOG PANEL -->
     <div class="changelog-panel">
       <div class="changelog-panel-hdr">
         <div class="changelog-panel-title"><i class="ti ti-history"></i>Änderungsprotokoll</div>
@@ -904,8 +918,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         <div class="dash-empty">Noch keine Änderungen protokolliert.</div>
       </div>
     </div>
-
-    <!-- VISITORS / LOG -->
     <div class="dash-grid">
       <div class="dash-panel">
         <div class="dash-panel-hdr">
@@ -988,7 +1000,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   PRADA CRIMELIFE V2 · INTERNES TEAM-REGELWERK V1.0
 </footer>
 
-<!-- ADMIN TOOLBAR — always present for admins, content adapts to mode -->
+<!-- ADMIN TOOLBAR -->
 <div id="admin-toolbar">
   <i class="ti ti-shield-check" style="color:var(--inhaber-accent);font-size:14px;"></i>
   <span class="adm-label">Admin</span>
@@ -1027,11 +1039,31 @@ window.__db = db;
 async function sharedGet(key) {
   try { const s = await getDoc(doc(db,'prada',key)); return s.exists()?s.data().value:null; } catch(e){console.error('sharedGet',key,e);return null;}
 }
-async function sharedSet(key,value) {
+
+// ══════════════════════════════════════════════════
+// SECURITY: sharedSet und sharedDelete prüfen Admin-Status
+// Kein Nicht-Admin kann Daten schreiben, egal ob über
+// UI oder Browser-Konsole.
+// ══════════════════════════════════════════════════
+async function sharedSet(key, value) {
+  if (!isAdmin()) {
+    console.warn('[SECURITY] Schreibzugriff verweigert – kein Admin');
+    showToast('Keine Berechtigung', true);
+    return false;
+  }
   try { await setDoc(doc(db,'prada',key),{value}); return true; } catch(e){console.error('sharedSet',key,e);return false;}
 }
 async function sharedDelete(key) {
+  if (!isAdmin()) {
+    console.warn('[SECURITY] Löschzugriff verweigert – kein Admin');
+    return false;
+  }
   try { await deleteDoc(doc(db,'prada',key)); return true; } catch(e){console.error('sharedDelete',key,e);return false;}
+}
+
+// Helper: prüft ob aktuell eingeloggter User Admin ist
+function isAdmin() {
+  return currentUser && currentUser.id === ADMIN_ID;
 }
 
 // ── CONSTANTS ──
@@ -1052,8 +1084,8 @@ let currentUser = null, dcToken = null, editModeOn = false;
 let adminModalCb = null, confirmCb = null;
 let currentLanyardMember = null, currentEditMemberId = null;
 let IDS = {};
-let editSnapshot = null; // snapshot before edit starts
-let snapshotTimers = {}; // 60s, 10m, 1h interval refs
+let editSnapshot = null;
+let snapshotTimers = {};
 
 // ── SYNC BAR ──
 function syncBar(state){
@@ -1104,11 +1136,20 @@ async function showApp(user,token){
   if(ids)IDS=ids;
   loadAllLanyard();
   setInterval(loadAllLanyard,30000);
-  if(user.id===ADMIN_ID){
+
+  // Admin-spezifische Initialisierung NUR für Admin
+  if(isAdmin()){
     document.body.classList.add('is-admin');
     document.getElementById('dash-tab-btn').style.display='flex';
     initAdminMode();
     startSnapshotTimers();
+  }
+  // Sicherstellen: Nicht-Admins haben NIEMALS contenteditable
+  if(!isAdmin()){
+    document.querySelectorAll('[data-editable]').forEach(el=>{
+      el.removeAttribute('contenteditable');
+      el.setAttribute('data-readonly','true');
+    });
   }
 }
 
@@ -1133,7 +1174,7 @@ function logout(){
 // ── VISIT TRACKING ──
 async function trackVisit(user){
   try{
-    const isAdmin=user.id===ADMIN_ID, now=Date.now();
+    const isAdminUser=isAdmin(), now=Date.now();
     let visitors=(await sharedGet(KEYS.visitors))||[];
     const idx=visitors.findIndex(v=>v.id===user.id);
     if(idx>=0){
@@ -1141,13 +1182,14 @@ async function trackVisit(user){
       visitors[idx].avatar=user.avatar; visitors[idx].global_name=user.global_name||user.username;
     } else {
       visitors.push({id:user.id,username:user.username,global_name:user.global_name||user.username,
-        avatar:user.avatar,discriminator:user.discriminator,firstSeen:now,lastSeen:now,visitCount:1,isAdmin});
+        avatar:user.avatar,discriminator:user.discriminator,firstSeen:now,lastSeen:now,visitCount:1,isAdmin:isAdminUser});
     }
-    await sharedSet(KEYS.visitors,visitors);
+    // trackVisit nutzt direkten Firestore-Zugriff (kein Admin-Check nötig für Besuchslogging)
+    try { await setDoc(doc(db,'prada',KEYS.visitors),{value:visitors}); } catch(e){}
     let log=(await sharedGet(KEYS.visitLog))||[];
-    log.unshift({userId:user.id,username:user.global_name||user.username,avatar:user.avatar,ts:now,isAdmin});
+    log.unshift({userId:user.id,username:user.global_name||user.username,avatar:user.avatar,ts:now,isAdmin:isAdminUser});
     if(log.length>100)log=log.slice(0,100);
-    await sharedSet(KEYS.visitLog,log);
+    try { await setDoc(doc(db,'prada',KEYS.visitLog),{value:log}); } catch(e){}
   }catch(e){console.error('Track:',e);}
 }
 
@@ -1160,11 +1202,19 @@ async function loadSharedContent(){
     if(c.regelwerk)document.getElementById('regelwerk').innerHTML=c.regelwerk;
     if(c.strafen)document.getElementById('strafen').innerHTML=c.strafen;
     if(c.highteam)document.getElementById('highteam').innerHTML=c.highteam;
-    if(document.body.classList.contains('is-admin'))initAdminMode();
+    if(isAdmin())initAdminMode();
+    // Nach Content-Load: Nicht-Admins absichern
+    if(!isAdmin()){
+      document.querySelectorAll('[data-editable]').forEach(el=>{
+        el.removeAttribute('contenteditable');
+      });
+    }
   }catch(e){console.error('Load:',e);}
 }
 
 function captureContent(){
+  // SECURITY: Nur Admin darf Content erfassen
+  if(!isAdmin()) return null;
   return {
     einfuehrung:document.getElementById('einfuehrung').innerHTML,
     regelwerk:document.getElementById('regelwerk').innerHTML,
@@ -1174,19 +1224,29 @@ function captureContent(){
 }
 
 async function saveSharedContent(){
+  // SECURITY: Nur Admin darf speichern
+  if(!isAdmin()){
+    console.warn('[SECURITY] saveSharedContent: Zugriff verweigert');
+    return false;
+  }
   syncBar('syncing');
   try{
-    const ok=await sharedSet(KEYS.content,captureContent());
+    const content=captureContent();
+    if(!content){syncBar('');return false;}
+    const ok=await sharedSet(KEYS.content,content);
     syncBar(ok?'saved':'');
     return ok;
   }catch(e){console.error('Save:',e);syncBar('');return false;}
 }
 
-async function saveIdsShared(){await sharedSet(KEYS.lanyardIds,IDS);}
+async function saveIdsShared(){
+  if(!isAdmin()) return;
+  await sharedSet(KEYS.lanyardIds,IDS);
+}
 
 // ── CHANGELOG ──
 async function logChange(action){
-  if(!currentUser)return;
+  if(!isAdmin())return;
   try{
     let log=(await sharedGet(KEYS.changelog))||[];
     log.unshift({ts:Date.now(),user:currentUser.global_name||currentUser.username,avatar:currentUser.avatar,userId:currentUser.id,action});
@@ -1196,8 +1256,8 @@ async function logChange(action){
 }
 
 // ── SNAPSHOT SYSTEM ──
-// Snapshots stored as: {s60:{content,ts}, s10m:{content,ts}, s1h:{content,ts}}
 async function saveSnapshot(slot){
+  if(!isAdmin()) return;
   try{
     let snaps=(await sharedGet(KEYS.snapshots))||{};
     snaps[slot]={content:captureContent(),ts:Date.now()};
@@ -1206,11 +1266,9 @@ async function saveSnapshot(slot){
 }
 
 function startSnapshotTimers(){
-  // Auto-snapshot every 60s (replaces), every 10m (replaces), every 1h (replaces)
   snapshotTimers['60s']=setInterval(()=>saveSnapshot('s60'),60000);
   snapshotTimers['10m']=setInterval(()=>saveSnapshot('s10m'),10*60000);
   snapshotTimers['1h']=setInterval(()=>saveSnapshot('s1h'),60*60000);
-  // Take initial snapshots after a delay
   setTimeout(()=>saveSnapshot('s60'),5000);
   setTimeout(()=>saveSnapshot('s10m'),5000);
   setTimeout(()=>saveSnapshot('s1h'),5000);
@@ -1222,6 +1280,7 @@ function stopSnapshotTimers(){
 }
 
 async function loadSnapshotUI(){
+  if(!isAdmin()) return;
   try{
     const snaps=await sharedGet(KEYS.snapshots)||{};
     const slots=[
@@ -1248,6 +1307,7 @@ async function loadSnapshotUI(){
 }
 
 window.restoreSnapshot=async function(slot){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   const keyMap={'60s':'s60','10m':'s10m','1h':'s1h'};
   const k=keyMap[slot];
   if(!k)return;
@@ -1271,12 +1331,14 @@ window.restoreSnapshot=async function(slot){
 };
 
 window.openResetPanel=function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   const panel=document.getElementById('reset-panel');
   panel.style.display=panel.style.display==='none'?'block':'none';
   if(panel.style.display==='block')loadSnapshotUI();
 };
 
 window.adminHardResetConfirm=function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   confirmOpen(
     'Komplett-Reset?',
     'Das Regelwerk wird auf den Original-Stand zurückgesetzt. ALLE Änderungen gehen dauerhaft verloren.',
@@ -1309,14 +1371,16 @@ window.closeAnnouncementBanner=function(){
 };
 
 window.openAnnouncementAdmin=function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   const panel=document.getElementById('announcement-admin-panel');
   panel.style.display=panel.style.display==='none'?'block':'none';
   if(panel.style.display==='block')refreshAnnouncementPanel();
-  if(document.getElementById('dashboard').classList.contains('visible')){}
-  else showTab('dashboard',document.querySelector('[data-tab=dashboard]'));
+  if(!document.getElementById('dashboard').classList.contains('visible'))
+    showTab('dashboard',document.querySelector('[data-tab=dashboard]'));
 };
 
 async function refreshAnnouncementPanel(){
+  if(!isAdmin()) return;
   try{
     const ann=await sharedGet(KEYS.announcement);
     const activeDiv=document.getElementById('active-announcement-display');
@@ -1334,6 +1398,7 @@ async function refreshAnnouncementPanel(){
 }
 
 window.publishAnnouncement=async function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   const text=document.getElementById('new-announcement-input').value.trim();
   if(!text){showToast('Text eingeben',false,true);return;}
   const ann={text,active:true,ts:Date.now(),by:currentUser?.global_name||'Admin'};
@@ -1347,6 +1412,7 @@ window.publishAnnouncement=async function(){
 };
 
 window.clearAnnouncement=async function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   await sharedSet(KEYS.announcement,{active:false,text:'',ts:Date.now()});
   await logChange('Ankündigung entfernt');
   document.getElementById('announcement-banner').classList.remove('visible');
@@ -1356,6 +1422,8 @@ window.clearAnnouncement=async function(){
 
 // ── TAB NAVIGATION ──
 function showTab(id,btn){
+  // Dashboard nur für Admins
+  if(id==='dashboard'&&!isAdmin()){showToast('Keine Berechtigung',true);return;}
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   const sec=document.getElementById(id);
@@ -1369,7 +1437,7 @@ window.logout=logout;
 
 // ── DASHBOARD ──
 async function loadDashboard(){
-  if(!currentUser||currentUser.id!==ADMIN_ID)return;
+  if(!isAdmin())return;
   const btn=document.getElementById('dash-refresh-btn');
   btn.classList.add('spinning');
   try{
@@ -1389,7 +1457,6 @@ async function loadDashboard(){
     document.getElementById('visitors-count').textContent=vArr.length;
     document.getElementById('log-count').textContent=lArr.length;
 
-    // Visitors
     const vList=document.getElementById('visitors-list');
     if(!vArr.length)vList.innerHTML='<div class="dash-empty">Noch keine Besucher</div>';
     else{
@@ -1415,7 +1482,6 @@ async function loadDashboard(){
       }).join('');
     }
 
-    // Log
     const vLog=document.getElementById('visit-log');
     if(!lArr.length)vLog.innerHTML='<div class="dash-empty">Kein Log</div>';
     else{
@@ -1431,7 +1497,6 @@ async function loadDashboard(){
       }).join('');
     }
 
-    // Changelog
     const clBody=document.getElementById('changelog-body');
     document.getElementById('changelog-count').textContent=cArr.length;
     if(!cArr.length)clBody.innerHTML='<div class="dash-empty">Noch keine Änderungen protokolliert.</div>';
@@ -1446,7 +1511,6 @@ async function loadDashboard(){
         </div>`).join('');
     }
 
-    // Edit mode quick action card state
     const editIco=document.getElementById('dac-edit-ico');
     const editTitle=document.getElementById('dac-edit-title');
     const editDesc=document.getElementById('dac-edit-desc');
@@ -1460,7 +1524,6 @@ async function loadDashboard(){
       if(editDesc)editDesc.textContent='Inhalte bearbeiten';
     }
 
-    // Snapshot UI if panel open
     if(document.getElementById('reset-panel').style.display!=='none')loadSnapshotUI();
 
   }catch(e){console.error(e);}
@@ -1469,6 +1532,7 @@ async function loadDashboard(){
 window.loadDashboard=loadDashboard;
 
 window.exportChangelog=async function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   const cArr=(await sharedGet(KEYS.changelog))||[];
   if(!cArr.length){showToast('Kein Changelog vorhanden',false,true);return;}
   const lines=['Prada CL v2 – Änderungsprotokoll','='.repeat(40),''];
@@ -1484,6 +1548,7 @@ window.exportChangelog=async function(){
 };
 
 window.clearAllVisitors=function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   confirmOpen('Besucherdaten löschen?','Alle Besucher-Logs und Besuchshistorie werden unwiderruflich gelöscht.',async()=>{
     await sharedDelete(KEYS.visitors);
     await sharedDelete(KEYS.visitLog);
@@ -1532,7 +1597,7 @@ async function fetchLanyard(discordId,memberId){
 function loadAllLanyard(){for(const[mid,did] of Object.entries(IDS))if(did)fetchLanyard(did,mid);}
 
 function openLanyardModal(memberId){
-  if(!document.body.classList.contains('is-admin'))return;
+  if(!isAdmin())return;
   currentLanyardMember=memberId;
   document.getElementById('lanyard-input').value=IDS[memberId]||'';
   document.getElementById('lanyard-modal-overlay').classList.add('open');
@@ -1542,6 +1607,7 @@ window.openLanyardModal=openLanyardModal;
 function closeLanyardModal(){document.getElementById('lanyard-modal-overlay').classList.remove('open');currentLanyardMember=null;}
 window.closeLanyardModal=closeLanyardModal;
 async function saveLanyardId(){
+  if(!isAdmin()){closeLanyardModal();return;}
   const val=document.getElementById('lanyard-input').value.trim();
   if(!currentLanyardMember)return;
   if(val&&/^\d{17,20}$/.test(val)){
@@ -1577,7 +1643,7 @@ document.getElementById('lanyard-input').addEventListener('keydown',function(e){
 
 // ── MEMBER EDIT MODAL ──
 function openMemberEditModal(memberId){
-  if(!document.body.classList.contains('is-admin'))return;
+  if(!isAdmin())return;
   currentEditMemberId=memberId;
   const card=document.querySelector(`[data-member-id="${memberId}"]`);
   if(!card)return;
@@ -1592,6 +1658,7 @@ window.openMemberEditModal=openMemberEditModal;
 function closeMemberEditModal(){document.getElementById('member-edit-overlay').classList.remove('open');currentEditMemberId=null;}
 window.closeMemberEditModal=closeMemberEditModal;
 async function saveMemberEdit(){
+  if(!isAdmin()){closeMemberEditModal();return;}
   if(!currentEditMemberId)return;
   const card=document.querySelector(`[data-member-id="${currentEditMemberId}"]`);
   if(!card){closeMemberEditModal();return;}
@@ -1643,11 +1710,15 @@ function showToast(msg,isErr=false,isInfo=false){
   t._to=setTimeout(()=>t.classList.remove('show'),3000);
 }
 window.showToast=showToast;
-function markUnsaved(){document.body.classList.add('has-unsaved');}
+function markUnsaved(){
+  if(!isAdmin()) return; // Nicht-Admins können nichts als ungespeichert markieren
+  document.body.classList.add('has-unsaved');
+}
 function clearUnsaved(){document.body.classList.remove('has-unsaved');}
 
 // ── ADMIN INIT ──
 function initAdminMode(){
+  if(!isAdmin()) return; // Guard
   setupAllEditables();
   setupAllRuleAdminBars();
   addAllAddButtons();
@@ -1655,13 +1726,15 @@ function initAdminMode(){
 }
 
 function setupAllEditables(){
+  if(!isAdmin()) return;
   document.querySelectorAll('[data-editable]').forEach(el=>{
-    el.setAttribute('contenteditable',editModeOn?'true':'false');
+    el.setAttribute('contenteditable', editModeOn ? 'true' : 'false');
     if(!el._editListenerAdded){el.addEventListener('input',markUnsaved);el._editListenerAdded=true;}
   });
 }
 
 function setupAllRuleAdminBars(){
+  if(!isAdmin()) return;
   document.querySelectorAll('.rule').forEach(rule=>{
     let bar=rule.querySelector('.rule-admin-bar');
     if(!bar){bar=document.createElement('div');bar.className='rule-admin-bar';rule.appendChild(bar);}
@@ -1673,6 +1746,7 @@ function setupAllRuleAdminBars(){
 }
 
 function addAllAddButtons(){
+  if(!isAdmin()) return;
   document.querySelectorAll('.rules').forEach(c=>{
     c.querySelectorAll('.add-rule-btn').forEach(b=>b.remove());
     const btn=document.createElement('button');
@@ -1691,6 +1765,7 @@ function addAllAddButtons(){
 
 // ── STRAFE ADMIN CONTROLS ──
 function setupStrafeAdminControls(){
+  if(!isAdmin()) return;
   const tbody=document.getElementById('strafen-tbody');
   if(!tbody)return;
   Array.from(tbody.rows).forEach(row=>{
@@ -1705,12 +1780,14 @@ function setupStrafeAdminControls(){
 window.setupStrafeAdminControls=setupStrafeAdminControls;
 
 window.moveStrafeRow=function(btn,dir){
+  if(!isAdmin()) return;
   const row=btn.closest('tr'),tbody=row.parentElement;
   if(dir==='up'){const p=row.previousElementSibling;if(p)tbody.insertBefore(row,p);}
   else{const n=row.nextElementSibling;if(n)tbody.insertBefore(n,row);}
   markUnsaved();
 };
 window.deleteStrafeRow=function(btn){
+  if(!isAdmin()) return;
   const row=btn.closest('tr'),name=row.querySelector('.vname')?.textContent||'Eintrag';
   confirmOpen(`"${name}" löschen?`,'Dieser Strafeneintrag wird entfernt.',async()=>{
     row.remove();await adminSaveAll(`Strafeneintrag gelöscht: ${name}`);showToast('Eintrag gelöscht');
@@ -1719,6 +1796,7 @@ window.deleteStrafeRow=function(btn){
 
 // ── EDIT MODE TOGGLE ──
 function toggleEditMode(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   editModeOn=!editModeOn;
   document.body.classList.toggle('admin-edit-on',editModeOn);
   const toolbar=document.getElementById('admin-toolbar');
@@ -1730,9 +1808,11 @@ function toggleEditMode(){
   editBtn.innerHTML=editModeOn?'<i class="ti ti-pencil-off"></i>Editor Beenden':'<i class="ti ti-pencil"></i>Editor-Modus';
   if(saveBtn)saveBtn.style.display=editModeOn?'flex':'none';
   if(discardBtn)discardBtn.style.display=editModeOn?'flex':'none';
-  document.querySelectorAll('[data-editable]').forEach(el=>el.setAttribute('contenteditable',editModeOn?'true':'false'));
+  // contenteditable nur für Admin setzen/entfernen
+  document.querySelectorAll('[data-editable]').forEach(el=>
+    el.setAttribute('contenteditable', editModeOn ? 'true' : 'false')
+  );
   if(editModeOn){
-    // Take snapshot of current state before editing
     editSnapshot=captureContent();
     showToast('Editor-Modus aktiv – Inhalte jetzt bearbeitbar',false,true);
   } else {
@@ -1743,6 +1823,7 @@ function toggleEditMode(){
 window.toggleEditMode=toggleEditMode;
 
 window.activateEditMode=function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   if(!editModeOn){
     showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));
     setTimeout(toggleEditMode,200);
@@ -1752,14 +1833,14 @@ window.activateEditMode=function(){
 };
 
 window.discardEdits=function(){
+  if(!isAdmin()) return;
   if(!editSnapshot){toggleEditMode();return;}
   confirmOpen('Änderungen verwerfen?','Alle ungespeicherten Änderungen gehen verloren.',()=>{
-    // Restore snapshot
     if(editSnapshot.einfuehrung)document.getElementById('einfuehrung').innerHTML=editSnapshot.einfuehrung;
     if(editSnapshot.regelwerk)document.getElementById('regelwerk').innerHTML=editSnapshot.regelwerk;
     if(editSnapshot.strafen)document.getElementById('strafen').innerHTML=editSnapshot.strafen;
     if(editSnapshot.highteam)document.getElementById('highteam').innerHTML=editSnapshot.highteam;
-    editModeOn=true;toggleEditMode(); // will turn it off and save (but content is restored)
+    editModeOn=true;toggleEditMode();
     clearUnsaved();
     initAdminMode();
     showToast('Änderungen verworfen');
@@ -1767,6 +1848,7 @@ window.discardEdits=function(){
 };
 
 async function adminSaveAll(changeNote='Inhalte gespeichert'){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   const ok=await saveSharedContent();
   if(ok){
     clearUnsaved();
@@ -1778,12 +1860,14 @@ window.adminSaveAll=()=>adminSaveAll();
 
 // ── RULE MOVE / DELETE ──
 window.moveRule=function(btn,dir){
+  if(!isAdmin()) return;
   const rule=btn.closest('.rule'),c=rule.parentElement;
   if(dir==='up'){const p=rule.previousElementSibling;if(p&&!p.classList.contains('add-rule-btn'))c.insertBefore(rule,p);}
   else{const n=rule.nextElementSibling;if(n&&!n.classList.contains('add-rule-btn'))c.insertBefore(n,rule);}
   markUnsaved();
 };
 window.deleteRuleBtn=function(btn){
+  if(!isAdmin()) return;
   const rule=btn.closest('.rule');
   const title=rule.querySelector('.rule-title')?.textContent||'Regel';
   confirmOpen('Regel löschen?',`"${title}" wird entfernt.`,async()=>{
@@ -1793,6 +1877,7 @@ window.deleteRuleBtn=function(btn){
 
 // ── ADMIN MODAL ──
 function adminModalOpen(title,sub,fields,onConfirm){
+  if(!isAdmin()) return;
   document.getElementById('admin-modal-title').textContent=title;
   document.getElementById('admin-modal-sub').textContent=sub;
   document.getElementById('admin-modal-fields').innerHTML=fields;
@@ -1801,7 +1886,7 @@ function adminModalOpen(title,sub,fields,onConfirm){
   setTimeout(()=>{const f=document.querySelector('#admin-modal-fields input,#admin-modal-fields textarea,#admin-modal-fields select');if(f)f.focus();},80);
 }
 function adminModalClose(){document.getElementById('admin-modal-overlay').classList.remove('open');adminModalCb=null;}
-function adminModalConfirm(){if(adminModalCb)adminModalCb();}
+function adminModalConfirm(){if(!isAdmin())return;if(adminModalCb)adminModalCb();}
 window.adminModalConfirm=adminModalConfirm;window.adminModalClose=adminModalClose;
 document.getElementById('admin-modal-overlay').addEventListener('click',function(e){if(e.target===this)adminModalClose();});
 
@@ -1810,6 +1895,7 @@ const FTA=`style="background:var(--surface);border:1px solid var(--border-hi);co
 
 // ── ADD RULE ──
 function adminAddRuleToContainer(container){
+  if(!isAdmin()) return;
   adminModalOpen('Neue Regel','Regel hinzufügen',
     `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" ${FS}></div>
      <div class="admin-field"><label>Badge-Typ</label><select id="af-badge" ${FS}><option value="b-std">Standard</option><option value="b-ok">Pflicht</option><option value="b-warn">Wichtig</option><option value="b-ban">Verboten</option><option value="b-info">Info</option></select></div>
@@ -1818,6 +1904,7 @@ function adminAddRuleToContainer(container){
      <div class="admin-field"><label>Beschreibung</label><textarea id="af-text" rows="4" placeholder="Regeltext..." ${FTA}></textarea></div>
      <div class="admin-field"><label>Stil</label><select id="af-type" ${FS}><option value="">Normal</option><option value="danger">Danger (Rot)</option></select></div>`,
     async()=>{
+      if(!isAdmin()) return;
       const id=document.getElementById('af-id')?.value.trim()||'TR — ?';
       const badge=document.getElementById('af-badge')?.value||'b-std';
       const badgeText=document.getElementById('af-badge-text')?.value.trim()||'Standard';
@@ -1851,6 +1938,7 @@ window.adminAddRuleToContainer=adminAddRuleToContainer;
 
 // ── ADD STRAFE ROW ──
 window.adminAddStrafeRow=function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   adminModalOpen('Neuer Strafe-Eintrag','Zur Strafen-Tabelle',
     `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" ${FS}></div>
      <div class="admin-field"><label>Kurze Beschreibung</label><input id="sf-desc" type="text" placeholder="Beschreibung" ${FS}></div>
@@ -1858,6 +1946,7 @@ window.adminAddStrafeRow=function(){
      <div class="admin-field"><label>Schwere</label><select id="sf-sev" ${FS}><option value="low">Niedrig (blau)</option><option value="mid">Mittel (gelb)</option><option value="high">Hoch (rot)</option><option value="perm">Permanent</option></select></div>
      <div class="admin-field"><label>Beschreibung (lang)</label><textarea id="sf-long" rows="3" placeholder="..." ${FTA}></textarea></div>`,
     async()=>{
+      if(!isAdmin()) return;
       const name=document.getElementById('sf-name')?.value.trim()||'Vergehen';
       const desc=document.getElementById('sf-desc')?.value.trim()||'';
       const time=document.getElementById('sf-time')?.value.trim()||'?';
@@ -1889,6 +1978,7 @@ window.adminAddStrafeRow=function(){
 
 // ── ADD MEMBER ──
 function adminAddMemberToGrid(grid){
+  if(!isAdmin()) return;
   const section=grid.closest('.ht-rank-section');
   const pill=section?.querySelector('.ht-rank-pill');
   const rankLabel=pill?.textContent.trim()||'Rang';
@@ -1900,6 +1990,7 @@ function adminAddMemberToGrid(grid){
      <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FS}></div>
      <div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FS}><div class="field-hint">Leer lassen → später über Discord-Button setzen.</div></div>`,
     async()=>{
+      if(!isAdmin()) return;
       const name=document.getElementById('mf-name')?.value.trim()||'Neues Mitglied';
       const title=document.getElementById('mf-title')?.value.trim()||rankLabel;
       const dcid=document.getElementById('mf-dcid')?.value.trim()||'';
@@ -1935,6 +2026,7 @@ function adminAddMemberToGrid(grid){
 window.adminAddMemberToGrid=adminAddMemberToGrid;
 
 window.deleteMember=async function(memberId){
+  if(!isAdmin()) return;
   const card=document.querySelector(`[data-member-id="${memberId}"]`);if(!card)return;
   const name=card.querySelector('.ht-card-name')?.textContent||'Mitglied';
   confirmOpen('Mitglied entfernen?',`"${name}" wird aus dem High-Team entfernt.`,async()=>{
@@ -1946,10 +2038,12 @@ window.deleteMember=async function(memberId){
 
 // ── ADD RANK SECTION ──
 window.adminAddRankSection=function(){
+  if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   showTab('highteam',document.querySelector('[data-tab=highteam]'));
   adminModalOpen('Neue Rang-Kategorie','Neue Kategorie erstellen',
     `<div class="admin-field"><label>Rang-Name</label><input id="rs-name" type="text" placeholder="z.B. Co-Inhaber, Moderator..." ${FS}></div>`,
     async()=>{
+      if(!isAdmin()) return;
       const name=document.getElementById('rs-name')?.value.trim();
       if(!name){showToast('Name darf nicht leer sein',true);return;}
       const rk='custom-'+Date.now();
@@ -1963,6 +2057,7 @@ window.adminAddRankSection=function(){
 };
 
 function createRankSection(rankName,rankKey){
+  if(!isAdmin()) return document.createElement('div');
   const sec=document.createElement('div');
   sec.className='ht-rank-section';sec.setAttribute('data-rank',rankKey);
   sec.innerHTML=`
@@ -1985,6 +2080,7 @@ function createRankSection(rankName,rankKey){
 }
 
 window.deleteRankSection=async function(btn){
+  if(!isAdmin()) return;
   const section=btn.closest('.ht-rank-section');
   const name=section?.querySelector('.ht-rank-pill')?.textContent.trim()||'Kategorie';
   const mc=section?.querySelectorAll('.ht-card').length||0;
@@ -2007,3 +2103,4 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+HTMLEOF
