@@ -34,14 +34,12 @@ html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden;}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;background-size:150px;}
 
-/* ── SYNC BAR ── */
 .sync-bar{position:fixed;top:56px;left:0;right:0;height:2px;background:transparent;z-index:999;transition:all 0.3s;}
 .sync-bar.syncing{background:linear-gradient(90deg,transparent,var(--inhaber-accent),transparent);animation:syncpulse 1s infinite;}
 .sync-bar.saved{background:var(--green);animation:fadeout 0.8s forwards 0.5s;}
 @keyframes syncpulse{0%{background-position:-200px 0}100%{background-position:200px 0}}
 @keyframes fadeout{to{opacity:0}}
 
-/* ── TOPBAR ── */
 .topbar{position:sticky;top:0;z-index:400;background:rgba(8,8,8,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 2rem;height:56px;}
 .topbar-logo{display:flex;align-items:center;gap:10px;margin-right:2.5rem;flex-shrink:0;}
 .topbar-logo img{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-hi);}
@@ -65,7 +63,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .admin-badge i{font-size:11px;}
 body.is-admin .admin-badge{display:flex;}
 
-/* ── HERO ── */
 .hero{position:relative;overflow:hidden;padding:4rem 2.5rem 3rem;text-align:center;background:#050505;border-bottom:1px solid var(--border);}
 .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 50% -20%,rgba(210,140,10,0.06) 0%,transparent 70%),repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(255,255,255,0.018) 59px,rgba(255,255,255,0.018) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.018) 59px,rgba(255,255,255,0.018) 60px);}
 .hero>*{position:relative;z-index:2;}
@@ -81,7 +78,6 @@ body.is-admin .admin-badge{display:flex;}
 .hero-chip{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--border);padding:5px 13px;background:var(--surface);}
 .hero-chip i{font-size:12px;}
 
-/* ── ANNOUNCEMENT BANNER ── */
 .announcement-banner{display:none;background:rgba(210,140,10,0.08);border-bottom:1px solid rgba(210,140,10,0.3);padding:10px 2rem;align-items:center;gap:12px;}
 .announcement-banner.visible{display:flex;}
 .announcement-banner i{color:var(--inhaber-accent);font-size:16px;flex-shrink:0;}
@@ -89,7 +85,6 @@ body.is-admin .admin-badge{display:flex;}
 .announcement-close{background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:16px;padding:2px 6px;}
 .announcement-close:hover{color:var(--text);}
 
-/* ── CONTENT ── */
 .content{max-width:1000px;margin:0 auto;padding:3rem 2.5rem 6rem;}
 .section{display:none;animation:up 0.16s ease;}
 .section.visible{display:block;}
@@ -103,20 +98,17 @@ body.is-admin .admin-badge{display:flex;}
 .sec-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:0.1em;color:var(--white);line-height:1;margin-bottom:5px;}
 .sec-desc{font-size:13px;color:var(--text-muted);line-height:1.5;}
 
-/* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border-hi);margin-bottom:2.2rem;overflow:hidden;}
 .stat{background:var(--card);padding:20px 22px;}
 .stat-n{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.06em;color:var(--white);line-height:1;}
 .stat-l{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--text-muted);letter-spacing:0.18em;text-transform:uppercase;margin-top:3px;}
 
-/* ── VIDEO ── */
 .vid-wrap{border:1px solid var(--border-hi);background:#000;margin-bottom:2rem;overflow:hidden;}
 .vid-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--border);background:var(--surface);}
 .vid-dots span{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff5f57;box-shadow:14px 0 0 #febc2e,28px 0 0 #28c840;}
 .vid-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;}
 .vid-wrap video{width:100%;display:block;aspect-ratio:16/9;background:#000;}
 
-/* ── INFO BOXES ── */
 .info{border:1px solid var(--border-hi);padding:13px 16px;margin-bottom:1.3rem;font-size:13px;line-height:1.55;display:flex;gap:11px;align-items:flex-start;background:var(--card);color:var(--text-dim);}
 .info i{font-size:16px;flex-shrink:0;margin-top:1px;color:var(--text-dim);}
 .info.warn{border-color:rgba(240,160,48,0.35);background:var(--amber-dim);}
@@ -124,11 +116,9 @@ body.is-admin .admin-badge{display:flex;}
 .info.ok{border-color:rgba(78,200,122,0.3);background:var(--green-dim);}
 .info.ok i{color:var(--green);}
 
-/* ── SECTION HEADERS ── */
 .sh{font-family:'DM Mono',monospace;font-size:8.5px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-muted);padding:2rem 0 1rem;display:flex;align-items:center;gap:14px;}
 .sh::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* ── RULES ── */
 .rules{display:grid;gap:5px;}
 .rule{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--border-hi);padding:15px 18px;transition:all 0.15s;position:relative;}
 .rule:hover{border-left-color:rgba(255,255,255,0.5);background:var(--card-hi);transform:translateX(2px);}
@@ -146,7 +136,7 @@ body.is-admin .admin-badge{display:flex;}
 .rule-text{font-size:12.5px;color:#999;line-height:1.65;}
 .rule-text code{font-family:'DM Mono',monospace;background:rgba(0,0,0,0.5);color:var(--text-dim);padding:1px 6px;font-size:11px;border:1px solid var(--border);}
 
-/* ── STRAFEN TABLE ── */
+/* ══ STRAFEN TABLE ══ */
 .stra-table{width:100%;border-collapse:collapse;border:1px solid var(--border-hi);margin-bottom:2rem;background:var(--card);}
 .stra-table th{font-family:'DM Mono',monospace;font-size:8px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-muted);padding:12px 16px;border-bottom:1px solid var(--border-hi);text-align:left;background:var(--surface);}
 .stra-table td{padding:13px 16px;font-size:13px;border-bottom:1px solid rgba(34,34,34,0.7);vertical-align:middle;color:var(--text-dim);}
@@ -160,26 +150,24 @@ body.is-admin .admin-badge{display:flex;}
 .zb.high{color:#ff9090;border-color:rgba(224,60,60,0.45);background:rgba(224,60,60,0.1);}
 .zb.perm{color:#ff6060;border-color:rgba(255,60,60,0.6);background:rgba(255,60,60,0.12);font-weight:700;}
 
-/* ══════════════════════════════════════════════════
-   SECURITY: Admin-only controls
-   Alle Edit-Buttons/Aktionen nur sichtbar wenn:
-   1. body.is-admin (eingeloggter Admin)
-   2. body.admin-edit-on (Editor-Modus aktiv)
-   Normale Spieler sehen NIEMALS diese Elemente.
-   ══════════════════════════════════════════════════ */
+/* ══ ADMIN-SPALTE: NUR für is-admin + edit-on ══ */
+/* WICHTIG: Standard = komplett unsichtbar für alle */
+.stra-admin-th{display:none !important;}
+.stra-admin-td{display:none !important;}
 
-/* Strafe-Tabelle Admin-Spalte: standardmäßig versteckt */
-.stra-admin-th{display:none;}
-.stra-admin-td{display:none;width:90px;text-align:right;white-space:nowrap;}
-/* Nur sichtbar wenn Admin UND Edit-Modus */
-body.is-admin.admin-edit-on .stra-admin-th,
-body.is-admin.admin-edit-on .stra-admin-td{display:table-cell;}
+/* Nur sichtbar wenn Admin UND Edit-Modus aktiv */
+body.is-admin.admin-edit-on .stra-admin-th{display:table-cell !important;}
+body.is-admin.admin-edit-on .stra-admin-td{display:table-cell !important;width:90px;text-align:right;white-space:nowrap;}
+
+/* Explizit: Nicht-Admins NIEMALS */
+body:not(.is-admin) .stra-admin-th{display:none !important;}
+body:not(.is-admin) .stra-admin-td{display:none !important;}
 
 .stra-adm-btn{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;border:1px solid var(--border-hi);background:rgba(0,0,0,0.6);color:var(--text-muted);cursor:pointer;transition:all 0.12s;margin-left:2px;vertical-align:middle;}
 .stra-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
 .stra-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
 
-/* ── HIGH-TEAM ── */
+/* ══ HIGH-TEAM ══ */
 .ht-rank-section{margin-bottom:3rem;}
 .ht-rank-header{display:flex;align-items:center;gap:12px;margin-bottom:1.4rem;}
 .ht-rank-pill{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.28em;text-transform:uppercase;padding:5px 14px;border:1px solid;flex-shrink:0;color:var(--text-dim);border-color:var(--border-hi);background:rgba(255,255,255,0.04);}
@@ -204,8 +192,7 @@ body.is-admin.admin-edit-on .stra-admin-td{display:table-cell;}
 .ht-card-status-dot.online{background:#23a559;}.ht-card-status-dot.idle{background:#f0b232;}.ht-card-status-dot.dnd{background:#f23f43;}.ht-card-status-dot.streaming{background:#593695;}
 .ht-card-deco{position:absolute;bottom:-8px;right:6px;font-family:'Bebas Neue',sans-serif;font-size:54px;pointer-events:none;line-height:1;opacity:0.04;letter-spacing:0.05em;color:#fff;}
 
-/* ── ADMIN-ONLY CONTROLS ── 
-   Sämtliche Edit-Steuerelemente: nur sichtbar für Admins im Edit-Modus */
+/* Admin-only Controls */
 .ht-admin-bar{display:none;position:absolute;top:8px;right:8px;gap:4px;}
 .rule-admin-bar{display:none;position:absolute;top:8px;right:8px;gap:4px;align-items:center;}
 .rank-section-del-btn{display:none;background:rgba(0,0,0,0.7);border:1px solid rgba(224,60,60,0.4);color:rgba(224,60,60,0.7);width:22px;height:22px;cursor:pointer;font-size:11px;align-items:center;justify-content:center;transition:all 0.12s;flex-shrink:0;}
@@ -220,7 +207,6 @@ body.is-admin.admin-edit-on .stra-admin-td{display:table-cell;}
 .rule-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
 .rule-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
 
-/* Edit-Mode Reveals: NUR Admin + Edit-Mode zusammen */
 body.is-admin.admin-edit-on .ht-admin-bar{display:flex;}
 body.is-admin.admin-edit-on .rule-admin-bar{display:flex;}
 body.is-admin.admin-edit-on .rank-section-del-btn{display:flex;}
@@ -233,19 +219,10 @@ body.is-admin.admin-edit-on [data-editable]:hover{outline:1px solid rgba(210,140
 body.is-admin.admin-edit-on [data-editable]:focus{outline:1px solid var(--inhaber-accent);background:rgba(210,140,10,0.07);}
 body.is-admin.admin-edit-on .add-strafe-row-btn{display:flex;}
 
-/* SECURITY: data-editable Felder für Nicht-Admins komplett gesperrt */
-body:not(.is-admin) [data-editable]{
-  user-select:text;
-  pointer-events:none; /* Kein Klick möglich */
-  cursor:default;
-}
-/* Für Admins außerhalb Edit-Modus: lesbar aber nicht editierbar */
-body.is-admin:not(.admin-edit-on) [data-editable]{
-  pointer-events:none;
-  cursor:default;
-}
+body:not(.is-admin) [data-editable]{user-select:text;pointer-events:none;cursor:default;}
+body.is-admin:not(.admin-edit-on) [data-editable]{pointer-events:none;cursor:default;}
 
-/* ── DASHBOARD ── */
+/* ══ DASHBOARD ══ */
 .dash-header{background:linear-gradient(135deg,rgba(155,141,255,0.08) 0%,rgba(8,8,8,0) 60%);border:1px solid rgba(155,141,255,0.2);padding:24px 28px;margin-bottom:2rem;position:relative;overflow:hidden;}
 .dash-header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#9b8dff,transparent);opacity:0.6;}
 .dash-header-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.1em;color:var(--white);margin-bottom:4px;}
@@ -293,7 +270,6 @@ body.is-admin:not(.admin-edit-on) [data-editable]{
 .dash-refresh.spinning i{animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* ── DASHBOARD ADMIN STRIP ── */
 .dash-admin-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:2rem;}
 .dash-admin-card{background:var(--card);border:1px solid var(--border-hi);padding:18px 20px;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden;}
 .dash-admin-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background 0.15s;}
@@ -303,7 +279,6 @@ body.is-admin:not(.admin-edit-on) [data-editable]{
 .dac-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--white);}
 .dac-desc{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.1em;margin-top:4px;}
 
-/* ── RESET TIMELINE PANEL ── */
 .reset-panel{background:var(--card);border:1px solid rgba(224,60,60,0.25);margin-bottom:2rem;}
 .reset-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(224,60,60,0.15);background:rgba(224,60,60,0.04);}
 .reset-panel-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#ff9090;display:flex;align-items:center;gap:8px;}
@@ -318,7 +293,6 @@ body.is-admin:not(.admin-edit-on) [data-editable]{
 .reset-slot-indicator{position:absolute;top:0;left:0;right:0;height:2px;background:transparent;}
 .reset-slot.has-snap .reset-slot-indicator{background:rgba(224,60,60,0.5);}
 
-/* ── CHANGELOG PANEL ── */
 .changelog-panel{background:var(--card);border:1px solid var(--border-hi);margin-bottom:2rem;}
 .changelog-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);}
 .changelog-panel-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-muted);display:flex;align-items:center;gap:8px;}
@@ -331,7 +305,6 @@ body.is-admin:not(.admin-edit-on) [data-editable]{
 .changelog-action strong{color:var(--text);}
 .changelog-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:2px;}
 
-/* ── ANNOUNCEMENT ADMIN PANEL ── */
 .announcement-admin-panel{background:var(--card);border:1px solid rgba(210,140,10,0.25);margin-bottom:2rem;}
 .announcement-admin-hdr{padding:12px 16px;border-bottom:1px solid rgba(210,140,10,0.15);background:rgba(210,140,10,0.04);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--inhaber-accent);display:flex;align-items:center;gap:8px;}
 .announcement-admin-body{padding:16px;}
@@ -347,7 +320,6 @@ body.is-admin:not(.admin-edit-on) [data-editable]{
 .announcement-send-btn:hover{background:rgba(210,140,10,0.22);}
 .announcement-send-btn:disabled{opacity:0.4;cursor:default;}
 
-/* ── ADMIN TOOLBAR: nur sichtbar für is-admin ── */
 #admin-toolbar{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:8000;background:rgba(13,10,4,0.97);border:1px solid var(--inhaber-border);box-shadow:0 0 40px rgba(210,140,10,0.2),0 8px 32px rgba(0,0,0,0.6);padding:8px 12px;gap:6px;align-items:center;backdrop-filter:blur(12px);transition:all 0.2s;}
 body.is-admin #admin-toolbar{display:flex;}
 .adm-btn{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--border-hi);background:transparent;color:var(--text-muted);cursor:pointer;transition:all 0.14s;white-space:nowrap;}
@@ -361,7 +333,6 @@ body.is-admin #admin-toolbar{display:flex;}
 body.has-unsaved .unsaved-dot{display:inline-block;}
 #admin-toolbar.edit-active{border-color:var(--inhaber-accent);box-shadow:0 0 40px rgba(210,140,10,0.35),0 8px 32px rgba(0,0,0,0.6);}
 
-/* ── MODALS ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .modal-overlay.open{display:flex;}
 .modal{background:var(--card);border:1px solid var(--border-hi);padding:28px 32px;width:380px;max-width:90vw;}
@@ -395,7 +366,6 @@ body.has-unsaved .unsaved-dot{display:inline-block;}
 .admin-modal-btn.cancel{background:transparent;border-color:var(--border-hi);color:var(--text-muted);}
 .admin-modal-btn.cancel:hover{color:var(--text-dim);}
 
-/* ── CONFIRM ── */
 #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9600;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 #confirm-overlay.open{display:flex;}
 .confirm-box{background:var(--card);border:1px solid rgba(224,60,60,0.4);padding:28px 32px;width:340px;max-width:90vw;text-align:center;}
@@ -409,7 +379,6 @@ body.has-unsaved .unsaved-dot{display:inline-block;}
 .confirm-btn.cancel{background:transparent;border-color:var(--border-hi);color:var(--text-muted);}
 .confirm-btn.cancel:hover{color:var(--text-dim);}
 
-/* ── AUTH ── */
 #auth-screen{position:fixed;inset:0;z-index:9000;background:#050505;display:flex;align-items:center;justify-content:center;flex-direction:column;}
 #auth-screen .auth-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(88,101,242,0.12) 0%,transparent 65%);}
 #auth-screen>*{position:relative;z-index:2;}
@@ -426,18 +395,15 @@ body.has-unsaved .unsaved-dot{display:inline-block;}
 .auth-btn svg{width:22px;height:22px;flex-shrink:0;}
 .auth-note{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--text-muted);letter-spacing:0.12em;margin-top:18px;line-height:1.7;}
 
-/* ── TOAST ── */
 .save-toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid rgba(78,200,122,0.4);color:#4ec87a;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 18px;z-index:9000;opacity:0;pointer-events:none;transition:opacity 0.2s;white-space:nowrap;}
 .save-toast.show{opacity:1;}
 .save-toast.err{border-color:rgba(224,60,60,0.4);color:#ff9090;}
 .save-toast.warn{border-color:rgba(240,160,48,0.4);color:#ffd07a;}
 
-/* ── TO TOP ── */
 #toTop{position:fixed;bottom:20px;right:20px;z-index:500;width:34px;height:34px;background:var(--card);border:1px solid var(--border-hi);color:var(--text-dim);cursor:pointer;display:none;align-items:center;justify-content:center;transition:all 0.14px;}
 #toTop:hover{border-color:var(--text-dim);color:var(--white);}
 #toTop.show{display:flex;}
 
-/* ── FOOTER ── */
 footer{border-top:1px solid var(--border);padding:1.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.12em;background:var(--surface);}
 footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightness(0.5);}
 
@@ -466,7 +432,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 
 <div class="sync-bar" id="sync-bar"></div>
 
-<!-- AUTH SCREEN -->
 <div id="auth-screen">
   <div class="auth-bg"></div>
   <div class="auth-box">
@@ -485,7 +450,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   </div>
 </div>
 
-<!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar-logo">
     <img src="https://cdn.discordapp.com/attachments/1477088048499134575/1509206572314919095/90186232-73a4-40ad-bb23-8c423dafdbc2.png?ex=6a1855a6&is=6a170426&hm=27ddcc6e0288d62469ee438720a43f3366b7f7a68ae073049ad6a55e3edf022e&" alt="Logo">
@@ -506,14 +470,12 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   </div>
 </header>
 
-<!-- ANNOUNCEMENT BANNER -->
 <div class="announcement-banner" id="announcement-banner">
   <i class="ti ti-speakerphone"></i>
   <span class="announcement-text" id="announcement-text"></span>
   <button class="announcement-close" onclick="closeAnnouncementBanner()"><i class="ti ti-x"></i></button>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Team-Regelwerk · Intern &amp; Vertraulich</div>
@@ -544,8 +506,9 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     </div>
     <div class="vid-wrap">
       <div class="vid-bar"><div class="vid-dots"><span></span></div><span class="vid-label">Einführungsvideo · Pflicht</span></div>
-      <video controls preload="metadata" autoplay muted playsinline>
-        <source src="Server Einführung Prada CL.mp4" type="video/mp4">
+      <!-- FIX 1: Korrekter Video-Link von Discord CDN -->
+      <video controls preload="metadata" playsinline>
+        <source src="https://cdn.discordapp.com/attachments/1509201079445749810/1509230430480502975/Server_Einfuhrung_Prada_Cl.mp4?ex=6a19149e&is=6a17c31e&hm=c61ac9198b4e634ff6797ce31c590e7237bd38738c1d2eb77a209da0881bd3e4&" type="video/mp4">
         Dein Browser unterstützt kein Video.
       </video>
     </div>
@@ -621,24 +584,25 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     </div>
     <div class="info"><i class="ti ti-info-circle"></i>Wiederholungsverstöße werden härter geahndet. Alle Maßnahmen sind mit Beweisen zu dokumentieren.</div>
     <div class="sh">Vergehen &amp; Sperrzeiten</div>
+    <!-- FIX 2: Admin-Spalte komplett entfernt aus dem statischen HTML -->
+    <!-- Sie wird per JS nur für Admins im Edit-Mode dynamisch hinzugefügt -->
     <table class="stra-table" id="strafen-table">
       <thead>
         <tr>
           <th>Vergehen</th>
           <th>Adminjail</th>
           <th>Beschreibung</th>
-          <th class="stra-admin-th">Aktionen</th>
         </tr>
       </thead>
       <tbody id="strafen-tbody">
-        <tr><td><div class="vname" data-editable>Reaktionszeit</div><div class="vdesc" data-editable>Keine Reaktion auf Admin-Anfragen</div></td><td><span class="zb low" data-editable>10 Min.</span></td><td data-editable>Spieler reagiert nicht auf mehrfache Kontaktversuche durch einen Admin.</td><td class="stra-admin-td"></td></tr>
-        <tr><td><div class="vname" data-editable>Beleidigung</div><div class="vdesc" data-editable>Einfache Beleidigung eines Spielers</div></td><td><span class="zb low" data-editable>10 Min.</span></td><td data-editable>Beleidigende Äußerungen gegenüber anderen Spielern im Chat oder Voice.</td><td class="stra-admin-td"></td></tr>
-        <tr><td><div class="vname" data-editable>Server schlecht reden</div><div class="vdesc" data-editable>Negative Außendarstellung des Servers</div></td><td><span class="zb mid" data-editable>15 Min.</span></td><td data-editable>Spieler macht den Server öffentlich schlecht oder verbreitet Gerüchte.</td><td class="stra-admin-td"></td></tr>
-        <tr><td><div class="vname" data-editable>Schwere Beleidigung</div><div class="vdesc" data-editable>Massive oder wiederholte Beleidigungen</div></td><td><span class="zb mid" data-editable>25 Min.</span></td><td data-editable>Schwerwiegende persönliche Angriffe oder wiederholtes Beleidigen nach Verwarnung.</td><td class="stra-admin-td"></td></tr>
-        <tr><td><div class="vname" data-editable>Eigenwerbung</div><div class="vdesc" data-editable>Werbung für andere Server oder Kanäle</div></td><td><span class="zb mid" data-editable>25 Min.</span></td><td data-editable>Werbung für Konkurrenzserver oder Discord-Einladungen im öffentlichen Bereich.</td><td class="stra-admin-td"></td></tr>
-        <tr><td><div class="vname" data-editable>Trolling</div><div class="vdesc" data-editable>Absichtliche Störung des Spielerlebnisses</div></td><td><span class="zb mid" data-editable>25 Min.</span></td><td data-editable>Spieler provoziert oder stört andere absichtlich.</td><td class="stra-admin-td"></td></tr>
-        <tr><td><div class="vname" data-editable>Rassismus</div><div class="vdesc" data-editable>Rassistische Äußerungen oder Symbole</div></td><td><span class="zb high" data-editable>40 Min.</span></td><td data-editable>Verwendung rassistischer Begriffe, Symbole oder diskriminierender Inhalte.</td><td class="stra-admin-td"></td></tr>
-        <tr><td><div class="vname" data-editable>Cheating / Hacks</div><div class="vdesc" data-editable>Einsatz externer Tools oder Exploits</div></td><td><span class="zb perm" data-editable>Permanent</span></td><td data-editable>Nutzung von Cheats, Hacks oder Exploits jeglicher Art.</td><td class="stra-admin-td"></td></tr>
+        <tr><td><div class="vname" data-editable>Reaktionszeit</div><div class="vdesc" data-editable>Keine Reaktion auf Admin-Anfragen</div></td><td><span class="zb low" data-editable>10 Min.</span></td><td data-editable>Spieler reagiert nicht auf mehrfache Kontaktversuche durch einen Admin.</td></tr>
+        <tr><td><div class="vname" data-editable>Beleidigung</div><div class="vdesc" data-editable>Einfache Beleidigung eines Spielers</div></td><td><span class="zb low" data-editable>10 Min.</span></td><td data-editable>Beleidigende Äußerungen gegenüber anderen Spielern im Chat oder Voice.</td></tr>
+        <tr><td><div class="vname" data-editable>Server schlecht reden</div><div class="vdesc" data-editable>Negative Außendarstellung des Servers</div></td><td><span class="zb mid" data-editable>15 Min.</span></td><td data-editable>Spieler macht den Server öffentlich schlecht oder verbreitet Gerüchte.</td></tr>
+        <tr><td><div class="vname" data-editable>Schwere Beleidigung</div><div class="vdesc" data-editable>Massive oder wiederholte Beleidigungen</div></td><td><span class="zb mid" data-editable>25 Min.</span></td><td data-editable>Schwerwiegende persönliche Angriffe oder wiederholtes Beleidigen nach Verwarnung.</td></tr>
+        <tr><td><div class="vname" data-editable>Eigenwerbung</div><div class="vdesc" data-editable>Werbung für andere Server oder Kanäle</div></td><td><span class="zb mid" data-editable>25 Min.</span></td><td data-editable>Werbung für Konkurrenzserver oder Discord-Einladungen im öffentlichen Bereich.</td></tr>
+        <tr><td><div class="vname" data-editable>Trolling</div><div class="vdesc" data-editable>Absichtliche Störung des Spielerlebnisses</div></td><td><span class="zb mid" data-editable>25 Min.</span></td><td data-editable>Spieler provoziert oder stört andere absichtlich.</td></tr>
+        <tr><td><div class="vname" data-editable>Rassismus</div><div class="vdesc" data-editable>Rassistische Äußerungen oder Symbole</div></td><td><span class="zb high" data-editable>40 Min.</span></td><td data-editable>Verwendung rassistischer Begriffe, Symbole oder diskriminierender Inhalte.</td></tr>
+        <tr><td><div class="vname" data-editable>Cheating / Hacks</div><div class="vdesc" data-editable>Einsatz externer Tools oder Exploits</div></td><td><span class="zb perm" data-editable>Permanent</span></td><td data-editable>Nutzung von Cheats, Hacks oder Exploits jeglicher Art.</td></tr>
       </tbody>
     </table>
     <button class="add-strafe-row-btn" id="add-strafe-btn" onclick="adminAddStrafeRow()"><i class="ti ti-plus"></i> Eintrag hinzufügen</button>
@@ -1037,36 +1001,19 @@ getAnalytics(app);
 window.__db = db;
 
 async function sharedGet(key) {
-  try { const s = await getDoc(doc(db,'prada',key)); return s.exists()?s.data().value:null; } catch(e){console.error('sharedGet',key,e);return null;}
+  try { const s = await getDoc(doc(db,'prada',key)); return s.exists()?s.data().value:null; } catch(e){return null;}
 }
-
-// ══════════════════════════════════════════════════
-// SECURITY: sharedSet und sharedDelete prüfen Admin-Status
-// Kein Nicht-Admin kann Daten schreiben, egal ob über
-// UI oder Browser-Konsole.
-// ══════════════════════════════════════════════════
 async function sharedSet(key, value) {
-  if (!isAdmin()) {
-    console.warn('[SECURITY] Schreibzugriff verweigert – kein Admin');
-    showToast('Keine Berechtigung', true);
-    return false;
-  }
-  try { await setDoc(doc(db,'prada',key),{value}); return true; } catch(e){console.error('sharedSet',key,e);return false;}
+  if (!isAdmin()) { showToast('Keine Berechtigung', true); return false; }
+  try { await setDoc(doc(db,'prada',key),{value}); return true; } catch(e){return false;}
 }
 async function sharedDelete(key) {
-  if (!isAdmin()) {
-    console.warn('[SECURITY] Löschzugriff verweigert – kein Admin');
-    return false;
-  }
-  try { await deleteDoc(doc(db,'prada',key)); return true; } catch(e){console.error('sharedDelete',key,e);return false;}
+  if (!isAdmin()) return false;
+  try { await deleteDoc(doc(db,'prada',key)); return true; } catch(e){return false;}
 }
 
-// Helper: prüft ob aktuell eingeloggter User Admin ist
-function isAdmin() {
-  return currentUser && currentUser.id === ADMIN_ID;
-}
+function isAdmin() { return currentUser && currentUser.id === ADMIN_ID; }
 
-// ── CONSTANTS ──
 const ADMIN_ID = '1477023843489939487';
 const CLIENT_ID = '1505344005054005428';
 const REDIRECT_URI = window.location.origin + window.location.pathname;
@@ -1079,7 +1026,6 @@ const KEYS = {
 };
 const STATUS_LABELS = {online:'Online',idle:'Abwesend',dnd:'Nicht stören',offline:'Offline',streaming:'Am Streamen'};
 
-// ── STATE ──
 let currentUser = null, dcToken = null, editModeOn = false;
 let adminModalCb = null, confirmCb = null;
 let currentLanyardMember = null, currentEditMemberId = null;
@@ -1087,14 +1033,12 @@ let IDS = {};
 let editSnapshot = null;
 let snapshotTimers = {};
 
-// ── SYNC BAR ──
 function syncBar(state){
   const b=document.getElementById('sync-bar');
   b.className='sync-bar '+state;
   if(state==='saved')setTimeout(()=>b.className='sync-bar',1200);
 }
 
-// ── AUTH ──
 function getOAuthUrl(){
   const state=Math.random().toString(36).slice(2);
   sessionStorage.setItem('oauth_state',state);
@@ -1129,6 +1073,13 @@ async function showApp(user,token){
   document.getElementById('topbar-avatar').src=av;
   document.getElementById('topbar-username').textContent=user.global_name||user.username;
   document.getElementById('topbar-user').style.display='flex';
+
+  // FIX 2: ZUERST Admin-Status setzen, DANN Content laden
+  if(isAdmin()){
+    document.body.classList.add('is-admin');
+    document.getElementById('dash-tab-btn').style.display='flex';
+  }
+
   await loadSharedContent();
   await loadAnnouncement();
   await trackVisit(user);
@@ -1137,18 +1088,16 @@ async function showApp(user,token){
   loadAllLanyard();
   setInterval(loadAllLanyard,30000);
 
-  // Admin-spezifische Initialisierung NUR für Admin
   if(isAdmin()){
-    document.body.classList.add('is-admin');
-    document.getElementById('dash-tab-btn').style.display='flex';
     initAdminMode();
     startSnapshotTimers();
-  }
-  // Sicherstellen: Nicht-Admins haben NIEMALS contenteditable
-  if(!isAdmin()){
-    document.querySelectorAll('[data-editable]').forEach(el=>{
+  } else {
+    // FIX 2: Sicherstellen dass KEINE Admin-Elemente für normale User sichtbar sind
+    // Admin-TDs aus der Strafen-Tabelle komplett entfernen
+    document.querySelectorAll('.stra-admin-td, .stra-admin-th').forEach(el => el.remove());
+    // contenteditable komplett sperren
+    document.querySelectorAll('[data-editable]').forEach(el => {
       el.removeAttribute('contenteditable');
-      el.setAttribute('data-readonly','true');
     });
   }
 }
@@ -1171,7 +1120,6 @@ function logout(){
   if(!handled)document.getElementById('auth-screen').style.display='flex';
 })();
 
-// ── VISIT TRACKING ──
 async function trackVisit(user){
   try{
     const isAdminUser=isAdmin(), now=Date.now();
@@ -1184,16 +1132,14 @@ async function trackVisit(user){
       visitors.push({id:user.id,username:user.username,global_name:user.global_name||user.username,
         avatar:user.avatar,discriminator:user.discriminator,firstSeen:now,lastSeen:now,visitCount:1,isAdmin:isAdminUser});
     }
-    // trackVisit nutzt direkten Firestore-Zugriff (kein Admin-Check nötig für Besuchslogging)
     try { await setDoc(doc(db,'prada',KEYS.visitors),{value:visitors}); } catch(e){}
     let log=(await sharedGet(KEYS.visitLog))||[];
     log.unshift({userId:user.id,username:user.global_name||user.username,avatar:user.avatar,ts:now,isAdmin:isAdminUser});
     if(log.length>100)log=log.slice(0,100);
     try { await setDoc(doc(db,'prada',KEYS.visitLog),{value:log}); } catch(e){}
-  }catch(e){console.error('Track:',e);}
+  }catch(e){}
 }
 
-// ── CONTENT LOAD/SAVE ──
 async function loadSharedContent(){
   try{
     const c=await sharedGet(KEYS.content);
@@ -1202,18 +1148,10 @@ async function loadSharedContent(){
     if(c.regelwerk)document.getElementById('regelwerk').innerHTML=c.regelwerk;
     if(c.strafen)document.getElementById('strafen').innerHTML=c.strafen;
     if(c.highteam)document.getElementById('highteam').innerHTML=c.highteam;
-    if(isAdmin())initAdminMode();
-    // Nach Content-Load: Nicht-Admins absichern
-    if(!isAdmin()){
-      document.querySelectorAll('[data-editable]').forEach(el=>{
-        el.removeAttribute('contenteditable');
-      });
-    }
-  }catch(e){console.error('Load:',e);}
+  }catch(e){}
 }
 
 function captureContent(){
-  // SECURITY: Nur Admin darf Content erfassen
   if(!isAdmin()) return null;
   return {
     einfuehrung:document.getElementById('einfuehrung').innerHTML,
@@ -1224,11 +1162,7 @@ function captureContent(){
 }
 
 async function saveSharedContent(){
-  // SECURITY: Nur Admin darf speichern
-  if(!isAdmin()){
-    console.warn('[SECURITY] saveSharedContent: Zugriff verweigert');
-    return false;
-  }
+  if(!isAdmin()) return false;
   syncBar('syncing');
   try{
     const content=captureContent();
@@ -1236,7 +1170,7 @@ async function saveSharedContent(){
     const ok=await sharedSet(KEYS.content,content);
     syncBar(ok?'saved':'');
     return ok;
-  }catch(e){console.error('Save:',e);syncBar('');return false;}
+  }catch(e){syncBar('');return false;}
 }
 
 async function saveIdsShared(){
@@ -1244,7 +1178,6 @@ async function saveIdsShared(){
   await sharedSet(KEYS.lanyardIds,IDS);
 }
 
-// ── CHANGELOG ──
 async function logChange(action){
   if(!isAdmin())return;
   try{
@@ -1252,17 +1185,16 @@ async function logChange(action){
     log.unshift({ts:Date.now(),user:currentUser.global_name||currentUser.username,avatar:currentUser.avatar,userId:currentUser.id,action});
     if(log.length>200)log=log.slice(0,200);
     await sharedSet(KEYS.changelog,log);
-  }catch(e){console.error('Changelog:',e);}
+  }catch(e){}
 }
 
-// ── SNAPSHOT SYSTEM ──
 async function saveSnapshot(slot){
   if(!isAdmin()) return;
   try{
     let snaps=(await sharedGet(KEYS.snapshots))||{};
     snaps[slot]={content:captureContent(),ts:Date.now()};
     await sharedSet(KEYS.snapshots,snaps);
-  }catch(e){console.error('Snapshot save:',e);}
+  }catch(e){}
 }
 
 function startSnapshotTimers(){
@@ -1283,11 +1215,7 @@ async function loadSnapshotUI(){
   if(!isAdmin()) return;
   try{
     const snaps=await sharedGet(KEYS.snapshots)||{};
-    const slots=[
-      {key:'s60',id:'snap-60s',label:'60s'},
-      {key:'s10m',id:'snap-10m',label:'10m'},
-      {key:'s1h',id:'snap-1h',label:'1h'}
-    ];
+    const slots=[{key:'s60',id:'snap-60s'},{key:'s10m',id:'snap-10m'},{key:'s1h',id:'snap-1h'}];
     slots.forEach(({key,id})=>{
       const el=document.getElementById(id);
       const timeEl=document.getElementById(id+'-time');
@@ -1303,7 +1231,7 @@ async function loadSnapshotUI(){
         if(agoEl)agoEl.textContent='Kein Snapshot';
       }
     });
-  }catch(e){console.error('Snapshot UI:',e);}
+  }catch(e){}
 }
 
 window.restoreSnapshot=async function(slot){
@@ -1316,18 +1244,13 @@ window.restoreSnapshot=async function(slot){
     if(!snaps[k]){showToast('Kein Snapshot vorhanden',false,true);return;}
     const snap=snaps[k];
     const ago=formatTime(snap.ts);
-    confirmOpen(
-      `Snapshot wiederherstellen?`,
-      `Stand von ${ago} wird für alle Besucher wiederhergestellt. Aktuelle Änderungen gehen verloren.`,
-      async()=>{
-        await sharedSet(KEYS.content,snap.content);
-        await logChange(`Snapshot wiederhergestellt (${ago})`);
-        showToast('Snapshot wiederhergestellt – Seite lädt neu...');
-        setTimeout(()=>location.reload(),900);
-      },
-      'Wiederherstellen'
-    );
-  }catch(e){console.error('Restore:',e);}
+    confirmOpen(`Snapshot wiederherstellen?`,`Stand von ${ago} wird wiederhergestellt.`,async()=>{
+      await sharedSet(KEYS.content,snap.content);
+      await logChange(`Snapshot wiederhergestellt (${ago})`);
+      showToast('Wiederhergestellt – Seite lädt neu...');
+      setTimeout(()=>location.reload(),900);
+    },'Wiederherstellen');
+  }catch(e){}
 };
 
 window.openResetPanel=function(){
@@ -1339,31 +1262,24 @@ window.openResetPanel=function(){
 
 window.adminHardResetConfirm=function(){
   if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
-  confirmOpen(
-    'Komplett-Reset?',
-    'Das Regelwerk wird auf den Original-Stand zurückgesetzt. ALLE Änderungen gehen dauerhaft verloren.',
-    async()=>{
-      await sharedDelete(KEYS.content);
-      await sharedDelete(KEYS.lanyardIds);
-      await sharedDelete(KEYS.snapshots);
-      await logChange('Komplett-Reset durchgeführt');
-      showToast('Zurückgesetzt – Seite lädt neu...');
-      setTimeout(()=>location.reload(),900);
-    },
-    'KOMPLETT ZURÜCKSETZEN'
-  );
+  confirmOpen('Komplett-Reset?','Das Regelwerk wird auf den Original-Stand zurückgesetzt.',async()=>{
+    await sharedDelete(KEYS.content);
+    await sharedDelete(KEYS.lanyardIds);
+    await sharedDelete(KEYS.snapshots);
+    await logChange('Komplett-Reset durchgeführt');
+    showToast('Zurückgesetzt – Seite lädt neu...');
+    setTimeout(()=>location.reload(),900);
+  },'KOMPLETT ZURÜCKSETZEN');
 };
 
-// ── ANNOUNCEMENT SYSTEM ──
 async function loadAnnouncement(){
   try{
     const ann=await sharedGet(KEYS.announcement);
     if(ann&&ann.text&&ann.active){
-      const banner=document.getElementById('announcement-banner');
       document.getElementById('announcement-text').textContent=ann.text;
-      banner.classList.add('visible');
+      document.getElementById('announcement-banner').classList.add('visible');
     }
-  }catch(e){console.error('Ann:',e);}
+  }catch(e){}
 }
 
 window.closeAnnouncementBanner=function(){
@@ -1403,12 +1319,12 @@ window.publishAnnouncement=async function(){
   if(!text){showToast('Text eingeben',false,true);return;}
   const ann={text,active:true,ts:Date.now(),by:currentUser?.global_name||'Admin'};
   await sharedSet(KEYS.announcement,ann);
-  await logChange(`Ankündigung veröffentlicht: "${text.slice(0,40)}${text.length>40?'…':''}"`);
+  await logChange(`Ankündigung: "${text.slice(0,40)}"`);
   document.getElementById('announcement-text').textContent=text;
   document.getElementById('announcement-banner').classList.add('visible');
   document.getElementById('new-announcement-input').value='';
   refreshAnnouncementPanel();
-  showToast('Ankündigung veröffentlicht – für alle sichtbar ✓');
+  showToast('Ankündigung veröffentlicht ✓');
 };
 
 window.clearAnnouncement=async function(){
@@ -1420,9 +1336,7 @@ window.clearAnnouncement=async function(){
   showToast('Ankündigung entfernt');
 };
 
-// ── TAB NAVIGATION ──
 function showTab(id,btn){
-  // Dashboard nur für Admins
   if(id==='dashboard'&&!isAdmin()){showToast('Keine Berechtigung',true);return;}
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -1435,7 +1349,6 @@ function showTab(id,btn){
 window.showTab=showTab;
 window.logout=logout;
 
-// ── DASHBOARD ──
 async function loadDashboard(){
   if(!isAdmin())return;
   const btn=document.getElementById('dash-refresh-btn');
@@ -1466,12 +1379,12 @@ async function loadDashboard(){
         const lt=(v.global_name||'?').charAt(0).toUpperCase();
         return `<div class="visitor-row">
           <div class="v-avatar">
-            ${au?`<img src="${au}" alt="" onerror="this.parentElement.innerHTML='<div class=v-avatar-ph>${lt}</div>'">`:`<div class="v-avatar-ph">${lt}</div>`}
+            ${au?`<img src="${au}" alt="">`:`<div class="v-avatar-ph">${lt}</div>`}
             ${v.isAdmin?'<div class="v-admin-dot"><i class="ti ti-shield-check"></i></div>':''}
           </div>
           <div class="v-info">
             <div class="v-name">${v.global_name||v.username}</div>
-            <div class="v-tag">@${v.username}${v.isAdmin?' <span style="color:var(--inhaber-accent)">· Admin</span>':''}</div>
+            <div class="v-tag">@${v.username}</div>
             ${v.isAdmin?'<div class="v-admin-badge"><i class="ti ti-shield-check"></i>Admin</div>':''}
           </div>
           <div class="v-meta">
@@ -1490,7 +1403,7 @@ async function loadDashboard(){
         const lt=(entry.username||'?').charAt(0).toUpperCase();
         return `<div class="log-row">
           ${entry.isAdmin?'<div class="log-admin-dot"></div>':''}
-          <div class="log-avatar">${au?`<img src="${au}" onerror="this.style.display='none'">`:`<div class="log-avatar-ph">${lt}</div>`}</div>
+          <div class="log-avatar">${au?`<img src="${au}">`:`<div class="log-avatar-ph">${lt}</div>`}</div>
           <div class="log-name"><strong>${entry.username}</strong> hat die Seite besucht</div>
           <div class="log-time">${formatTime(entry.ts)}</div>
         </div>`;
@@ -1511,22 +1424,8 @@ async function loadDashboard(){
         </div>`).join('');
     }
 
-    const editIco=document.getElementById('dac-edit-ico');
-    const editTitle=document.getElementById('dac-edit-title');
-    const editDesc=document.getElementById('dac-edit-desc');
-    if(editModeOn){
-      if(editIco)editIco.className='ti ti-pencil-off';
-      if(editTitle)editTitle.textContent='Editor AKTIV';
-      if(editDesc)editDesc.textContent='Klick zum Beenden';
-    } else {
-      if(editIco)editIco.className='ti ti-pencil';
-      if(editTitle)editTitle.textContent='Editor-Modus';
-      if(editDesc)editDesc.textContent='Inhalte bearbeiten';
-    }
-
     if(document.getElementById('reset-panel').style.display!=='none')loadSnapshotUI();
-
-  }catch(e){console.error(e);}
+  }catch(e){}
   setTimeout(()=>btn.classList.remove('spinning'),400);
 }
 window.loadDashboard=loadDashboard;
@@ -1549,7 +1448,7 @@ window.exportChangelog=async function(){
 
 window.clearAllVisitors=function(){
   if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
-  confirmOpen('Besucherdaten löschen?','Alle Besucher-Logs und Besuchshistorie werden unwiderruflich gelöscht.',async()=>{
+  confirmOpen('Besucherdaten löschen?','Alle Logs werden unwiderruflich gelöscht.',async()=>{
     await sharedDelete(KEYS.visitors);
     await sharedDelete(KEYS.visitLog);
     await logChange('Besucherdaten gelöscht');
@@ -1567,7 +1466,6 @@ function formatTime(ts){
   return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
 }
 
-// ── LANYARD ──
 async function fetchLanyard(discordId,memberId){
   try{
     const res=await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
@@ -1618,19 +1516,6 @@ async function saveLanyardId(){
   } else if(val===''){
     delete IDS[currentLanyardMember];
     await saveIdsShared();
-    const card=document.querySelector(`[data-member-id="${currentLanyardMember}"]`);
-    if(card){
-      const wrap=card.querySelector('.dc-avatar-wrap'),img=wrap&&wrap.querySelector('img.dc-avatar');
-      if(img){
-        const name=card.querySelector('.ht-card-name')?.textContent.trim()||'?';
-        const ph=document.createElement('div');ph.className='dc-avatar-placeholder';
-        ph.textContent=name.charAt(name.lastIndexOf(' ')+1).toUpperCase()||name.charAt(0).toUpperCase();
-        wrap.insertBefore(ph,wrap.firstChild);img.remove();
-      }
-      const sd=document.getElementById(`status-${currentLanyardMember}`);if(sd)sd.className='dc-status';
-      const sl2=document.getElementById(`statuslabel-${currentLanyardMember}`);
-      if(sl2)sl2.innerHTML='<span class="ht-card-status-dot"></span><span>Offline</span>';
-    }
     closeLanyardModal(); showToast('Discord ID entfernt');
   } else {
     document.getElementById('lanyard-input').style.borderColor='#e03c3c';
@@ -1641,7 +1526,6 @@ window.saveLanyardId=saveLanyardId;
 document.getElementById('lanyard-modal-overlay').addEventListener('click',function(e){if(e.target===this)closeLanyardModal();});
 document.getElementById('lanyard-input').addEventListener('keydown',function(e){if(e.key==='Enter')saveLanyardId();if(e.key==='Escape')closeLanyardModal();});
 
-// ── MEMBER EDIT MODAL ──
 function openMemberEditModal(memberId){
   if(!isAdmin())return;
   currentEditMemberId=memberId;
@@ -1671,23 +1555,12 @@ async function saveMemberEdit(){
   if(ph)ph.textContent=newName.charAt(newName.lastIndexOf(' ')+1).toUpperCase()||newName.charAt(0).toUpperCase();
   const titleEl=card.querySelector('.ht-card-title');if(titleEl)titleEl.textContent=newTitle;
   const rankTagEl=card.querySelector('.ht-card-rank-tag');if(rankTagEl&&newRank)rankTagEl.textContent=newRank;
-  if(newRank){
-    const sections=document.querySelectorAll('#ht-rank-sections .ht-rank-section');
-    let tGrid=null,tKey=null;
-    sections.forEach(sec=>{
-      const pill=sec.querySelector('.ht-rank-pill');
-      if(pill&&pill.textContent.trim().toLowerCase()===newRank.toLowerCase()){tGrid=sec.querySelector('.ht-grid');tKey=sec.dataset.rank;}
-    });
-    if(tGrid&&tKey){const ab=tGrid.querySelector('.add-member-btn');if(ab)tGrid.insertBefore(card,ab);else tGrid.appendChild(card);}
-    else{const rk='custom-'+Date.now();const ns=createRankSection(newRank,rk);document.getElementById('ht-rank-sections').appendChild(ns);const ng=ns.querySelector('.ht-grid');const ab=ng.querySelector('.add-member-btn');if(ab)ng.insertBefore(card,ab);else ng.appendChild(card);}
-  }
   closeMemberEditModal();
   await adminSaveAll(`Mitglied bearbeitet: ${newName}`);
 }
 window.saveMemberEdit=saveMemberEdit;
 document.getElementById('member-edit-overlay').addEventListener('click',function(e){if(e.target===this)closeMemberEditModal();});
 
-// ── CONFIRM DIALOG ──
 function confirmOpen(title,sub,onYes,yesLabel='Löschen'){
   document.getElementById('confirm-title').textContent=title;
   document.getElementById('confirm-sub').textContent=sub;
@@ -1700,7 +1573,6 @@ window.confirmClose=confirmClose;
 document.getElementById('confirm-yes').addEventListener('click',()=>{if(confirmCb){confirmCb();confirmClose();}});
 document.getElementById('confirm-overlay').addEventListener('click',function(e){if(e.target===this)confirmClose();});
 
-// ── TOAST ──
 function showToast(msg,isErr=false,isInfo=false){
   const t=document.getElementById('save-toast');
   t.textContent=(isErr?'✕ ':isInfo?'● ':'✓ ')+msg;
@@ -1710,15 +1582,11 @@ function showToast(msg,isErr=false,isInfo=false){
   t._to=setTimeout(()=>t.classList.remove('show'),3000);
 }
 window.showToast=showToast;
-function markUnsaved(){
-  if(!isAdmin()) return; // Nicht-Admins können nichts als ungespeichert markieren
-  document.body.classList.add('has-unsaved');
-}
+function markUnsaved(){ if(!isAdmin()) return; document.body.classList.add('has-unsaved'); }
 function clearUnsaved(){document.body.classList.remove('has-unsaved');}
 
-// ── ADMIN INIT ──
 function initAdminMode(){
-  if(!isAdmin()) return; // Guard
+  if(!isAdmin()) return;
   setupAllEditables();
   setupAllRuleAdminBars();
   addAllAddButtons();
@@ -1763,18 +1631,34 @@ function addAllAddButtons(){
   });
 }
 
-// ── STRAFE ADMIN CONTROLS ──
+// FIX 2: Strafen-Admin-Spalte wird nur für Admins dynamisch hinzugefügt
 function setupStrafeAdminControls(){
   if(!isAdmin()) return;
+  const table=document.getElementById('strafen-table');
+  if(!table) return;
+  
+  // Admin-Spalte in Header einfügen
+  const thead=table.querySelector('thead tr');
+  if(thead && !thead.querySelector('.stra-admin-th')){
+    const th=document.createElement('th');
+    th.className='stra-admin-th';
+    th.textContent='Aktionen';
+    thead.appendChild(th);
+  }
+
+  // Admin-Zellen in jede Zeile einfügen
   const tbody=document.getElementById('strafen-tbody');
   if(!tbody)return;
   Array.from(tbody.rows).forEach(row=>{
-    let td=row.querySelector('.stra-admin-td');
-    if(!td){td=document.createElement('td');td.className='stra-admin-td';row.appendChild(td);}
-    td.innerHTML=`
-      <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
-      <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
-      <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
+    if(!row.querySelector('.stra-admin-td')){
+      const td=document.createElement('td');
+      td.className='stra-admin-td';
+      td.innerHTML=`
+        <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
+        <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
+        <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
+      row.appendChild(td);
+    }
   });
 }
 window.setupStrafeAdminControls=setupStrafeAdminControls;
@@ -1794,7 +1678,6 @@ window.deleteStrafeRow=function(btn){
   });
 };
 
-// ── EDIT MODE TOGGLE ──
 function toggleEditMode(){
   if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   editModeOn=!editModeOn;
@@ -1808,28 +1691,23 @@ function toggleEditMode(){
   editBtn.innerHTML=editModeOn?'<i class="ti ti-pencil-off"></i>Editor Beenden':'<i class="ti ti-pencil"></i>Editor-Modus';
   if(saveBtn)saveBtn.style.display=editModeOn?'flex':'none';
   if(discardBtn)discardBtn.style.display=editModeOn?'flex':'none';
-  // contenteditable nur für Admin setzen/entfernen
   document.querySelectorAll('[data-editable]').forEach(el=>
     el.setAttribute('contenteditable', editModeOn ? 'true' : 'false')
   );
   if(editModeOn){
     editSnapshot=captureContent();
-    showToast('Editor-Modus aktiv – Inhalte jetzt bearbeitbar',false,true);
+    showToast('Editor-Modus aktiv',false,true);
   } else {
     editSnapshot=null;
-    adminSaveAll('Inhalte bearbeitet (Editor-Modus)');
+    adminSaveAll('Inhalte bearbeitet');
   }
 }
 window.toggleEditMode=toggleEditMode;
 
 window.activateEditMode=function(){
   if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
-  if(!editModeOn){
-    showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));
-    setTimeout(toggleEditMode,200);
-  } else {
-    toggleEditMode();
-  }
+  if(!editModeOn){showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));setTimeout(toggleEditMode,200);}
+  else{toggleEditMode();}
 };
 
 window.discardEdits=function(){
@@ -1853,12 +1731,11 @@ async function adminSaveAll(changeNote='Inhalte gespeichert'){
   if(ok){
     clearUnsaved();
     await logChange(changeNote);
-    showToast('Gespeichert – für ALLE Besucher sichtbar ✓');
+    showToast('Gespeichert – für ALLE sichtbar ✓');
   } else showToast('Speichern fehlgeschlagen',true);
 }
 window.adminSaveAll=()=>adminSaveAll();
 
-// ── RULE MOVE / DELETE ──
 window.moveRule=function(btn,dir){
   if(!isAdmin()) return;
   const rule=btn.closest('.rule'),c=rule.parentElement;
@@ -1875,7 +1752,6 @@ window.deleteRuleBtn=function(btn){
   });
 };
 
-// ── ADMIN MODAL ──
 function adminModalOpen(title,sub,fields,onConfirm){
   if(!isAdmin()) return;
   document.getElementById('admin-modal-title').textContent=title;
@@ -1890,10 +1766,9 @@ function adminModalConfirm(){if(!isAdmin())return;if(adminModalCb)adminModalCb()
 window.adminModalConfirm=adminModalConfirm;window.adminModalClose=adminModalClose;
 document.getElementById('admin-modal-overlay').addEventListener('click',function(e){if(e.target===this)adminModalClose();});
 
-const FS=`style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"`;
+const FS=`style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%);"`;
 const FTA=`style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"`;
 
-// ── ADD RULE ──
 function adminAddRuleToContainer(container){
   if(!isAdmin()) return;
   adminModalOpen('Neue Regel','Regel hinzufügen',
@@ -1929,14 +1804,13 @@ function adminAddRuleToContainer(container){
       const ab=container.querySelector('.add-rule-btn');
       if(ab)container.insertBefore(rule,ab);else container.appendChild(rule);
       adminModalClose();
-      await adminSaveAll(`Neue Regel hinzugefügt: ${title}`);
-      showToast('Regel hinzugefügt & gespeichert');
+      await adminSaveAll(`Neue Regel: ${title}`);
+      showToast('Regel hinzugefügt ✓');
     }
   );
 }
 window.adminAddRuleToContainer=adminAddRuleToContainer;
 
-// ── ADD STRAFE ROW ──
 window.adminAddStrafeRow=function(){
   if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   adminModalOpen('Neuer Strafe-Eintrag','Zur Strafen-Tabelle',
@@ -1970,13 +1844,12 @@ window.adminAddStrafeRow=function(){
       });
       tbody.appendChild(tr);
       adminModalClose();
-      await adminSaveAll(`Strafeneintrag hinzugefügt: ${name}`);
-      showToast('Eintrag hinzugefügt & gespeichert');
+      await adminSaveAll(`Strafeneintrag: ${name}`);
+      showToast('Eintrag hinzugefügt ✓');
     }
   );
 };
 
-// ── ADD MEMBER ──
 function adminAddMemberToGrid(grid){
   if(!isAdmin()) return;
   const section=grid.closest('.ht-rank-section');
@@ -1988,7 +1861,7 @@ function adminAddMemberToGrid(grid){
   adminModalOpen('Mitglied hinzufügen',`Rang: ${rankLabel}`,
     `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" ${FS}></div>
      <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FS}></div>
-     <div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FS}><div class="field-hint">Leer lassen → später über Discord-Button setzen.</div></div>`,
+     <div class="admin-field"><label>Discord ID (optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FS}></div>`,
     async()=>{
       if(!isAdmin()) return;
       const name=document.getElementById('mf-name')?.value.trim()||'Neues Mitglied';
@@ -2018,8 +1891,8 @@ function adminAddMemberToGrid(grid){
       const ab=grid.querySelector('.add-member-btn');if(ab)grid.insertBefore(card,ab);else grid.appendChild(card);
       if(dcid&&/^\d{17,20}$/.test(dcid)){IDS[uid]=dcid;await saveIdsShared();fetchLanyard(dcid,uid);}
       adminModalClose();
-      await adminSaveAll(`Mitglied hinzugefügt: ${name} (${rankLabel})`);
-      showToast('Mitglied hinzugefügt & für alle gespeichert');
+      await adminSaveAll(`Mitglied hinzugefügt: ${name}`);
+      showToast('Mitglied hinzugefügt ✓');
     }
   );
 }
@@ -2029,14 +1902,13 @@ window.deleteMember=async function(memberId){
   if(!isAdmin()) return;
   const card=document.querySelector(`[data-member-id="${memberId}"]`);if(!card)return;
   const name=card.querySelector('.ht-card-name')?.textContent||'Mitglied';
-  confirmOpen('Mitglied entfernen?',`"${name}" wird aus dem High-Team entfernt.`,async()=>{
+  confirmOpen('Mitglied entfernen?',`"${name}" wird entfernt.`,async()=>{
     card.remove();delete IDS[memberId];await saveIdsShared();
     await adminSaveAll(`Mitglied entfernt: ${name}`);
-    showToast('Mitglied entfernt & gespeichert');
+    showToast('Mitglied entfernt ✓');
   });
 };
 
-// ── ADD RANK SECTION ──
 window.adminAddRankSection=function(){
   if(!isAdmin()){showToast('Keine Berechtigung',true);return;}
   showTab('highteam',document.querySelector('[data-tab=highteam]'));
@@ -2050,8 +1922,8 @@ window.adminAddRankSection=function(){
       const ns=createRankSection(name,rk);
       document.getElementById('ht-rank-sections').appendChild(ns);
       adminModalClose();
-      await adminSaveAll(`Rang-Kategorie hinzugefügt: ${name}`);
-      showToast(`Kategorie "${name}" erstellt & gespeichert`);
+      await adminSaveAll(`Rang-Kategorie: ${name}`);
+      showToast(`Kategorie "${name}" erstellt ✓`);
     }
   );
 };
@@ -2090,16 +1962,14 @@ window.deleteRankSection=async function(btn){
       section.querySelectorAll('[data-member-id]').forEach(card=>delete IDS[card.getAttribute('data-member-id')]);
       await saveIdsShared();section.remove();
       await adminSaveAll(`Rang-Kategorie gelöscht: ${name}`);
-      showToast('Kategorie entfernt & gespeichert');
+      showToast('Kategorie entfernt ✓');
     }
   );
 };
 
-// ── SCROLL TO TOP ──
 window.addEventListener('scroll',()=>{
   document.getElementById('toTop').classList.toggle('show',window.scrollY>400);
 });
-
 </script>
 </body>
 </html>
