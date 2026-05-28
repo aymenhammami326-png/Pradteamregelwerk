@@ -1013,21 +1013,45 @@ if (discordLoginBtn) {
 }
 
 async function handleCallback() {
-  const hash = window.location.hash.slice(1);
-  if (!hash) return false;
-  const params = new URLSearchParams(hash);
+  const raw = window.location.hash.slice(1) || window.location.search.slice(1);
+  if (!raw) return false;
+  const params = new URLSearchParams(raw);
+  const error = params.get('error');
+  if (error) {
+    const description = params.get('error_description') || '';
+    console.error('Discord OAuth error:', error, description);
+    showToast(`Discord-Login fehlgeschlagen: ${error}`, true);
+    history.replaceState(null, '', window.location.pathname);
+    return false;
+  }
   const token = params.get('access_token');
   if (!token) return false;
+  const returnedState = params.get('state');
+  const expectedState = sessionStorage.getItem('oauth_state');
+  if (returnedState && expectedState && returnedState !== expectedState) {
+    console.error('OAuth state mismatch', returnedState, expectedState);
+    showToast('Discord-Login fehlgeschlagen: Ungültiger OAuth-State', true);
+    history.replaceState(null, '', window.location.pathname);
+    return false;
+  }
   history.replaceState(null, '', window.location.pathname);
   try {
     const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } });
-    if (!res.ok) return false;
+    if (!res.ok) {
+      console.error('Discord API returned not OK', res.status);
+      showToast('Discord-Login fehlgeschlagen', true);
+      return false;
+    }
     const user = await res.json();
     sessionStorage.setItem('prada_token', token);
     sessionStorage.setItem('prada_user', JSON.stringify(user));
     showApp(user, token);
     return true;
-  } catch { return false; }
+  } catch (e) {
+    console.error('Discord fetch error:', e);
+    showToast('Discord-Login fehlgeschlagen', true);
+    return false;
+  }
 }
 
 async function showApp(user, token) {
