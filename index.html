@@ -20,6 +20,7 @@
 </script>
 
 <style>
+/* (gleicher CSS wie zuvor – unverändert) */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --bg:#080808;--surface:#0e0e0e;--card:#131313;--card-hi:#1a1a1a;
@@ -446,7 +447,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 </section>
 
 <div class="content">
-
   <!-- EINFÜHRUNG -->
   <div class="section visible" id="einfuehrung">
     <div class="bc">Prada CL v2 <span class="bc-sep">›</span> <em>Einführung</em></div>
@@ -776,7 +776,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- LANYARD MODAL -->
@@ -861,7 +860,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="ti ti-arrow-up"></i></button>
 
 <script type="module">
-  // Firebase initialisieren (Modul-Import)
   import { initializeApp } from "firebase/app";
   import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
   import { getAnalytics } from "firebase/analytics";
@@ -879,20 +877,15 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const analytics = getAnalytics(app);
-  
-  // Globale Firebase-Referenz für nicht-Modul-Funktionen
   window.__db = db;
-  
-  // Shared Storage Funktionen mit Firebase
+
   async function sharedGet(key) {
     try {
       const ref = doc(db, "prada", key);
       const snap = await getDoc(ref);
-      if (snap.exists()) return snap.data().value;
-      return null;
+      return snap.exists() ? snap.data().value : null;
     } catch(e) { console.error("sharedGet", key, e); return null; }
   }
-  
   async function sharedSet(key, value) {
     try {
       const ref = doc(db, "prada", key);
@@ -900,7 +893,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       return true;
     } catch(e) { console.error("sharedSet", key, e); return false; }
   }
-  
   async function sharedDelete(key) {
     try {
       const ref = doc(db, "prada", key);
@@ -908,27 +900,20 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       return true;
     } catch(e) { console.error("sharedDelete", key, e); return false; }
   }
-  
-  // Rest des ursprünglichen Skripts (angepasst, dass sharedGet/Set/Delete jetzt Firebase nutzen)
-  // Der gesamte folgende Code ist identisch mit der ursprünglichen Logik,
-  // nur die shared-Funktionen wurden durch die Firebase-Version ersetzt.
-  // Der Einfachheit halber übernehmen wir alle globalen Funktionen wie gehabt.
-  
-  // ══════════════════════════════════════════════
-  // CONFIG & GLOBALS (unverändert)
-  // ══════════════════════════════════════════════
+
+  // -------------------------------------------------------------
+  // ALLE ADMIN-FUNKTIONEN (wie zuvor, aber mit window-Zuweisungen)
+  // -------------------------------------------------------------
   const ADMIN_ID = '1477023843489939487';
   const CLIENT_ID = '1505344005054005428';
   const REDIRECT_URI = window.location.origin + window.location.pathname;
   const SCOPES = 'identify';
-  
   const SHARED_KEYS = {
     content: 'prada-content-v2',
     lanyardIds: 'prada-lanyard-ids',
     visitors: 'prada-visitors',
     visitLog: 'prada-visitlog',
   };
-  
   let currentUser = null;
   let dcToken = null;
   let editModeOn = false;
@@ -938,14 +923,13 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   let currentEditMemberId = null;
   let IDS = {};
   const STATUS_LABELS = {online:'Online',idle:'Abwesend',dnd:'Nicht stören',offline:'Offline',streaming:'Am Streamen'};
-  
+
   function syncBar(state) {
     const bar = document.getElementById('sync-bar');
     bar.className = 'sync-bar ' + state;
     if (state === 'saved') setTimeout(() => bar.className = 'sync-bar', 1200);
   }
-  
-  // OAuth / Auth (identisch)
+
   function getOAuthUrl() {
     const state = Math.random().toString(36).slice(2);
     sessionStorage.setItem('oauth_state', state);
@@ -955,7 +939,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     });
   }
   document.getElementById('discord-login-btn').href = getOAuthUrl();
-  
+
   async function handleCallback() {
     const hash = window.location.hash.slice(1);
     if (!hash) return false;
@@ -973,7 +957,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       return true;
     } catch { return false; }
   }
-  
+
   async function showApp(user, token) {
     dcToken = token || sessionStorage.getItem('prada_token');
     currentUser = user;
@@ -984,16 +968,12 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     document.getElementById('topbar-avatar').src = avatarUrl;
     document.getElementById('topbar-username').textContent = user.global_name || user.username;
     document.getElementById('topbar-user').style.display = 'flex';
-  
     await loadSharedContent();
     await trackVisit(user);
-  
     const ids = await sharedGet(SHARED_KEYS.lanyardIds);
     if (ids) IDS = ids;
-  
     loadAllLanyard();
     setInterval(loadAllLanyard, 30000);
-  
     if (user.id === ADMIN_ID) {
       document.body.classList.add('is-admin');
       document.getElementById('dash-tab-btn').style.display = 'flex';
@@ -1001,7 +981,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       initAdminMode();
     }
   }
-  
+
   function logout() {
     sessionStorage.removeItem('prada_token');
     sessionStorage.removeItem('prada_user');
@@ -1012,15 +992,14 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     document.getElementById('discord-login-btn').href = getOAuthUrl();
     currentUser = null; dcToken = null;
   }
-  
+
   (async function initAuth() {
     const saved = sessionStorage.getItem('prada_user');
     if (saved) { showApp(JSON.parse(saved), sessionStorage.getItem('prada_token')); return; }
     const handled = await handleCallback();
     if (!handled) document.getElementById('auth-screen').style.display = 'flex';
   })();
-  
-  // Besucher-Tracking (verwendet sharedSet/Get)
+
   async function trackVisit(user) {
     try {
       const isAdmin = user.id === ADMIN_ID;
@@ -1046,7 +1025,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       await sharedSet(SHARED_KEYS.visitLog, log);
     } catch(e) { console.error('Track error:', e); }
   }
-  
+
   async function loadSharedContent() {
     try {
       const c = await sharedGet(SHARED_KEYS.content);
@@ -1058,7 +1037,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       if (document.body.classList.contains('is-admin')) initAdminMode();
     } catch(e) { console.error('Load content error:', e); }
   }
-  
+
   async function saveSharedContent() {
     syncBar('syncing');
     try {
@@ -1073,24 +1052,11 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       else { syncBar(''); return false; }
     } catch(e) { console.error('Save error:', e); syncBar(''); return false; }
   }
-  
+
   async function saveIdsShared() {
     await sharedSet(SHARED_KEYS.lanyardIds, IDS);
   }
-  
-  // Tab Navigation, Dashboard, Lanyard, Member Edit, Confirm, Toast, Admin-Funktionen
-  // (alle diese Funktionen bleiben exakt wie im Original, da sie sharedGet/Set verwenden, die jetzt Firebase sind)
-  // Aus Platzgründen wiederhole ich hier den vollständigen Code der ursprünglichen JS-Funktionen.
-  // Der Einfachheit halber setze ich den restlichen Code als Fortsetzung ein – bitte sicherstellen, dass alle Funktionen definiert sind.
-  
-  // ----------------------------------------------------------------------
-  // Alle Funktionen aus dem Original (showTab, loadDashboard, fetchLanyard, etc.)
-  // müssen hier stehen. Da sie bereits im ursprünglichen Code existierten und nur die
-  // shared-Funktionen ausgetauscht wurden, reicht es, sie unverändert zu übernehmen.
-  // Aus Gründen der Übersichtlichkeit wird hier nur eine Auswahl gezeigt,
-  // die aber alle notwendigen Funktionen enthält.
-  // ----------------------------------------------------------------------
-  
+
   function showTab(id, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1100,10 +1066,10 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     window.scrollTo({top:0,behavior:'smooth'});
     if (id === 'dashboard') loadDashboard();
   }
-  window.addEventListener('scroll', () => {
-    document.getElementById('toTop').classList.toggle('show', window.scrollY > 280);
-  });
-  
+
+  window.showTab = showTab;
+  window.logout = logout;
+
   async function loadDashboard() {
     if (!currentUser || currentUser.id !== ADMIN_ID) return;
     const btn = document.getElementById('dash-refresh-btn');
@@ -1120,7 +1086,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       document.getElementById('ds-log').textContent = log.length;
       document.getElementById('visitors-count').textContent = visitors.length;
       document.getElementById('log-count').textContent = log.length;
-  
       const vList = document.getElementById('visitors-list');
       if (!visitors.length) vList.innerHTML = '<div class="dash-empty">Noch keine Besucher</div>';
       else {
@@ -1145,7 +1110,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           </div>`;
         }).join('');
       }
-  
       const vLog = document.getElementById('visit-log');
       if (!log.length) vLog.innerHTML = '<div class="dash-empty">Kein Log</div>';
       else {
@@ -1165,7 +1129,9 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     } catch(e) { console.error(e); }
     setTimeout(() => btn.classList.remove('spinning'), 400);
   }
-  
+
+  window.loadDashboard = loadDashboard;
+
   function formatTime(ts) {
     const diff = Date.now() - ts;
     if (diff < 60000) return 'Gerade eben';
@@ -1174,7 +1140,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     const d = new Date(ts);
     return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'}) + ' ' + d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
   }
-  
+
   async function fetchLanyard(discordId, memberId) {
     try {
       const res = await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
@@ -1208,11 +1174,11 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       if (lbl) lbl.innerHTML = `<span class="ht-card-status-dot ${status}"></span><span>${STATUS_LABELS[status]||'Offline'}</span>`;
     } catch {}
   }
-  
+
   function loadAllLanyard() {
     for (const [mid, did] of Object.entries(IDS)) if (did) fetchLanyard(did, mid);
   }
-  
+
   function openLanyardModal(memberId) {
     if (!document.body.classList.contains('is-admin')) return;
     currentLanyardMember = memberId;
@@ -1220,10 +1186,14 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     document.getElementById('lanyard-modal-overlay').classList.add('open');
     setTimeout(() => document.getElementById('lanyard-input').focus(), 50);
   }
+  window.openLanyardModal = openLanyardModal;
+
   function closeLanyardModal() {
     document.getElementById('lanyard-modal-overlay').classList.remove('open');
     currentLanyardMember = null;
   }
+  window.closeLanyardModal = closeLanyardModal;
+
   async function saveLanyardId() {
     const val = document.getElementById('lanyard-input').value.trim();
     if (!currentLanyardMember) return;
@@ -1257,9 +1227,11 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       setTimeout(() => document.getElementById('lanyard-input').style.borderColor = '', 1200);
     }
   }
+  window.saveLanyardId = saveLanyardId;
+
   document.getElementById('lanyard-modal-overlay').addEventListener('click', function(e){ if(e.target===this) closeLanyardModal(); });
   document.getElementById('lanyard-input').addEventListener('keydown', function(e){ if(e.key==='Enter') saveLanyardId(); if(e.key==='Escape') closeLanyardModal(); });
-  
+
   function openMemberEditModal(memberId) {
     if (!document.body.classList.contains('is-admin')) return;
     currentEditMemberId = memberId;
@@ -1275,10 +1247,14 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     document.getElementById('member-edit-overlay').classList.add('open');
     setTimeout(() => document.getElementById('me-name').focus(), 50);
   }
+  window.openMemberEditModal = openMemberEditModal;
+
   function closeMemberEditModal() {
     document.getElementById('member-edit-overlay').classList.remove('open');
     currentEditMemberId = null;
   }
+  window.closeMemberEditModal = closeMemberEditModal;
+
   async function saveMemberEdit() {
     if (!currentEditMemberId) return;
     const card = document.querySelector(`[data-member-id="${currentEditMemberId}"]`);
@@ -1295,7 +1271,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     const titleEl = card.querySelector('.ht-card-title');
     if (titleEl) titleEl.textContent = newTitle;
     if (currentRankEl) currentRankEl.textContent = newRankInput;
-  
     if (newRankInput) {
       const rankSections = document.querySelectorAll('#ht-rank-sections .ht-rank-section');
       let targetGrid = null, targetRankKey = null;
@@ -1327,7 +1302,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     closeMemberEditModal();
     await adminSaveAll();
   }
-  
+  window.saveMemberEdit = saveMemberEdit;
+
   function getRankClass(rankName) {
     const n = rankName.toLowerCase();
     if (n.includes('inhaber')) return 'inhaber';
@@ -1335,6 +1311,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     if (n.includes('teamleitung') || n === 'tl') return 'tl';
     return 'custom';
   }
+
   function updateCardRankClasses(card) {
     const cls = card.classList.contains('inhaber') ? 'inhaber'
                : card.classList.contains('sl') ? 'sl'
@@ -1344,6 +1321,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     if (rankTagEl) rankTagEl.className = `ht-card-rank-tag ${cls}`;
     if (titleEl) titleEl.className = `ht-card-title ${cls}`;
   }
+
   function createRankSection(rankName, rankKey) {
     const sec = document.createElement('div');
     sec.className = 'ht-rank-section';
@@ -1368,8 +1346,9 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     grid.appendChild(addBtn);
     return sec;
   }
+
   document.getElementById('member-edit-overlay').addEventListener('click', function(e){ if(e.target===this) closeMemberEditModal(); });
-  
+
   function confirmOpen(title, sub, onYes, yesLabel='Löschen') {
     document.getElementById('confirm-title').textContent = title;
     document.getElementById('confirm-sub').textContent = sub;
@@ -1378,9 +1357,10 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     document.getElementById('confirm-overlay').classList.add('open');
   }
   function confirmClose() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
+  window.confirmClose = confirmClose;
   document.getElementById('confirm-yes').addEventListener('click', () => { if(confirmCallback){confirmCallback();confirmClose();} });
   document.getElementById('confirm-overlay').addEventListener('click', function(e){ if(e.target===this) confirmClose(); });
-  
+
   function showToast(msg, isErr=false, isInfo=false) {
     const t = document.getElementById('save-toast');
     t.textContent = (isErr ? '✕ ' : isInfo ? '● ' : '✓ ') + msg;
@@ -1389,14 +1369,19 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     clearTimeout(t._to);
     t._to = setTimeout(() => t.classList.remove('show'), 3000);
   }
+  window.showToast = showToast;
+
   function markUnsaved() { document.body.classList.add('has-unsaved'); }
   function clearUnsaved() { document.body.classList.remove('has-unsaved'); }
-  
+  window.markUnsaved = markUnsaved;
+  window.clearUnsaved = clearUnsaved;
+
   function initAdminMode() {
     setupAllEditables();
     setupAllRuleAdminBars();
     addAllAddButtons();
   }
+
   function setupAllEditables() {
     document.querySelectorAll('[data-editable]').forEach(el => {
       el.setAttribute('contenteditable', editModeOn ? 'true' : 'false');
@@ -1406,6 +1391,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       }
     });
   }
+
   function setupAllRuleAdminBars() {
     document.querySelectorAll('.rule').forEach(rule => {
       let bar = rule.querySelector('.rule-admin-bar');
@@ -1416,6 +1402,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)"><i class="ti ti-trash"></i></button>`;
     });
   }
+
   function addAllAddButtons() {
     document.querySelectorAll('.rules').forEach(c => {
       if (!c.querySelector('.add-rule-btn')) {
@@ -1438,7 +1425,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     const sb = document.getElementById('add-strafe-btn');
     if (sb) sb.style.display = 'flex';
   }
-  
+
   function toggleEditMode() {
     editModeOn = !editModeOn;
     document.body.classList.toggle('admin-edit-on', editModeOn);
@@ -1448,13 +1435,15 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     document.querySelectorAll('[data-editable]').forEach(el => el.setAttribute('contenteditable', editModeOn ? 'true' : 'false'));
     if (!editModeOn) adminSaveAll();
   }
-  
+  window.toggleEditMode = toggleEditMode;
+
   async function adminSaveAll() {
     const ok = await saveSharedContent();
     if (ok) { clearUnsaved(); showToast('Gespeichert – für ALLE Besucher sichtbar ✓'); }
     else showToast('Speichern fehlgeschlagen', true);
   }
-  
+  window.adminSaveAll = adminSaveAll;
+
   async function adminResetConfirm() {
     confirmOpen('Alle Änderungen zurücksetzen?', 'Das Regelwerk wird auf den Originalstand zurückgesetzt.', async () => {
       await sharedDelete(SHARED_KEYS.content);
@@ -1464,20 +1453,24 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       setTimeout(() => location.reload(), 900);
     }, 'Zurücksetzen');
   }
-  
+  window.adminResetConfirm = adminResetConfirm;
+
   function moveRule(btn, dir) {
     const rule = btn.closest('.rule'), c = rule.parentElement;
     if (dir==='up') { const p=rule.previousElementSibling; if(p&&!p.classList.contains('add-rule-btn')) c.insertBefore(rule,p); }
     else { const n=rule.nextElementSibling; if(n&&!n.classList.contains('add-rule-btn')) c.insertBefore(n,rule); }
     markUnsaved();
   }
+  window.moveRule = moveRule;
+
   function deleteRuleBtn(btn) {
     const rule = btn.closest('.rule');
     const title = rule.querySelector('.rule-title')?.textContent || 'Regel';
     confirmOpen('Regel löschen?', `"${title}" wird entfernt.`,
       () => { rule.remove(); markUnsaved(); showToast('Regel gelöscht'); });
   }
-  
+  window.deleteRuleBtn = deleteRuleBtn;
+
   function adminModalOpen(title, sub, fields, onConfirm) {
     document.getElementById('admin-modal-title').textContent = title;
     document.getElementById('admin-modal-sub').textContent = sub;
@@ -1487,17 +1480,20 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   }
   function adminModalClose() { document.getElementById('admin-modal-overlay').classList.remove('open'); adminModalCallback = null; }
   function adminModalConfirm() { if(adminModalCallback) adminModalCallback(); }
+  window.adminModalConfirm = adminModalConfirm;
+  window.adminModalClose = adminModalClose;
   document.getElementById('admin-modal-overlay').addEventListener('click', function(e){ if(e.target===this) adminModalClose(); });
-  
+
   const FIELD_STYLE = `style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"`;
-  
+
   function adminAddRule() {
     const visible = document.querySelector('.section.visible');
     const target = visible?.querySelector('.rules:last-of-type');
     if (target) adminAddRuleToContainer(target);
     else showToast('Wechsle zu einem Tab mit Regeln', true);
   }
-  
+  window.adminAddRule = adminAddRule;
+
   function adminAddRuleToContainer(container) {
     adminModalOpen('Neue Regel', 'Regel hinzufügen',
       `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" ${FIELD_STYLE}></div>
@@ -1525,7 +1521,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       }
     );
   }
-  
+
   function adminAddStrafeRow() {
     adminModalOpen('Neuer Strafe-Eintrag', 'Zur Strafen-Tabelle',
       `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" ${FIELD_STYLE}></div>
@@ -1551,7 +1547,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       }
     );
   }
-  
+  window.adminAddStrafeRow = adminAddStrafeRow;
+
   function adminAddMember() {
     showTab('highteam', document.querySelector('[data-tab=highteam]'));
     setTimeout(() => {
@@ -1559,7 +1556,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       if (grid) adminAddMemberToGrid(grid);
     }, 200);
   }
-  
+  window.adminAddMember = adminAddMember;
+
   function adminAddMemberToGrid(grid) {
     const section = grid.closest('.ht-rank-section');
     const pill = section?.querySelector('.ht-rank-pill');
@@ -1571,7 +1569,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
                   : existingCard?.classList.contains('tl') ? 'tl' : 'custom';
     const decoMap = {inhaber:'INH', sl:'SL', tl:'TL', custom:'★'};
     const deco = decoMap[rankCls] || rankLabel.slice(0,3).toUpperCase();
-  
+
     adminModalOpen('Mitglied hinzufügen', `Rang: ${rankLabel}`,
       `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" ${FIELD_STYLE}></div>
        <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FIELD_STYLE}></div>
@@ -1582,7 +1580,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         const dcid = document.getElementById('mf-dcid')?.value.trim() || '';
         const letter = name.charAt(name.lastIndexOf(' ')+1).toUpperCase() || name.charAt(0).toUpperCase();
         const uid = `${rankKey}-${Date.now()}`;
-  
+
         const card = document.createElement('div');
         card.className = `ht-card ${rankCls}`;
         card.setAttribute('data-member-id', uid);
@@ -1606,19 +1604,20 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
           </div>
           <div class="ht-card-deco">${deco}</div>`;
         card.querySelectorAll('[data-editable]').forEach(el => { el.addEventListener('input', markUnsaved); el.setAttribute('contenteditable', editModeOn?'true':'false'); });
-  
+
         const addBtn = grid.querySelector('.add-member-btn');
         if (addBtn) grid.insertBefore(card, addBtn); else grid.appendChild(card);
-  
+
         if (dcid && /^\d{17,20}$/.test(dcid)) { IDS[uid]=dcid; await saveIdsShared(); fetchLanyard(dcid,uid); }
-  
+
         adminModalClose();
         await adminSaveAll();
         showToast('Mitglied hinzugefügt & für alle gespeichert');
       }
     );
   }
-  
+  window.adminAddMemberToGrid = adminAddMemberToGrid;
+
   async function deleteMember(memberId) {
     const card = document.querySelector(`[data-member-id="${memberId}"]`);
     if (!card) return;
@@ -1632,7 +1631,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         showToast('Mitglied entfernt & gespeichert');
       });
   }
-  
+  window.deleteMember = deleteMember;
+
   function adminAddRankSection() {
     showTab('highteam', document.querySelector('[data-tab=highteam]'));
     adminModalOpen('Neue Rang-Kategorie', 'Neue Kategorie erstellen',
@@ -1649,7 +1649,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       }
     );
   }
-  
+  window.adminAddRankSection = adminAddRankSection;
+
   async function deleteRankSection(btn) {
     const section = btn.closest('.ht-rank-section');
     const name = section?.querySelector('.ht-rank-pill')?.textContent.trim() || 'Kategorie';
@@ -1668,36 +1669,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       }
     );
   }
-  
-  // Globale Funktionen für onclick-Attribute verfügbar machen
-  window.showTab = showTab;
-  window.logout = logout;
-  window.openLanyardModal = openLanyardModal;
-  window.closeLanyardModal = closeLanyardModal;
-  window.saveLanyardId = saveLanyardId;
-  window.openMemberEditModal = openMemberEditModal;
-  window.closeMemberEditModal = closeMemberEditModal;
-  window.saveMemberEdit = saveMemberEdit;
-  window.confirmClose = confirmClose;
-  window.showToast = showToast;
-  window.toggleEditMode = toggleEditMode;
-  window.adminSaveAll = adminSaveAll;
-  window.adminResetConfirm = adminResetConfirm;
-  window.moveRule = moveRule;
-  window.deleteRuleBtn = deleteRuleBtn;
-  window.adminAddRule = adminAddRule;
-  window.adminAddStrafeRow = adminAddStrafeRow;
-  window.adminAddMember = adminAddMember;
-  window.adminAddRankSection = adminAddRankSection;
-  window.deleteMember = deleteMember;
   window.deleteRankSection = deleteRankSection;
-  window.loadDashboard = loadDashboard;
-  window.adminAddRuleToContainer = adminAddRuleToContainer;
-  window.adminAddMemberToGrid = adminAddMemberToGrid;
-  window.createRankSection = createRankSection;
-  window.updateCardRankClasses = updateCardRankClasses;
-  window.markUnsaved = markUnsaved;
-  window.clearUnsaved = clearUnsaved;
 </script>
 </body>
 </html>
