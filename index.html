@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-
 <script type="importmap">
   {
     "imports": {
@@ -17,7 +16,6 @@
     }
   }
 </script>
-
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -36,12 +34,14 @@ html{scroll-behavior:smooth;}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden;}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;background-size:150px;}
 
+/* ── SYNC BAR ── */
 .sync-bar{position:fixed;top:56px;left:0;right:0;height:2px;background:transparent;z-index:999;transition:all 0.3s;}
 .sync-bar.syncing{background:linear-gradient(90deg,transparent,var(--inhaber-accent),transparent);animation:syncpulse 1s infinite;}
 .sync-bar.saved{background:var(--green);animation:fadeout 0.8s forwards 0.5s;}
 @keyframes syncpulse{0%{background-position:-200px 0}100%{background-position:200px 0}}
 @keyframes fadeout{to{opacity:0}}
 
+/* ── TOPBAR ── */
 .topbar{position:sticky;top:0;z-index:400;background:rgba(8,8,8,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 2rem;height:56px;}
 .topbar-logo{display:flex;align-items:center;gap:10px;margin-right:2.5rem;flex-shrink:0;}
 .topbar-logo img{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-hi);}
@@ -55,7 +55,17 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .tab-btn.active{color:var(--white);border-bottom-color:var(--white);}
 .tab-btn.crown-tab.active{color:var(--inhaber-accent);border-bottom-color:var(--inhaber-accent);}
 .tab-btn.dash-tab.active{color:#9b8dff;border-bottom-color:#9b8dff;}
+.topbar-user{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0;}
+.topbar-avatar{width:26px;height:26px;border-radius:50%;border:1px solid var(--border-hi);object-fit:cover;}
+.topbar-username{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:0.08em;display:none;}
+@media(min-width:600px){.topbar-username{display:block;}}
+.topbar-logout{width:28px;height:28px;background:transparent;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.14s;}
+.topbar-logout:hover{border-color:var(--red);color:var(--red);}
+.admin-badge{display:none;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--inhaber-accent);border:1px solid var(--inhaber-border);background:rgba(210,140,10,0.08);padding:4px 10px;flex-shrink:0;}
+.admin-badge i{font-size:11px;}
+body.is-admin .admin-badge{display:flex;}
 
+/* ── HERO ── */
 .hero{position:relative;overflow:hidden;padding:4rem 2.5rem 3rem;text-align:center;background:#050505;border-bottom:1px solid var(--border);}
 .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 80% at 50% -20%,rgba(210,140,10,0.06) 0%,transparent 70%),repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(255,255,255,0.018) 59px,rgba(255,255,255,0.018) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.018) 59px,rgba(255,255,255,0.018) 60px);}
 .hero>*{position:relative;z-index:2;}
@@ -71,6 +81,15 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .hero-chip{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--border);padding:5px 13px;background:var(--surface);}
 .hero-chip i{font-size:12px;}
 
+/* ── ANNOUNCEMENT BANNER ── */
+.announcement-banner{display:none;background:rgba(210,140,10,0.08);border-bottom:1px solid rgba(210,140,10,0.3);padding:10px 2rem;align-items:center;gap:12px;}
+.announcement-banner.visible{display:flex;}
+.announcement-banner i{color:var(--inhaber-accent);font-size:16px;flex-shrink:0;}
+.announcement-text{font-size:13px;color:var(--text-dim);flex:1;}
+.announcement-close{background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:16px;padding:2px 6px;}
+.announcement-close:hover{color:var(--text);}
+
+/* ── CONTENT ── */
 .content{max-width:1000px;margin:0 auto;padding:3rem 2.5rem 6rem;}
 .section{display:none;animation:up 0.16s ease;}
 .section.visible{display:block;}
@@ -83,23 +102,33 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .sec-ico i{font-size:22px;color:var(--text-dim);}
 .sec-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:0.1em;color:var(--white);line-height:1;margin-bottom:5px;}
 .sec-desc{font-size:13px;color:var(--text-muted);line-height:1.5;}
+
+/* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border-hi);margin-bottom:2.2rem;overflow:hidden;}
 .stat{background:var(--card);padding:20px 22px;}
 .stat-n{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.06em;color:var(--white);line-height:1;}
 .stat-l{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--text-muted);letter-spacing:0.18em;text-transform:uppercase;margin-top:3px;}
+
+/* ── VIDEO ── */
 .vid-wrap{border:1px solid var(--border-hi);background:#000;margin-bottom:2rem;overflow:hidden;}
 .vid-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--border);background:var(--surface);}
 .vid-dots span{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff5f57;box-shadow:14px 0 0 #febc2e,28px 0 0 #28c840;}
 .vid-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;}
 .vid-wrap video{width:100%;display:block;aspect-ratio:16/9;background:#000;}
+
+/* ── INFO BOXES ── */
 .info{border:1px solid var(--border-hi);padding:13px 16px;margin-bottom:1.3rem;font-size:13px;line-height:1.55;display:flex;gap:11px;align-items:flex-start;background:var(--card);color:var(--text-dim);}
 .info i{font-size:16px;flex-shrink:0;margin-top:1px;color:var(--text-dim);}
 .info.warn{border-color:rgba(240,160,48,0.35);background:var(--amber-dim);}
 .info.warn i{color:var(--amber);}
 .info.ok{border-color:rgba(78,200,122,0.3);background:var(--green-dim);}
 .info.ok i{color:var(--green);}
+
+/* ── SECTION HEADERS ── */
 .sh{font-family:'DM Mono',monospace;font-size:8.5px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-muted);padding:2rem 0 1rem;display:flex;align-items:center;gap:14px;}
 .sh::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ── RULES ── */
 .rules{display:grid;gap:5px;}
 .rule{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--border-hi);padding:15px 18px;transition:all 0.15s;position:relative;}
 .rule:hover{border-left-color:rgba(255,255,255,0.5);background:var(--card-hi);transform:translateX(2px);}
@@ -117,6 +146,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .rule-text{font-size:12.5px;color:#999;line-height:1.65;}
 .rule-text code{font-family:'DM Mono',monospace;background:rgba(0,0,0,0.5);color:var(--text-dim);padding:1px 6px;font-size:11px;border:1px solid var(--border);}
 
+/* ── STRAFEN TABLE ── */
 .stra-table{width:100%;border-collapse:collapse;border:1px solid var(--border-hi);margin-bottom:2rem;background:var(--card);}
 .stra-table th{font-family:'DM Mono',monospace;font-size:8px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-muted);padding:12px 16px;border-bottom:1px solid var(--border-hi);text-align:left;background:var(--surface);}
 .stra-table td{padding:13px 16px;font-size:13px;border-bottom:1px solid rgba(34,34,34,0.7);vertical-align:middle;color:var(--text-dim);}
@@ -129,53 +159,68 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .zb.mid{color:#ffd07a;border-color:rgba(240,160,48,0.4);background:rgba(240,160,48,0.08);}
 .zb.high{color:#ff9090;border-color:rgba(224,60,60,0.45);background:rgba(224,60,60,0.1);}
 .zb.perm{color:#ff6060;border-color:rgba(255,60,60,0.6);background:rgba(255,60,60,0.12);font-weight:700;}
+
+/* ── ADMIN CONTROLS (only visible in edit mode) ── */
 .stra-admin-th{display:none;}
 .stra-admin-td{display:none;width:90px;text-align:right;white-space:nowrap;}
-body.is-admin .stra-admin-th,body.is-admin .stra-admin-td{display:table-cell;}
+body.admin-edit-on .stra-admin-th,body.admin-edit-on .stra-admin-td{display:table-cell;}
 .stra-adm-btn{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;border:1px solid var(--border-hi);background:rgba(0,0,0,0.6);color:var(--text-muted);cursor:pointer;transition:all 0.12s;margin-left:2px;vertical-align:middle;}
 .stra-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
 .stra-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
 
+/* ── HIGH-TEAM ── */
 .ht-rank-section{margin-bottom:3rem;}
 .ht-rank-header{display:flex;align-items:center;gap:12px;margin-bottom:1.4rem;}
 .ht-rank-pill{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.28em;text-transform:uppercase;padding:5px 14px;border:1px solid;flex-shrink:0;color:var(--text-dim);border-color:var(--border-hi);background:rgba(255,255,255,0.04);}
-.ht-rank-pill.inhaber,.ht-rank-pill.sl,.ht-rank-pill.tl,.ht-rank-pill.custom{color:var(--text-dim);border-color:var(--border-hi);background:rgba(255,255,255,0.04);}
 .ht-rank-icon{font-size:15px;flex-shrink:0;color:var(--text-dim);}
-.ht-rank-icon.inhaber,.ht-rank-icon.sl,.ht-rank-icon.tl,.ht-rank-icon.custom{color:var(--text-dim);}
 .ht-rank-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-hi),transparent);}
-.ht-rank-line.inhaber,.ht-rank-line.sl,.ht-rank-line.tl,.ht-rank-line.custom{background:linear-gradient(90deg,var(--border-hi),transparent);}
 .ht-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;}
 .ht-card{position:relative;overflow:hidden;padding:22px 22px 18px;border:1px solid var(--border-hi);background:var(--card);transition:all 0.2s ease;}
 .ht-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.07);}
 .ht-card:hover{background:var(--card-hi);border-color:rgba(255,255,255,0.22);transform:translateY(-2px);box-shadow:0 4px 24px rgba(0,0,0,0.4);}
-.ht-card.inhaber,.ht-card.sl,.ht-card.tl,.ht-card.custom{border-color:var(--border-hi);background:var(--card);}
-.ht-card.inhaber::before,.ht-card.sl::after{display:none;}
-.ht-card.sl::after{display:none;}
-.ht-card.tl{border-top:none;}
-.ht-card.inhaber:hover,.ht-card.sl:hover,.ht-card.tl:hover,.ht-card.custom:hover{border-color:rgba(255,255,255,0.22);background:var(--card-hi);box-shadow:0 4px 24px rgba(0,0,0,0.4);transform:translateY(-2px);}
 .ht-card-inner{display:flex;align-items:center;gap:16px;}
 .dc-avatar-wrap{position:relative;flex-shrink:0;}
 .dc-avatar{width:56px;height:56px;border-radius:50%;border:2px solid var(--border-hi);object-fit:cover;background:var(--card-hi);display:block;}
-.dc-avatar.inhaber,.dc-avatar.sl,.dc-avatar.tl,.dc-avatar.custom{border-color:var(--border-hi);}
 .dc-avatar-placeholder{width:56px;height:56px;border-radius:50%;border:2px solid var(--border-hi);background:var(--card-hi);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--text-muted);flex-shrink:0;}
 .dc-status{position:absolute;bottom:1px;right:1px;width:14px;height:14px;border-radius:50%;border:2.5px solid var(--bg);background:#747f8d;}
 .dc-status.online{background:#23a559;}.dc-status.idle{background:#f0b232;}.dc-status.dnd{background:#f23f43;}.dc-status.streaming{background:#593695;}
 .ht-card-info{flex:1;min-width:0;}
 .ht-card-rank-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:5px;opacity:0.6;color:var(--text-muted);}
-.ht-card-rank-tag.inhaber,.ht-card-rank-tag.sl,.ht-card-rank-tag.tl,.ht-card-rank-tag.custom{color:var(--text-muted);}
 .ht-card-name{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:0.07em;color:var(--white);line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .ht-card-title{font-size:11px;font-weight:400;margin-top:4px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.25);}
-.ht-card-title.inhaber,.ht-card-title.sl,.ht-card-title.tl,.ht-card-title.custom{color:rgba(255,255,255,0.25);}
 .ht-card-status{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;gap:5px;}
 .ht-card-status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:#747f8d;}
 .ht-card-status-dot.online{background:#23a559;}.ht-card-status-dot.idle{background:#f0b232;}.ht-card-status-dot.dnd{background:#f23f43;}.ht-card-status-dot.streaming{background:#593695;}
 .ht-card-deco{position:absolute;bottom:-8px;right:6px;font-family:'Bebas Neue',sans-serif;font-size:54px;pointer-events:none;line-height:1;opacity:0.04;letter-spacing:0.05em;color:#fff;}
+
+/* ── ADMIN-ONLY CONTROLS (only visible in edit mode) ── */
 .ht-admin-bar{display:none;position:absolute;top:8px;right:8px;gap:4px;}
-body.is-admin .ht-admin-bar{display:flex;}
+.rule-admin-bar{display:none;position:absolute;top:8px;right:8px;gap:4px;align-items:center;}
+.rank-section-del-btn{display:none;background:rgba(0,0,0,0.7);border:1px solid rgba(224,60,60,0.4);color:rgba(224,60,60,0.7);width:22px;height:22px;cursor:pointer;font-size:11px;align-items:center;justify-content:center;transition:all 0.12s;flex-shrink:0;}
+.rank-section-del-btn:hover{color:#ff6060;border-color:rgba(224,60,60,0.7);}
+.add-rule-btn,.add-member-btn{display:none;width:100%;padding:11px;border:1px dashed var(--border-hi);background:transparent;color:var(--text-muted);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;margin-top:5px;align-items:center;justify-content:center;gap:8px;}
+.add-rank-section-btn{display:none;width:100%;padding:13px;border:1px dashed rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.3);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;margin-top:1rem;align-items:center;justify-content:center;gap:8px;}
+.add-rank-section-btn:hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.04);}
 .ht-adm-btn{width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:12px;border:1px solid var(--border-hi);background:rgba(0,0,0,0.7);color:var(--text-muted);cursor:pointer;transition:all 0.12s;}
 .ht-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
 .ht-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
+.rule-adm-btn{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;border:1px solid var(--border-hi);background:rgba(0,0,0,0.6);color:var(--text-muted);cursor:pointer;transition:all 0.12s;}
+.rule-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
+.rule-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
 
+/* ── EDIT MODE REVEALS ── */
+body.admin-edit-on .ht-admin-bar{display:flex;}
+body.admin-edit-on .rule-admin-bar{display:flex;}
+body.admin-edit-on .rank-section-del-btn{display:flex;}
+body.admin-edit-on .add-rule-btn,body.admin-edit-on .add-member-btn{display:flex;}
+body.admin-edit-on .add-rank-section-btn{display:flex;}
+body.admin-edit-on .rule-top{padding-right:84px;}
+body.admin-edit-on [data-editable]{outline:1px dashed rgba(210,140,10,0.35);cursor:text;}
+body.admin-edit-on [data-editable]:hover{outline:1px solid rgba(210,140,10,0.7);background:rgba(210,140,10,0.04);}
+body.admin-edit-on [data-editable]:focus{outline:1px solid var(--inhaber-accent);background:rgba(210,140,10,0.07);}
+body.admin-edit-on .add-strafe-row-btn{display:flex;}
+
+/* ── DASHBOARD ── */
 .dash-header{background:linear-gradient(135deg,rgba(155,141,255,0.08) 0%,rgba(8,8,8,0) 60%);border:1px solid rgba(155,141,255,0.2);padding:24px 28px;margin-bottom:2rem;position:relative;overflow:hidden;}
 .dash-header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#9b8dff,transparent);opacity:0.6;}
 .dash-header-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.1em;color:var(--white);margin-bottom:4px;}
@@ -222,7 +267,9 @@ body.is-admin .ht-admin-bar{display:flex;}
 .dash-refresh:hover{color:var(--text);border-color:var(--text-muted);}
 .dash-refresh.spinning i{animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.dash-admin-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:2rem;}
+
+/* ── DASHBOARD ADMIN STRIP ── */
+.dash-admin-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:2rem;}
 .dash-admin-card{background:var(--card);border:1px solid var(--border-hi);padding:18px 20px;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden;}
 .dash-admin-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background 0.15s;}
 .dash-admin-card:hover::before{background:var(--c,var(--inhaber-accent));}
@@ -231,33 +278,52 @@ body.is-admin .ht-admin-bar{display:flex;}
 .dac-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--white);}
 .dac-desc{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.1em;margin-top:4px;}
 
-#auth-screen{position:fixed;inset:0;z-index:9000;background:#050505;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-#auth-screen .auth-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(88,101,242,0.12) 0%,transparent 65%);}
-#auth-screen>*{position:relative;z-index:2;}
-.auth-box{width:420px;max-width:92vw;background:var(--card);border:1px solid var(--border-hi);padding:44px 40px 36px;text-align:center;}
-.auth-logo-wrap{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
-.auth-logo{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,210,60,0.25);}
-.auth-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.12em;color:var(--white);line-height:1;}
-.auth-title em{color:var(--text-muted);font-style:normal;}
-.auth-divider{height:1px;background:var(--border);margin:0 0 28px;}
-.auth-headline{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.1em;color:var(--white);margin-bottom:8px;}
-.auth-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase;margin-bottom:28px;line-height:1.7;}
-.auth-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 20px;background:#5865f2;border:1px solid rgba(88,101,242,0.6);color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.04em;cursor:pointer;transition:all 0.15s;text-decoration:none;}
-.auth-btn:hover{background:#4752c4;box-shadow:0 0 32px rgba(88,101,242,0.25);transform:translateY(-1px);}
-.auth-btn svg{width:22px;height:22px;flex-shrink:0;}
-.auth-note{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--text-muted);letter-spacing:0.12em;margin-top:18px;line-height:1.7;}
+/* ── RESET TIMELINE PANEL ── */
+.reset-panel{background:var(--card);border:1px solid rgba(224,60,60,0.25);margin-bottom:2rem;}
+.reset-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(224,60,60,0.15);background:rgba(224,60,60,0.04);}
+.reset-panel-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#ff9090;display:flex;align-items:center;gap:8px;}
+.reset-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.reset-slot{background:var(--card);padding:16px 14px;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden;}
+.reset-slot:hover{background:rgba(224,60,60,0.08);}
+.reset-slot-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
+.reset-slot-time{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:var(--text-dim);line-height:1;}
+.reset-slot-ago{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:4px;}
+.reset-slot.has-snap .reset-slot-time{color:#ff9090;}
+.reset-slot.has-snap .reset-slot-label{color:#ff9090;}
+.reset-slot-indicator{position:absolute;top:0;left:0;right:0;height:2px;background:transparent;}
+.reset-slot.has-snap .reset-slot-indicator{background:rgba(224,60,60,0.5);}
 
-.topbar-user{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0;}
-.topbar-avatar{width:26px;height:26px;border-radius:50%;border:1px solid var(--border-hi);object-fit:cover;}
-.topbar-username{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:0.08em;display:none;}
-@media(min-width:600px){.topbar-username{display:block;}}
-.topbar-logout{width:28px;height:28px;background:transparent;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.14s;}
-.topbar-logout:hover{border-color:var(--red);color:var(--red);}
-.admin-badge{display:none;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--inhaber-accent);border:1px solid var(--inhaber-border);background:rgba(210,140,10,0.08);padding:4px 10px;flex-shrink:0;}
-.admin-badge i{font-size:11px;}
-body.is-admin .admin-badge{display:flex;}
+/* ── CHANGELOG PANEL ── */
+.changelog-panel{background:var(--card);border:1px solid var(--border-hi);margin-bottom:2rem;}
+.changelog-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);}
+.changelog-panel-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-muted);display:flex;align-items:center;gap:8px;}
+.changelog-body{max-height:280px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.changelog-entry{display:flex;gap:14px;padding:11px 16px;border-bottom:1px solid rgba(34,34,34,0.5);}
+.changelog-entry:last-child{border-bottom:none;}
+.changelog-dot{width:6px;height:6px;border-radius:50%;background:var(--inhaber-accent);flex-shrink:0;margin-top:5px;}
+.changelog-content{flex:1;}
+.changelog-action{font-size:12px;color:var(--text-dim);}
+.changelog-action strong{color:var(--text);}
+.changelog-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:2px;}
 
-#admin-toolbar{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:8000;background:rgba(13,10,4,0.97);border:1px solid var(--inhaber-border);box-shadow:0 0 40px rgba(210,140,10,0.2),0 8px 32px rgba(0,0,0,0.6);padding:8px 12px;gap:6px;align-items:center;backdrop-filter:blur(12px);}
+/* ── ANNOUNCEMENT ADMIN PANEL ── */
+.announcement-admin-panel{background:var(--card);border:1px solid rgba(210,140,10,0.25);margin-bottom:2rem;}
+.announcement-admin-hdr{padding:12px 16px;border-bottom:1px solid rgba(210,140,10,0.15);background:rgba(210,140,10,0.04);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--inhaber-accent);display:flex;align-items:center;gap:8px;}
+.announcement-admin-body{padding:16px;}
+.announcement-active{display:flex;align-items:flex-start;gap:12px;background:rgba(210,140,10,0.06);border:1px solid rgba(210,140,10,0.2);padding:12px 14px;margin-bottom:12px;}
+.announcement-active-text{flex:1;font-size:12px;color:var(--text-dim);line-height:1.5;}
+.announcement-active-meta{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:4px;}
+.announcement-clear-btn{background:transparent;border:1px solid rgba(224,60,60,0.4);color:#ff9090;font-family:'DM Mono',monospace;font-size:9px;padding:5px 10px;cursor:pointer;flex-shrink:0;transition:all 0.12s;}
+.announcement-clear-btn:hover{background:rgba(224,60,60,0.1);}
+.announcement-form{display:flex;gap:8px;}
+.announcement-input{flex:1;background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;transition:border-color 0.15s;}
+.announcement-input:focus{border-color:var(--inhaber-accent);}
+.announcement-send-btn{background:rgba(210,140,10,0.12);border:1px solid var(--inhaber-border);color:var(--inhaber-accent);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:all 0.14s;flex-shrink:0;white-space:nowrap;}
+.announcement-send-btn:hover{background:rgba(210,140,10,0.22);}
+.announcement-send-btn:disabled{opacity:0.4;cursor:default;}
+
+/* ── ADMIN TOOLBAR (always present for admins, content changes with edit mode) ── */
+#admin-toolbar{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:8000;background:rgba(13,10,4,0.97);border:1px solid var(--inhaber-border);box-shadow:0 0 40px rgba(210,140,10,0.2),0 8px 32px rgba(0,0,0,0.6);padding:8px 12px;gap:6px;align-items:center;backdrop-filter:blur(12px);transition:all 0.2s;}
 body.is-admin #admin-toolbar{display:flex;}
 .adm-btn{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--border-hi);background:transparent;color:var(--text-muted);cursor:pointer;transition:all 0.14s;white-space:nowrap;}
 .adm-btn i{font-size:13px;}
@@ -268,27 +334,10 @@ body.is-admin #admin-toolbar{display:flex;}
 .adm-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.22em;text-transform:uppercase;color:var(--inhaber-accent);padding:0 4px;}
 .unsaved-dot{display:none;width:6px;height:6px;border-radius:50%;background:var(--amber);animation:blink 1.5s infinite;}
 body.has-unsaved .unsaved-dot{display:inline-block;}
-body.admin-edit-on [data-editable]{outline:1px dashed rgba(210,140,10,0.35);cursor:text;}
-body.admin-edit-on [data-editable]:hover{outline:1px solid rgba(210,140,10,0.7);background:rgba(210,140,10,0.04);}
-body.admin-edit-on [data-editable]:focus{outline:1px solid var(--inhaber-accent);background:rgba(210,140,10,0.07);}
+/* Edit-mode indicator on toolbar */
+#admin-toolbar.edit-active{border-color:var(--inhaber-accent);box-shadow:0 0 40px rgba(210,140,10,0.35),0 8px 32px rgba(0,0,0,0.6);}
 
-.rule-admin-bar{display:none;position:absolute;top:8px;right:8px;gap:4px;align-items:center;}
-body.is-admin .rule-admin-bar{display:flex;}
-.rule-adm-btn{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;border:1px solid var(--border-hi);background:rgba(0,0,0,0.6);color:var(--text-muted);cursor:pointer;transition:all 0.12s;}
-.rule-adm-btn:hover{color:var(--white);border-color:var(--text-dim);}
-.rule-adm-btn.del:hover{color:#ff6060;border-color:rgba(224,60,60,0.6);}
-body.is-admin .rule-top{padding-right:84px;}
-
-.add-rule-btn,.add-member-btn{display:none;width:100%;padding:11px;border:1px dashed var(--border-hi);background:transparent;color:var(--text-muted);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;margin-top:5px;align-items:center;justify-content:center;gap:8px;}
-body.is-admin .add-rule-btn,body.is-admin .add-member-btn{display:flex;}
-.add-rule-btn:hover,.add-member-btn:hover{border-color:var(--inhaber-accent);color:var(--inhaber-accent);background:rgba(210,140,10,0.04);}
-.add-rank-section-btn{display:none;width:100%;padding:13px;border:1px dashed rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.3);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;margin-top:1rem;align-items:center;justify-content:center;gap:8px;}
-body.is-admin .add-rank-section-btn{display:flex;}
-.add-rank-section-btn:hover{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.04);}
-.rank-section-del-btn{display:none;background:rgba(0,0,0,0.7);border:1px solid rgba(224,60,60,0.4);color:rgba(224,60,60,0.7);width:22px;height:22px;cursor:pointer;font-size:11px;align-items:center;justify-content:center;transition:all 0.12s;flex-shrink:0;}
-body.is-admin .rank-section-del-btn{display:flex;}
-.rank-section-del-btn:hover{color:#ff6060;border-color:rgba(224,60,60,0.7);}
-
+/* ── MODALS ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .modal-overlay.open{display:flex;}
 .modal{background:var(--card);border:1px solid var(--border-hi);padding:28px 32px;width:380px;max-width:90vw;}
@@ -321,6 +370,8 @@ body.is-admin .rank-section-del-btn{display:flex;}
 .admin-modal-btn.confirm:hover{background:rgba(210,140,10,0.22);}
 .admin-modal-btn.cancel{background:transparent;border-color:var(--border-hi);color:var(--text-muted);}
 .admin-modal-btn.cancel:hover{color:var(--text-dim);}
+
+/* ── CONFIRM ── */
 #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9600;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 #confirm-overlay.open{display:flex;}
 .confirm-box{background:var(--card);border:1px solid rgba(224,60,60,0.4);padding:28px 32px;width:340px;max-width:90vw;text-align:center;}
@@ -333,15 +384,41 @@ body.is-admin .rank-section-del-btn{display:flex;}
 .confirm-btn.del:hover{background:rgba(224,60,60,0.22);}
 .confirm-btn.cancel{background:transparent;border-color:var(--border-hi);color:var(--text-muted);}
 .confirm-btn.cancel:hover{color:var(--text-dim);}
+
+/* ── AUTH ── */
+#auth-screen{position:fixed;inset:0;z-index:9000;background:#050505;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+#auth-screen .auth-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(88,101,242,0.12) 0%,transparent 65%);}
+#auth-screen>*{position:relative;z-index:2;}
+.auth-box{width:420px;max-width:92vw;background:var(--card);border:1px solid var(--border-hi);padding:44px 40px 36px;text-align:center;}
+.auth-logo-wrap{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
+.auth-logo{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,210,60,0.25);}
+.auth-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.12em;color:var(--white);line-height:1;}
+.auth-title em{color:var(--text-muted);font-style:normal;}
+.auth-divider{height:1px;background:var(--border);margin:0 0 28px;}
+.auth-headline{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.1em;color:var(--white);margin-bottom:8px;}
+.auth-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase;margin-bottom:28px;line-height:1.7;}
+.auth-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 20px;background:#5865f2;border:1px solid rgba(88,101,242,0.6);color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.04em;cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.auth-btn:hover{background:#4752c4;box-shadow:0 0 32px rgba(88,101,242,0.25);transform:translateY(-1px);}
+.auth-btn svg{width:22px;height:22px;flex-shrink:0;}
+.auth-note{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--text-muted);letter-spacing:0.12em;margin-top:18px;line-height:1.7;}
+
+/* ── TOAST ── */
 .save-toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid rgba(78,200,122,0.4);color:#4ec87a;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 18px;z-index:9000;opacity:0;pointer-events:none;transition:opacity 0.2s;white-space:nowrap;}
 .save-toast.show{opacity:1;}
 .save-toast.err{border-color:rgba(224,60,60,0.4);color:#ff9090;}
 .save-toast.warn{border-color:rgba(240,160,48,0.4);color:#ffd07a;}
+
+/* ── TO TOP ── */
 #toTop{position:fixed;bottom:20px;right:20px;z-index:500;width:34px;height:34px;background:var(--card);border:1px solid var(--border-hi);color:var(--text-dim);cursor:pointer;display:none;align-items:center;justify-content:center;transition:all 0.14px;}
 #toTop:hover{border-color:var(--text-dim);color:var(--white);}
 #toTop.show{display:flex;}
+
+/* ── FOOTER ── */
 footer{border-top:1px solid var(--border);padding:1.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.12em;background:var(--surface);}
 footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightness(0.5);}
+
+.add-strafe-row-btn{display:none;width:100%;padding:11px;border:1px dashed var(--border-hi);background:transparent;color:var(--text-muted);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;margin-top:5px;align-items:center;justify-content:center;gap:8px;}
+.add-strafe-row-btn:hover{border-color:var(--inhaber-accent);color:var(--inhaber-accent);background:rgba(210,140,10,0.04);}
 
 @media(max-width:700px){
   .topbar{padding:0 1rem;}
@@ -356,7 +433,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   .ht-grid{grid-template-columns:1fr;}
   #admin-toolbar{width:calc(100% - 2rem);flex-wrap:wrap;bottom:12px;}
   .dash-stats{grid-template-columns:repeat(2,1fr);}
-  .dash-admin-strip{grid-template-columns:1fr;}
+  .dash-admin-strip{grid-template-columns:1fr 1fr;}
+  .reset-timeline{grid-template-columns:repeat(2,1fr);}
 }
 </style>
 </head>
@@ -403,6 +481,13 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     <button class="topbar-logout" onclick="logout()" title="Abmelden"><i class="ti ti-logout"></i></button>
   </div>
 </header>
+
+<!-- ANNOUNCEMENT BANNER -->
+<div class="announcement-banner" id="announcement-banner">
+  <i class="ti ti-speakerphone"></i>
+  <span class="announcement-text" id="announcement-text"></span>
+  <button class="announcement-close" onclick="closeAnnouncementBanner()"><i class="ti ti-x"></i></button>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -532,7 +617,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
         <tr><td><div class="vname" data-editable>Cheating / Hacks</div><div class="vdesc" data-editable>Einsatz externer Tools oder Exploits</div></td><td><span class="zb perm" data-editable>Permanent</span></td><td data-editable>Nutzung von Cheats, Hacks oder Exploits jeglicher Art.</td><td class="stra-admin-td"></td></tr>
       </tbody>
     </table>
-    <button class="add-rule-btn" id="add-strafe-btn" onclick="adminAddStrafeRow()"><i class="ti ti-plus"></i> Eintrag hinzufügen</button>
+    <button class="add-strafe-row-btn" id="add-strafe-btn" onclick="adminAddStrafeRow()"><i class="ti ti-plus"></i> Eintrag hinzufügen</button>
   </div>
 
   <!-- HIGH-TEAM -->
@@ -705,34 +790,122 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
           <div class="dash-header-title">Admin Dashboard</div>
-          <div class="dash-header-sub">Besucherübersicht · Shared Storage · Alle Admins</div>
+          <div class="dash-header-sub">Besucherübersicht · Snapshots · Ankündigungen · Changelog</div>
         </div>
         <button class="dash-refresh" id="dash-refresh-btn" onclick="loadDashboard()"><i class="ti ti-refresh"></i></button>
       </div>
     </div>
-    <div class="dash-admin-strip">
-      <div class="dash-admin-card" style="--c:var(--inhaber-accent)" onclick="showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));setTimeout(()=>document.getElementById('adm-edit-btn').click(),300)">
-        <div class="dac-ico" style="color:var(--inhaber-accent)"><i class="ti ti-pencil"></i></div>
-        <div class="dac-title">Regelwerk bearbeiten</div>
-        <div class="dac-desc">Edit-Modus aktivieren</div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="dash-admin-strip" id="dash-admin-strip">
+      <div class="dash-admin-card" style="--c:var(--inhaber-accent)" onclick="activateEditMode()">
+        <div class="dac-ico" style="color:var(--inhaber-accent)"><i class="ti ti-pencil" id="dac-edit-ico"></i></div>
+        <div class="dac-title" id="dac-edit-title">Editor-Modus</div>
+        <div class="dac-desc" id="dac-edit-desc">Inhalte bearbeiten</div>
       </div>
       <div class="dash-admin-card" style="--c:var(--tl-accent)" onclick="showTab('highteam',document.querySelector('[data-tab=highteam]'))">
         <div class="dac-ico" style="color:#aaa"><i class="ti ti-crown"></i></div>
-        <div class="dac-title">High-Team verwalten</div>
-        <div class="dac-desc">Mitglieder · Ränge · Discord IDs</div>
+        <div class="dac-title">High-Team</div>
+        <div class="dac-desc">Mitglieder · Ränge</div>
       </div>
-      <div class="dash-admin-card" style="--c:var(--red)" onclick="adminResetConfirm()">
-        <div class="dac-ico" style="color:var(--red)"><i class="ti ti-rotate-clockwise-2"></i></div>
-        <div class="dac-title">Reset</div>
-        <div class="dac-desc">Alle Änderungen zurücksetzen</div>
+      <div class="dash-admin-card" style="--c:#9b8dff" onclick="openAnnouncementAdmin()">
+        <div class="dac-ico" style="color:#9b8dff"><i class="ti ti-speakerphone"></i></div>
+        <div class="dac-title">Ankündigung</div>
+        <div class="dac-desc" id="dac-ann-desc">Banner verwalten</div>
+      </div>
+      <div class="dash-admin-card" style="--c:var(--green)" onclick="exportChangelog()">
+        <div class="dac-ico" style="color:var(--green)"><i class="ti ti-file-download"></i></div>
+        <div class="dac-title">Changelog</div>
+        <div class="dac-desc">Änderungen exportieren</div>
+      </div>
+      <div class="dash-admin-card" style="--c:var(--red)" onclick="openResetPanel()">
+        <div class="dac-ico" style="color:var(--red)"><i class="ti ti-history"></i></div>
+        <div class="dac-title">Reset / Snapshots</div>
+        <div class="dac-desc">Zeitpunkt auswählen</div>
+      </div>
+      <div class="dash-admin-card" style="--c:#888" onclick="clearAllVisitors()">
+        <div class="dac-ico" style="color:#888"><i class="ti ti-trash"></i></div>
+        <div class="dac-title">Besucherdaten</div>
+        <div class="dac-desc">Alle Logs löschen</div>
       </div>
     </div>
+
+    <!-- STATS -->
     <div class="dash-stats" id="dash-stats">
       <div class="dash-stat"><div class="dash-stat-n purple" id="ds-total">–</div><div class="dash-stat-l">Besucher gesamt</div></div>
       <div class="dash-stat"><div class="dash-stat-n green" id="ds-today">–</div><div class="dash-stat-l">Heute</div></div>
       <div class="dash-stat"><div class="dash-stat-n amber" id="ds-admins">–</div><div class="dash-stat-l">Admin-Besuche</div></div>
       <div class="dash-stat"><div class="dash-stat-n red" id="ds-log">–</div><div class="dash-stat-l">Log-Einträge</div></div>
     </div>
+
+    <!-- ANNOUNCEMENT PANEL -->
+    <div class="announcement-admin-panel" id="announcement-admin-panel" style="display:none;">
+      <div class="announcement-admin-hdr"><i class="ti ti-speakerphone"></i>Ankündigung verwalten</div>
+      <div class="announcement-admin-body">
+        <div id="active-announcement-display" style="display:none;">
+          <div class="announcement-active">
+            <i class="ti ti-speakerphone" style="color:var(--inhaber-accent);flex-shrink:0;"></i>
+            <div>
+              <div class="announcement-active-text" id="active-ann-text"></div>
+              <div class="announcement-active-meta" id="active-ann-meta"></div>
+            </div>
+            <button class="announcement-clear-btn" onclick="clearAnnouncement()"><i class="ti ti-x"></i> Entfernen</button>
+          </div>
+        </div>
+        <div id="no-announcement" style="display:none;font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;padding:12px 0;margin-bottom:12px;">Keine aktive Ankündigung</div>
+        <div class="announcement-form">
+          <input class="announcement-input" id="new-announcement-input" type="text" placeholder="Neue Ankündigung eingeben..." maxlength="200">
+          <button class="announcement-send-btn" onclick="publishAnnouncement()"><i class="ti ti-send"></i> Veröffentlichen</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESET PANEL -->
+    <div class="reset-panel" id="reset-panel" style="display:none;">
+      <div class="reset-panel-hdr">
+        <div class="reset-panel-title"><i class="ti ti-history"></i>Snapshots & Reset-Optionen</div>
+        <button style="background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;" onclick="document.getElementById('reset-panel').style.display='none'"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="reset-timeline" id="reset-timeline">
+        <div class="reset-slot" id="snap-60s" onclick="restoreSnapshot('60s')">
+          <div class="reset-slot-indicator"></div>
+          <div class="reset-slot-label">Letzte 60 Sek.</div>
+          <div class="reset-slot-time" id="snap-60s-time">–</div>
+          <div class="reset-slot-ago" id="snap-60s-ago">Kein Snapshot</div>
+        </div>
+        <div class="reset-slot" id="snap-10m" onclick="restoreSnapshot('10m')">
+          <div class="reset-slot-indicator"></div>
+          <div class="reset-slot-label">Letzte 10 Min.</div>
+          <div class="reset-slot-time" id="snap-10m-time">–</div>
+          <div class="reset-slot-ago" id="snap-10m-ago">Kein Snapshot</div>
+        </div>
+        <div class="reset-slot" id="snap-1h" onclick="restoreSnapshot('1h')">
+          <div class="reset-slot-indicator"></div>
+          <div class="reset-slot-label">Letzte 1 Std.</div>
+          <div class="reset-slot-time" id="snap-1h-time">–</div>
+          <div class="reset-slot-ago" id="snap-1h-ago">Kein Snapshot</div>
+        </div>
+        <div class="reset-slot" onclick="adminHardResetConfirm()" style="border-left:2px solid rgba(224,60,60,0.3);">
+          <div class="reset-slot-indicator" style="background:rgba(224,60,60,0.5);"></div>
+          <div class="reset-slot-label" style="color:#ff9090;">Komplett-Reset</div>
+          <div class="reset-slot-time" style="color:#ff6060;font-size:16px;">ORIGINAL</div>
+          <div class="reset-slot-ago" style="color:rgba(224,60,60,0.7);">Alle Daten löschen</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHANGELOG PANEL -->
+    <div class="changelog-panel">
+      <div class="changelog-panel-hdr">
+        <div class="changelog-panel-title"><i class="ti ti-history"></i>Änderungsprotokoll</div>
+        <span class="dash-panel-count" id="changelog-count">0</span>
+      </div>
+      <div class="changelog-body" id="changelog-body">
+        <div class="dash-empty">Noch keine Änderungen protokolliert.</div>
+      </div>
+    </div>
+
+    <!-- VISITORS / LOG -->
     <div class="dash-grid">
       <div class="dash-panel">
         <div class="dash-panel-hdr">
@@ -815,878 +988,1022 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   PRADA CRIMELIFE V2 · INTERNES TEAM-REGELWERK V1.0
 </footer>
 
+<!-- ADMIN TOOLBAR — always present for admins, content adapts to mode -->
 <div id="admin-toolbar">
   <i class="ti ti-shield-check" style="color:var(--inhaber-accent);font-size:14px;"></i>
   <span class="adm-label">Admin</span>
   <span class="unsaved-dot"></span>
   <div class="adm-sep"></div>
-  <button class="adm-btn" id="adm-edit-btn" onclick="toggleEditMode()"><i class="ti ti-pencil"></i>Bearbeiten</button>
-  <button class="adm-btn" onclick="adminSaveAll()"><i class="ti ti-device-floppy"></i>Speichern</button>
-  <button class="adm-btn danger" onclick="adminResetConfirm()"><i class="ti ti-rotate-clockwise-2"></i>Reset</button>
+  <button class="adm-btn" id="adm-edit-btn" onclick="toggleEditMode()"><i class="ti ti-pencil"></i>Editor-Modus</button>
+  <button class="adm-btn" id="adm-save-btn" style="display:none;" onclick="adminSaveAll()"><i class="ti ti-device-floppy"></i>Speichern</button>
+  <button class="adm-btn" id="adm-discard-btn" style="display:none;" onclick="discardEdits()"><i class="ti ti-x"></i>Verwerfen</button>
+  <div class="adm-sep" id="adm-sep2"></div>
+  <button class="adm-btn" onclick="showTab('dashboard',document.querySelector('[data-tab=dashboard]'))"><i class="ti ti-layout-dashboard"></i>Dashboard</button>
 </div>
 
 <div class="save-toast" id="save-toast"></div>
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="ti ti-arrow-up"></i></button>
 
 <script type="module">
-  import { initializeApp } from "firebase/app";
-  import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
-  import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBqstLMCa2QsUHjOWCelMTgfIgUMNNZoIY",
-    authDomain: "pradateamregelwerk.firebaseapp.com",
-    projectId: "pradateamregelwerk",
-    storageBucket: "pradateamregelwerk.firebasestorage.app",
-    messagingSenderId: "767635495179",
-    appId: "1:767635495179:web:f72f254c3cb91bb3bc2a0e",
-    measurementId: "G-LPXW5H1LBN"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBqstLMCa2QsUHjOWCelMTgfIgUMNNZoIY",
+  authDomain: "pradateamregelwerk.firebaseapp.com",
+  projectId: "pradateamregelwerk",
+  storageBucket: "pradateamregelwerk.firebasestorage.app",
+  messagingSenderId: "767635495179",
+  appId: "1:767635495179:web:f72f254c3cb91bb3bc2a0e",
+  measurementId: "G-LPXW5H1LBN"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const analytics = getAnalytics(app);
-  window.__db = db;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+getAnalytics(app);
+window.__db = db;
 
-  async function sharedGet(key) {
-    try {
-      const ref = doc(db, "prada", key);
-      const snap = await getDoc(ref);
-      return snap.exists() ? snap.data().value : null;
-    } catch(e) { console.error("sharedGet", key, e); return null; }
-  }
-  async function sharedSet(key, value) {
-    try {
-      const ref = doc(db, "prada", key);
-      await setDoc(ref, { value });
-      return true;
-    } catch(e) { console.error("sharedSet", key, e); return false; }
-  }
-  async function sharedDelete(key) {
-    try {
-      const ref = doc(db, "prada", key);
-      await deleteDoc(ref);
-      return true;
-    } catch(e) { console.error("sharedDelete", key, e); return false; }
-  }
+async function sharedGet(key) {
+  try { const s = await getDoc(doc(db,'prada',key)); return s.exists()?s.data().value:null; } catch(e){console.error('sharedGet',key,e);return null;}
+}
+async function sharedSet(key,value) {
+  try { await setDoc(doc(db,'prada',key),{value}); return true; } catch(e){console.error('sharedSet',key,e);return false;}
+}
+async function sharedDelete(key) {
+  try { await deleteDoc(doc(db,'prada',key)); return true; } catch(e){console.error('sharedDelete',key,e);return false;}
+}
 
-  const ADMIN_ID = '1477023843489939487';
-  const CLIENT_ID = '1505344005054005428';
-  const REDIRECT_URI = window.location.origin + window.location.pathname;
-  const SCOPES = 'identify';
-  const SHARED_KEYS = {
-    content: 'prada-content-v2',
-    lanyardIds: 'prada-lanyard-ids',
-    visitors: 'prada-visitors',
-    visitLog: 'prada-visitlog',
-  };
+// ── CONSTANTS ──
+const ADMIN_ID = '1477023843489939487';
+const CLIENT_ID = '1505344005054005428';
+const REDIRECT_URI = window.location.origin + window.location.pathname;
+const SCOPES = 'identify';
+const KEYS = {
+  content:'prada-content-v2', lanyardIds:'prada-lanyard-ids',
+  visitors:'prada-visitors', visitLog:'prada-visitlog',
+  snapshots:'prada-snapshots-v2', changelog:'prada-changelog',
+  announcement:'prada-announcement'
+};
+const STATUS_LABELS = {online:'Online',idle:'Abwesend',dnd:'Nicht stören',offline:'Offline',streaming:'Am Streamen'};
 
-  let currentUser = null;
-  let dcToken = null;
-  let editModeOn = false;
-  let adminModalCallback = null;
-  let confirmCallback = null;
-  let currentLanyardMember = null;
-  let currentEditMemberId = null;
-  let IDS = {};
-  const STATUS_LABELS = {online:'Online',idle:'Abwesend',dnd:'Nicht stören',offline:'Offline',streaming:'Am Streamen'};
+// ── STATE ──
+let currentUser = null, dcToken = null, editModeOn = false;
+let adminModalCb = null, confirmCb = null;
+let currentLanyardMember = null, currentEditMemberId = null;
+let IDS = {};
+let editSnapshot = null; // snapshot before edit starts
+let snapshotTimers = {}; // 60s, 10m, 1h interval refs
 
-  function syncBar(state) {
-    const bar = document.getElementById('sync-bar');
-    bar.className = 'sync-bar ' + state;
-    if (state === 'saved') setTimeout(() => bar.className = 'sync-bar', 1200);
-  }
+// ── SYNC BAR ──
+function syncBar(state){
+  const b=document.getElementById('sync-bar');
+  b.className='sync-bar '+state;
+  if(state==='saved')setTimeout(()=>b.className='sync-bar',1200);
+}
 
-  // ─── AUTH ───
-  function getOAuthUrl() {
-    const state = Math.random().toString(36).slice(2);
-    sessionStorage.setItem('oauth_state', state);
-    return `https://discord.com/api/oauth2/authorize?` + new URLSearchParams({
-      client_id: CLIENT_ID, redirect_uri: REDIRECT_URI,
-      response_type: 'token', scope: SCOPES, state
-    });
-  }
-  document.getElementById('discord-login-btn').href = getOAuthUrl();
-
-  async function handleCallback() {
-    const hash = window.location.hash.slice(1);
-    if (!hash) return false;
-    const params = new URLSearchParams(hash);
-    const token = params.get('access_token');
-    if (!token) return false;
-    history.replaceState(null, '', window.location.pathname);
-    try {
-      const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } });
-      if (!res.ok) return false;
-      const user = await res.json();
-      sessionStorage.setItem('prada_token', token);
-      sessionStorage.setItem('prada_user', JSON.stringify(user));
-      showApp(user, token);
-      return true;
-    } catch { return false; }
-  }
-
-  async function showApp(user, token) {
-    dcToken = token || sessionStorage.getItem('prada_token');
-    currentUser = user;
-    document.getElementById('auth-screen').style.display = 'none';
-    const avatarUrl = user.avatar
-      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=64`
-      : `https://cdn.discordapp.com/embed/avatars/${parseInt(user.discriminator||0)%5}.png`;
-    document.getElementById('topbar-avatar').src = avatarUrl;
-    document.getElementById('topbar-username').textContent = user.global_name || user.username;
-    document.getElementById('topbar-user').style.display = 'flex';
-    await loadSharedContent();
-    await trackVisit(user);
-    const ids = await sharedGet(SHARED_KEYS.lanyardIds);
-    if (ids) IDS = ids;
-    loadAllLanyard();
-    setInterval(loadAllLanyard, 30000);
-    if (user.id === ADMIN_ID) {
-      document.body.classList.add('is-admin');
-      document.getElementById('dash-tab-btn').style.display = 'flex';
-      initAdminMode();
-    }
-  }
-
-  function logout() {
-    sessionStorage.removeItem('prada_token');
-    sessionStorage.removeItem('prada_user');
-    document.getElementById('auth-screen').style.display = 'flex';
-    document.getElementById('topbar-user').style.display = 'none';
-    document.getElementById('dash-tab-btn').style.display = 'none';
-    document.body.classList.remove('is-admin','admin-edit-on','has-unsaved');
-    document.getElementById('discord-login-btn').href = getOAuthUrl();
-    currentUser = null; dcToken = null;
-  }
-
-  (async function initAuth() {
-    const saved = sessionStorage.getItem('prada_user');
-    if (saved) { showApp(JSON.parse(saved), sessionStorage.getItem('prada_token')); return; }
-    const handled = await handleCallback();
-    if (!handled) document.getElementById('auth-screen').style.display = 'flex';
-  })();
-
-  // ─── VISIT TRACKING ───
-  async function trackVisit(user) {
-    try {
-      const isAdmin = user.id === ADMIN_ID;
-      const now = Date.now();
-      let visitors = (await sharedGet(SHARED_KEYS.visitors)) || [];
-      const idx = visitors.findIndex(v => v.id === user.id);
-      if (idx >= 0) {
-        visitors[idx].lastSeen = now;
-        visitors[idx].visitCount = (visitors[idx].visitCount || 1) + 1;
-        visitors[idx].avatar = user.avatar;
-        visitors[idx].global_name = user.global_name || user.username;
-      } else {
-        visitors.push({
-          id: user.id, username: user.username, global_name: user.global_name || user.username,
-          avatar: user.avatar, discriminator: user.discriminator,
-          firstSeen: now, lastSeen: now, visitCount: 1, isAdmin
-        });
-      }
-      await sharedSet(SHARED_KEYS.visitors, visitors);
-      let log = (await sharedGet(SHARED_KEYS.visitLog)) || [];
-      log.unshift({ userId: user.id, username: user.global_name || user.username, avatar: user.avatar, ts: now, isAdmin });
-      if (log.length > 100) log = log.slice(0, 100);
-      await sharedSet(SHARED_KEYS.visitLog, log);
-    } catch(e) { console.error('Track error:', e); }
-  }
-
-  // ─── CONTENT LOAD/SAVE ───
-  async function loadSharedContent() {
-    try {
-      const c = await sharedGet(SHARED_KEYS.content);
-      if (!c) return;
-      if (c.einfuehrung) document.getElementById('einfuehrung').innerHTML = c.einfuehrung;
-      if (c.regelwerk) document.getElementById('regelwerk').innerHTML = c.regelwerk;
-      if (c.strafen) document.getElementById('strafen').innerHTML = c.strafen;
-      if (c.highteam) document.getElementById('highteam').innerHTML = c.highteam;
-      // Re-init admin mode after content reload to rewire all button handlers
-      if (document.body.classList.contains('is-admin')) initAdminMode();
-    } catch(e) { console.error('Load content error:', e); }
-  }
-
-  async function saveSharedContent() {
-    syncBar('syncing');
-    try {
-      const c = {
-        einfuehrung: document.getElementById('einfuehrung').innerHTML,
-        regelwerk: document.getElementById('regelwerk').innerHTML,
-        strafen: document.getElementById('strafen').innerHTML,
-        highteam: document.getElementById('highteam').innerHTML
-      };
-      const ok = await sharedSet(SHARED_KEYS.content, c);
-      if (ok) { syncBar('saved'); return true; }
-      else { syncBar(''); return false; }
-    } catch(e) { console.error('Save error:', e); syncBar(''); return false; }
-  }
-
-  async function saveIdsShared() {
-    await sharedSet(SHARED_KEYS.lanyardIds, IDS);
-  }
-
-  // ─── TAB NAVIGATION ───
-  function showTab(id, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    const sec = document.getElementById(id);
-    if (sec) sec.classList.add('visible');
-    if (btn) btn.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-    if (id === 'dashboard') loadDashboard();
-  }
-  window.showTab = showTab;
-  window.logout = logout;
-
-  // ─── DASHBOARD ───
-  async function loadDashboard() {
-    if (!currentUser || currentUser.id !== ADMIN_ID) return;
-    const btn = document.getElementById('dash-refresh-btn');
-    btn.classList.add('spinning');
-    try {
-      const visitors = (await sharedGet(SHARED_KEYS.visitors)) || [];
-      const log = (await sharedGet(SHARED_KEYS.visitLog)) || [];
-      const today = new Date(); today.setHours(0,0,0,0);
-      const todayCount = visitors.filter(v => v.lastSeen >= today.getTime()).length;
-      const adminVisits = log.filter(l => l.isAdmin).length;
-      document.getElementById('ds-total').textContent = visitors.length;
-      document.getElementById('ds-today').textContent = todayCount;
-      document.getElementById('ds-admins').textContent = adminVisits;
-      document.getElementById('ds-log').textContent = log.length;
-      document.getElementById('visitors-count').textContent = visitors.length;
-      document.getElementById('log-count').textContent = log.length;
-      const vList = document.getElementById('visitors-list');
-      if (!visitors.length) vList.innerHTML = '<div class="dash-empty">Noch keine Besucher</div>';
-      else {
-        const sorted = [...visitors].sort((a,b)=>b.lastSeen - a.lastSeen);
-        vList.innerHTML = sorted.map(v => {
-          const avatarUrl = v.avatar ? `https://cdn.discordapp.com/avatars/${v.id}/${v.avatar}.png?size=64` : null;
-          const letter = (v.global_name||'?').charAt(0).toUpperCase();
-          return `<div class="visitor-row">
-            <div class="v-avatar">
-              ${avatarUrl ? `<img src="${avatarUrl}" alt="" onerror="this.parentElement.innerHTML='<div class=v-avatar-ph>${letter}</div>'">` : `<div class="v-avatar-ph">${letter}</div>`}
-              ${v.isAdmin ? '<div class="v-admin-dot"><i class="ti ti-shield-check"></i></div>' : ''}
-            </div>
-            <div class="v-info">
-              <div class="v-name">${v.global_name||v.username}</div>
-              <div class="v-tag">@${v.username}${v.isAdmin?' <span style="color:var(--inhaber-accent)">· Admin</span>':''}</div>
-              ${v.isAdmin ? '<div class="v-admin-badge"><i class="ti ti-shield-check"></i>Admin</div>' : ''}
-            </div>
-            <div class="v-meta">
-              <div class="v-time">${formatTime(v.lastSeen)}</div>
-              <div class="v-count">${v.visitCount||1}× besucht</div>
-            </div>
-          </div>`;
-        }).join('');
-      }
-      const vLog = document.getElementById('visit-log');
-      if (!log.length) vLog.innerHTML = '<div class="dash-empty">Kein Log</div>';
-      else {
-        vLog.innerHTML = log.slice(0,50).map(entry => {
-          const avatarUrl = entry.avatar ? `https://cdn.discordapp.com/avatars/${entry.userId}/${entry.avatar}.png?size=56` : null;
-          const letter = (entry.username||'?').charAt(0).toUpperCase();
-          return `<div class="log-row">
-            ${entry.isAdmin ? '<div class="log-admin-dot"></div>' : ''}
-            <div class="log-avatar">
-              ${avatarUrl ? `<img src="${avatarUrl}" onerror="this.style.display='none'">` : `<div class="log-avatar-ph">${letter}</div>`}
-            </div>
-            <div class="log-name"><strong>${entry.username}</strong> hat die Seite besucht</div>
-            <div class="log-time">${formatTime(entry.ts)}</div>
-          </div>`;
-        }).join('');
-      }
-    } catch(e) { console.error(e); }
-    setTimeout(() => btn.classList.remove('spinning'), 400);
-  }
-  window.loadDashboard = loadDashboard;
-
-  function formatTime(ts) {
-    const diff = Date.now() - ts;
-    if (diff < 60000) return 'Gerade eben';
-    if (diff < 3600000) return `vor ${Math.floor(diff/60000)} Min.`;
-    if (diff < 86400000) return `vor ${Math.floor(diff/3600000)} Std.`;
-    const d = new Date(ts);
-    return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'}) + ' ' + d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
-  }
-
-  // ─── LANYARD ───
-  async function fetchLanyard(discordId, memberId) {
-    try {
-      const res = await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
-      if (!res.ok) return;
-      const data = await res.json();
-      if (!data.success) return;
-      const d = data.data;
-      const card = document.querySelector(`[data-member-id="${memberId}"]`);
-      if (!card) return;
-      const wrap = card.querySelector('.dc-avatar-wrap');
-      if (wrap) {
-        const uid = d.discord_user.id, h = d.discord_user.avatar;
-        const url = h ? `https://cdn.discordapp.com/avatars/${uid}/${h}.${h.startsWith('a_')?'gif':'png'}?size=128`
-                      : `https://cdn.discordapp.com/embed/avatars/${parseInt(uid)%5}.png`;
-        let img = wrap.querySelector('img.dc-avatar');
-        const ph = wrap.querySelector('.dc-avatar-placeholder');
-        if (ph) ph.remove();
-        if (!img) {
-          img = document.createElement('img');
-          img.className = 'dc-avatar';
-          wrap.insertBefore(img, wrap.firstChild);
-        }
-        img.src = url;
-      }
-      const status = d.discord_status || 'offline';
-      const dot = document.getElementById(`status-${memberId}`);
-      if (dot) dot.className = `dc-status ${status}`;
-      const lbl = document.getElementById(`statuslabel-${memberId}`);
-      if (lbl) lbl.innerHTML = `<span class="ht-card-status-dot ${status}"></span><span>${STATUS_LABELS[status]||'Offline'}</span>`;
-    } catch {}
-  }
-
-  function loadAllLanyard() {
-    for (const [mid, did] of Object.entries(IDS)) if (did) fetchLanyard(did, mid);
-  }
-
-  function openLanyardModal(memberId) {
-    if (!document.body.classList.contains('is-admin')) return;
-    currentLanyardMember = memberId;
-    document.getElementById('lanyard-input').value = IDS[memberId] || '';
-    document.getElementById('lanyard-modal-overlay').classList.add('open');
-    setTimeout(() => document.getElementById('lanyard-input').focus(), 50);
-  }
-  window.openLanyardModal = openLanyardModal;
-
-  function closeLanyardModal() {
-    document.getElementById('lanyard-modal-overlay').classList.remove('open');
-    currentLanyardMember = null;
-  }
-  window.closeLanyardModal = closeLanyardModal;
-
-  async function saveLanyardId() {
-    const val = document.getElementById('lanyard-input').value.trim();
-    if (!currentLanyardMember) return;
-    if (val && /^\d{17,20}$/.test(val)) {
-      IDS[currentLanyardMember] = val;
-      await saveIdsShared();
-      fetchLanyard(val, currentLanyardMember);
-      closeLanyardModal(); showToast('Discord ID gespeichert – für alle sichtbar ✓');
-    } else if (val === '') {
-      delete IDS[currentLanyardMember];
-      await saveIdsShared();
-      const card = document.querySelector(`[data-member-id="${currentLanyardMember}"]`);
-      if (card) {
-        const wrap = card.querySelector('.dc-avatar-wrap');
-        const img = wrap && wrap.querySelector('img.dc-avatar');
-        if (img) {
-          const name = card.querySelector('.ht-card-name')?.textContent.trim() || '?';
-          const ph = document.createElement('div');
-          ph.className = 'dc-avatar-placeholder';
-          ph.textContent = name.charAt(name.lastIndexOf(' ')+1).toUpperCase() || name.charAt(0).toUpperCase();
-          wrap.insertBefore(ph, wrap.firstChild); img.remove();
-        }
-        const sd = document.getElementById(`status-${currentLanyardMember}`);
-        if (sd) sd.className = 'dc-status';
-        const sl2 = document.getElementById(`statuslabel-${currentLanyardMember}`);
-        if (sl2) sl2.innerHTML = '<span class="ht-card-status-dot"></span><span>Offline</span>';
-      }
-      closeLanyardModal(); showToast('Discord ID entfernt');
-    } else {
-      document.getElementById('lanyard-input').style.borderColor = '#e03c3c';
-      setTimeout(() => document.getElementById('lanyard-input').style.borderColor = '', 1200);
-    }
-  }
-  window.saveLanyardId = saveLanyardId;
-
-  document.getElementById('lanyard-modal-overlay').addEventListener('click', function(e){ if(e.target===this) closeLanyardModal(); });
-  document.getElementById('lanyard-input').addEventListener('keydown', function(e){ if(e.key==='Enter') saveLanyardId(); if(e.key==='Escape') closeLanyardModal(); });
-
-  // ─── MEMBER EDIT MODAL ───
-  function openMemberEditModal(memberId) {
-    if (!document.body.classList.contains('is-admin')) return;
-    currentEditMemberId = memberId;
-    const card = document.querySelector(`[data-member-id="${memberId}"]`);
-    if (!card) return;
-    const name = card.querySelector('.ht-card-name')?.textContent.trim() || '';
-    const rankTag = card.querySelector('.ht-card-rank-tag')?.textContent.trim() || '';
-    const title = card.querySelector('.ht-card-title')?.textContent.trim() || '';
-    document.getElementById('me-name').value = name;
-    document.getElementById('me-rank').value = rankTag;
-    document.getElementById('me-title').value = title;
-    document.getElementById('member-edit-sub').textContent = `Bearbeite: ${name}`;
-    document.getElementById('member-edit-overlay').classList.add('open');
-    setTimeout(() => document.getElementById('me-name').focus(), 50);
-  }
-  window.openMemberEditModal = openMemberEditModal;
-
-  function closeMemberEditModal() {
-    document.getElementById('member-edit-overlay').classList.remove('open');
-    currentEditMemberId = null;
-  }
-  window.closeMemberEditModal = closeMemberEditModal;
-
-  async function saveMemberEdit() {
-    if (!currentEditMemberId) return;
-    const card = document.querySelector(`[data-member-id="${currentEditMemberId}"]`);
-    if (!card) { closeMemberEditModal(); return; }
-    const newName = document.getElementById('me-name').value.trim();
-    const newRankInput = document.getElementById('me-rank').value.trim();
-    const newTitle = document.getElementById('me-title').value.trim();
-    if (!newName) { showToast('Name darf nicht leer sein', true); return; }
-    const nameEl = card.querySelector('.ht-card-name');
-    if (nameEl) nameEl.textContent = newName;
-    const ph = card.querySelector('.dc-avatar-placeholder');
-    if (ph) ph.textContent = newName.charAt(newName.lastIndexOf(' ')+1).toUpperCase() || newName.charAt(0).toUpperCase();
-    const titleEl = card.querySelector('.ht-card-title');
-    if (titleEl) titleEl.textContent = newTitle;
-    const rankTagEl = card.querySelector('.ht-card-rank-tag');
-    if (rankTagEl && newRankInput) rankTagEl.textContent = newRankInput;
-    if (newRankInput) {
-      const rankSections = document.querySelectorAll('#ht-rank-sections .ht-rank-section');
-      let targetGrid = null, targetRankKey = null;
-      rankSections.forEach(sec => {
-        const pill = sec.querySelector('.ht-rank-pill');
-        if (pill && pill.textContent.trim().toLowerCase() === newRankInput.toLowerCase()) {
-          targetGrid = sec.querySelector('.ht-grid');
-          targetRankKey = sec.dataset.rank;
-        }
-      });
-      if (targetGrid && targetRankKey) {
-        const addBtn = targetGrid.querySelector('.add-member-btn');
-        if (addBtn) targetGrid.insertBefore(card, addBtn); else targetGrid.appendChild(card);
-      } else {
-        const rankKey = 'custom-' + Date.now();
-        const newSection = createRankSection(newRankInput, rankKey);
-        document.getElementById('ht-rank-sections').appendChild(newSection);
-        const newGrid = newSection.querySelector('.ht-grid');
-        const addBtn = newGrid.querySelector('.add-member-btn');
-        if (addBtn) newGrid.insertBefore(card, addBtn); else newGrid.appendChild(card);
-      }
-    }
-    closeMemberEditModal();
-    await adminSaveAll();
-  }
-  window.saveMemberEdit = saveMemberEdit;
-
-  document.getElementById('member-edit-overlay').addEventListener('click', function(e){ if(e.target===this) closeMemberEditModal(); });
-
-  // ─── CONFIRM DIALOG ───
-  function confirmOpen(title, sub, onYes, yesLabel='Löschen') {
-    document.getElementById('confirm-title').textContent = title;
-    document.getElementById('confirm-sub').textContent = sub;
-    document.getElementById('confirm-yes').textContent = yesLabel;
-    confirmCallback = onYes;
-    document.getElementById('confirm-overlay').classList.add('open');
-  }
-  function confirmClose() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
-  window.confirmClose = confirmClose;
-  document.getElementById('confirm-yes').addEventListener('click', () => { if(confirmCallback){confirmCallback();confirmClose();} });
-  document.getElementById('confirm-overlay').addEventListener('click', function(e){ if(e.target===this) confirmClose(); });
-
-  // ─── TOAST ───
-  function showToast(msg, isErr=false, isInfo=false) {
-    const t = document.getElementById('save-toast');
-    t.textContent = (isErr ? '✕ ' : isInfo ? '● ' : '✓ ') + msg;
-    t.className = 'save-toast' + (isErr?' err':isInfo?' warn':'');
-    t.classList.add('show');
-    clearTimeout(t._to);
-    t._to = setTimeout(() => t.classList.remove('show'), 3000);
-  }
-  window.showToast = showToast;
-
-  function markUnsaved() { document.body.classList.add('has-unsaved'); }
-  function clearUnsaved() { document.body.classList.remove('has-unsaved'); }
-
-  // ─── ADMIN INIT ───
-  function initAdminMode() {
-    setupAllEditables();
-    setupAllRuleAdminBars();
-    addAllAddButtons();       // ← jetzt immer neu verdrahtet
-    setupStrafeAdminControls();
-  }
-
-  function setupAllEditables() {
-    document.querySelectorAll('[data-editable]').forEach(el => {
-      el.setAttribute('contenteditable', editModeOn ? 'true' : 'false');
-      if (!el._editListenerAdded) {
-        el.addEventListener('input', markUnsaved);
-        el._editListenerAdded = true;
-      }
-    });
-  }
-
-  function setupAllRuleAdminBars() {
-    document.querySelectorAll('.rule').forEach(rule => {
-      let bar = rule.querySelector('.rule-admin-bar');
-      if (!bar) { bar = document.createElement('div'); bar.className='rule-admin-bar'; rule.appendChild(bar); }
-      bar.innerHTML = `
-        <button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
-        <button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
-        <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
-    });
-  }
-
-  // ─── FIX: Buttons immer neu erstellen — nie per if-Guard überspringen ───
-  // Nach Firebase-Reload (innerHTML-Überschreibung) gehen .onclick-Handler verloren.
-  // Alte Buttons werden deshalb immer entfernt und neu eingefügt.
-  function addAllAddButtons() {
-    document.querySelectorAll('.rules').forEach(c => {
-      // Alte Buttons raus, neue rein — damit der onclick-Handler frisch gesetzt wird
-      c.querySelectorAll('.add-rule-btn').forEach(b => b.remove());
-      const btn = document.createElement('button');
-      btn.className = 'add-rule-btn';
-      btn.innerHTML = '<i class="ti ti-plus"></i> Neue Regel';
-      btn.onclick = () => adminAddRuleToContainer(c);
-      c.appendChild(btn);
-    });
-    document.querySelectorAll('.ht-grid').forEach(g => {
-      // Alte Buttons raus, neue rein
-      g.querySelectorAll('.add-member-btn').forEach(b => b.remove());
-      const btn = document.createElement('button');
-      btn.className = 'add-member-btn';
-      btn.innerHTML = '<i class="ti ti-user-plus"></i> Mitglied hinzufügen';
-      btn.onclick = () => adminAddMemberToGrid(g);
-      g.appendChild(btn);
-    });
-  }
-
-  // ─── STRAFEN TABLE ADMIN CONTROLS ───
-  function setupStrafeAdminControls() {
-    const tbody = document.getElementById('strafen-tbody');
-    if (!tbody) return;
-    Array.from(tbody.rows).forEach(row => {
-      let adminTd = row.querySelector('.stra-admin-td');
-      if (!adminTd) {
-        adminTd = document.createElement('td');
-        adminTd.className = 'stra-admin-td';
-        row.appendChild(adminTd);
-      }
-      adminTd.innerHTML = `
-        <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
-        <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
-        <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
-    });
-  }
-  window.setupStrafeAdminControls = setupStrafeAdminControls;
-
-  function moveStrafeRow(btn, dir) {
-    const row = btn.closest('tr');
-    const tbody = row.parentElement;
-    if (dir === 'up') {
-      const prev = row.previousElementSibling;
-      if (prev) tbody.insertBefore(row, prev);
-    } else {
-      const next = row.nextElementSibling;
-      if (next) tbody.insertBefore(next, row);
-    }
-    markUnsaved();
-  }
-  window.moveStrafeRow = moveStrafeRow;
-
-  function deleteStrafeRow(btn) {
-    const row = btn.closest('tr');
-    const name = row.querySelector('.vname')?.textContent || 'Eintrag';
-    confirmOpen(`"${name}" löschen?`, 'Dieser Strafeneintrag wird entfernt.',
-      async () => { row.remove(); await adminSaveAll(); showToast('Eintrag gelöscht'); });
-  }
-  window.deleteStrafeRow = deleteStrafeRow;
-
-  function toggleEditMode() {
-    editModeOn = !editModeOn;
-    document.body.classList.toggle('admin-edit-on', editModeOn);
-    const btn = document.getElementById('adm-edit-btn');
-    btn.classList.toggle('active', editModeOn);
-    btn.innerHTML = editModeOn ? '<i class="ti ti-pencil-off"></i>Beenden' : '<i class="ti ti-pencil"></i>Bearbeiten';
-    document.querySelectorAll('[data-editable]').forEach(el => el.setAttribute('contenteditable', editModeOn ? 'true' : 'false'));
-    if (!editModeOn) adminSaveAll();
-  }
-  window.toggleEditMode = toggleEditMode;
-
-  async function adminSaveAll() {
-    const ok = await saveSharedContent();
-    if (ok) { clearUnsaved(); showToast('Gespeichert – für ALLE Besucher sichtbar ✓'); }
-    else showToast('Speichern fehlgeschlagen', true);
-  }
-  window.adminSaveAll = adminSaveAll;
-
-  async function adminResetConfirm() {
-    confirmOpen('Alle Änderungen zurücksetzen?', 'Das Regelwerk wird auf den Originalstand zurückgesetzt.', async () => {
-      await sharedDelete(SHARED_KEYS.content);
-      await sharedDelete(SHARED_KEYS.lanyardIds);
-      clearUnsaved();
-      showToast('Zurückgesetzt – Seite lädt neu...');
-      setTimeout(() => location.reload(), 900);
-    }, 'Zurücksetzen');
-  }
-  window.adminResetConfirm = adminResetConfirm;
-
-  // ─── RULE MOVE / DELETE ───
-  function moveRule(btn, dir) {
-    const rule = btn.closest('.rule');
-    const c = rule.parentElement;
-    if (dir==='up') {
-      const p = rule.previousElementSibling;
-      if (p && !p.classList.contains('add-rule-btn')) c.insertBefore(rule, p);
-    } else {
-      const n = rule.nextElementSibling;
-      if (n && !n.classList.contains('add-rule-btn')) c.insertBefore(n, rule);
-    }
-    markUnsaved();
-  }
-  window.moveRule = moveRule;
-
-  function deleteRuleBtn(btn) {
-    const rule = btn.closest('.rule');
-    const title = rule.querySelector('.rule-title')?.textContent || 'Regel';
-    confirmOpen('Regel löschen?', `"${title}" wird entfernt.`,
-      async () => { rule.remove(); await adminSaveAll(); showToast('Regel gelöscht'); });
-  }
-  window.deleteRuleBtn = deleteRuleBtn;
-
-  // ─── ADMIN MODAL ───
-  function adminModalOpen(title, sub, fields, onConfirm) {
-    document.getElementById('admin-modal-title').textContent = title;
-    document.getElementById('admin-modal-sub').textContent = sub;
-    document.getElementById('admin-modal-fields').innerHTML = fields;
-    adminModalCallback = onConfirm;
-    document.getElementById('admin-modal-overlay').classList.add('open');
-    setTimeout(() => {
-      const first = document.querySelector('#admin-modal-fields input, #admin-modal-fields textarea, #admin-modal-fields select');
-      if (first) first.focus();
-    }, 80);
-  }
-  function adminModalClose() {
-    document.getElementById('admin-modal-overlay').classList.remove('open');
-    adminModalCallback = null;
-  }
-  function adminModalConfirm() { if(adminModalCallback) adminModalCallback(); }
-  window.adminModalConfirm = adminModalConfirm;
-  window.adminModalClose = adminModalClose;
-  document.getElementById('admin-modal-overlay').addEventListener('click', function(e){ if(e.target===this) adminModalClose(); });
-
-  const FIELD_STYLE = `style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"`;
-  const TEXTAREA_STYLE = `style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"`;
-
-  // ─── ADD RULE ───
-  function adminAddRuleToContainer(container) {
-    adminModalOpen('Neue Regel', 'Regel hinzufügen',
-      `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Badge-Typ</label><select id="af-badge" ${FIELD_STYLE}><option value="b-std">Standard</option><option value="b-ok">Pflicht</option><option value="b-warn">Wichtig</option><option value="b-ban">Verboten</option><option value="b-info">Info</option></select></div>
-       <div class="admin-field"><label>Badge-Text</label><input id="af-badge-text" type="text" placeholder="Grundregel" ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Titel</label><input id="af-title" type="text" placeholder="Regelname" ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Beschreibung</label><textarea id="af-text" rows="4" placeholder="Regeltext..." ${TEXTAREA_STYLE}></textarea></div>
-       <div class="admin-field"><label>Stil</label><select id="af-type" ${FIELD_STYLE}><option value="">Normal</option><option value="danger">Danger (Rot)</option></select></div>`,
-      async () => {
-        const id = document.getElementById('af-id')?.value.trim() || 'TR — ?';
-        const badge = document.getElementById('af-badge')?.value || 'b-std';
-        const badgeText = document.getElementById('af-badge-text')?.value.trim() || 'Standard';
-        const title = document.getElementById('af-title')?.value.trim() || 'Neue Regel';
-        const text = document.getElementById('af-text')?.value.trim() || '';
-        const type = document.getElementById('af-type')?.value || '';
-        const rule = document.createElement('div');
-        rule.className = `rule${type?' '+type:''}`;
-        rule.innerHTML = `
-          <div class="rule-top"><span class="rule-id" data-editable>${id}</span><span class="badge ${badge}">${badgeText}</span></div>
-          <div class="rule-title" data-editable>${title}</div>
-          <div class="rule-text" data-editable>${text}</div>
-          <div class="rule-admin-bar">
-            <button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
-            <button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
-            <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button>
-          </div>`;
-        rule.querySelectorAll('[data-editable]').forEach(el => {
-          el.setAttribute('contenteditable', editModeOn?'true':'false');
-          el.addEventListener('input', markUnsaved);
-        });
-        const addBtn = container.querySelector('.add-rule-btn');
-        if (addBtn) container.insertBefore(rule, addBtn); else container.appendChild(rule);
-        adminModalClose();
-        await adminSaveAll();
-        showToast('Regel hinzugefügt & gespeichert');
-      }
-    );
-  }
-  window.adminAddRuleToContainer = adminAddRuleToContainer;
-
-  // ─── ADD STRAFE ROW ───
-  function adminAddStrafeRow() {
-    adminModalOpen('Neuer Strafe-Eintrag', 'Zur Strafen-Tabelle',
-      `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Kurze Beschreibung</label><input id="sf-desc" type="text" placeholder="Beschreibung" ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Zeit / Strafe</label><input id="sf-time" type="text" placeholder="z.B. 25 Min." ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Schwere</label><select id="sf-sev" ${FIELD_STYLE}><option value="low">Niedrig (blau)</option><option value="mid">Mittel (gelb)</option><option value="high">Hoch (rot)</option><option value="perm">Permanent</option></select></div>
-       <div class="admin-field"><label>Beschreibung (lang)</label><textarea id="sf-long" rows="3" placeholder="..." ${TEXTAREA_STYLE}></textarea></div>`,
-      async () => {
-        const name = document.getElementById('sf-name')?.value.trim() || 'Vergehen';
-        const desc = document.getElementById('sf-desc')?.value.trim() || '';
-        const time = document.getElementById('sf-time')?.value.trim() || '?';
-        const sev = document.getElementById('sf-sev')?.value || 'low';
-        const long = document.getElementById('sf-long')?.value.trim() || '';
-        const tbody = document.getElementById('strafen-tbody');
-        if (!tbody) { adminModalClose(); return; }
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><div class="vname" data-editable>${name}</div><div class="vdesc" data-editable>${desc}</div></td>
-          <td><span class="zb ${sev}" data-editable>${time}</span></td>
-          <td data-editable>${long}</td>
-          <td class="stra-admin-td">
-            <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
-            <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
-            <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>
-          </td>`;
-        tr.querySelectorAll('[data-editable]').forEach(el => {
-          el.setAttribute('contenteditable', editModeOn?'true':'false');
-          el.addEventListener('input', markUnsaved);
-        });
-        tbody.appendChild(tr);
-        adminModalClose();
-        await adminSaveAll();
-        showToast('Eintrag hinzugefügt & gespeichert');
-      }
-    );
-  }
-  window.adminAddStrafeRow = adminAddStrafeRow;
-
-  // ─── ADD MEMBER ───
-  function adminAddMemberToGrid(grid) {
-    const section = grid.closest('.ht-rank-section');
-    const pill = section?.querySelector('.ht-rank-pill');
-    const rankLabel = pill?.textContent.trim() || 'Rang';
-    const rankKey = grid.getAttribute('data-rank') || 'custom';
-    const decoMap = {inhaber:'INH', sl:'SL', tl:'TL'};
-    const deco = decoMap[rankKey] || rankLabel.slice(0,3).toUpperCase();
-
-    adminModalOpen('Mitglied hinzufügen', `Rang: ${rankLabel}`,
-      `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FIELD_STYLE}></div>
-       <div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FIELD_STYLE}><div class="field-hint">Leer lassen → später über Discord-Button setzen.</div></div>`,
-      async () => {
-        const name = document.getElementById('mf-name')?.value.trim() || 'Neues Mitglied';
-        const title = document.getElementById('mf-title')?.value.trim() || rankLabel;
-        const dcid = document.getElementById('mf-dcid')?.value.trim() || '';
-        const letter = name.charAt(name.lastIndexOf(' ')+1).toUpperCase() || name.charAt(0).toUpperCase();
-        const uid = `${rankKey}-${Date.now()}`;
-
-        const card = document.createElement('div');
-        card.className = `ht-card`;
-        card.setAttribute('data-member-id', uid);
-        card.innerHTML = `
-          <div class="ht-admin-bar">
-            <button class="ht-adm-btn" onclick="openMemberEditModal('${uid}')"><i class="ti ti-pencil"></i></button>
-            <button class="ht-adm-btn" onclick="openLanyardModal('${uid}')"><i class="ti ti-brand-discord"></i></button>
-            <button class="ht-adm-btn del" onclick="deleteMember('${uid}')"><i class="ti ti-trash"></i></button>
-          </div>
-          <div class="ht-card-inner">
-            <div class="dc-avatar-wrap">
-              <div class="dc-avatar-placeholder">${letter}</div>
-              <span class="dc-status" id="status-${uid}"></span>
-            </div>
-            <div class="ht-card-info">
-              <div class="ht-card-rank-tag" data-editable>${rankLabel}</div>
-              <div class="ht-card-name" data-editable>${name}</div>
-              <div class="ht-card-title" data-editable>${title}</div>
-              <div class="ht-card-status" id="statuslabel-${uid}"><span class="ht-card-status-dot"></span><span>Offline</span></div>
-            </div>
-          </div>
-          <div class="ht-card-deco">${deco}</div>`;
-        card.querySelectorAll('[data-editable]').forEach(el => {
-          el.addEventListener('input', markUnsaved);
-          el.setAttribute('contenteditable', editModeOn?'true':'false');
-        });
-        const addBtn = grid.querySelector('.add-member-btn');
-        if (addBtn) grid.insertBefore(card, addBtn); else grid.appendChild(card);
-        if (dcid && /^\d{17,20}$/.test(dcid)) { IDS[uid]=dcid; await saveIdsShared(); fetchLanyard(dcid, uid); }
-        adminModalClose();
-        await adminSaveAll();
-        showToast('Mitglied hinzugefügt & für alle gespeichert');
-      }
-    );
-  }
-  window.adminAddMemberToGrid = adminAddMemberToGrid;
-
-  async function deleteMember(memberId) {
-    const card = document.querySelector(`[data-member-id="${memberId}"]`);
-    if (!card) return;
-    const name = card.querySelector('.ht-card-name')?.textContent || 'Mitglied';
-    confirmOpen('Mitglied entfernen?', `"${name}" wird aus dem High-Team entfernt.`,
-      async () => {
-        card.remove();
-        delete IDS[memberId];
-        await saveIdsShared();
-        await adminSaveAll();
-        showToast('Mitglied entfernt & gespeichert');
-      });
-  }
-  window.deleteMember = deleteMember;
-
-  // ─── ADD RANK SECTION ───
-  function adminAddRankSection() {
-    showTab('highteam', document.querySelector('[data-tab=highteam]'));
-    adminModalOpen('Neue Rang-Kategorie', 'Neue Kategorie erstellen',
-      `<div class="admin-field"><label>Rang-Name</label><input id="rs-name" type="text" placeholder="z.B. Co-Inhaber, Moderator..." ${FIELD_STYLE}></div>`,
-      async () => {
-        const name = document.getElementById('rs-name')?.value.trim();
-        if (!name) { showToast('Name darf nicht leer sein', true); return; }
-        const rankKey = 'custom-' + Date.now();
-        const newSection = createRankSection(name, rankKey);
-        document.getElementById('ht-rank-sections').appendChild(newSection);
-        adminModalClose();
-        await adminSaveAll();
-        showToast(`Kategorie "${name}" erstellt & gespeichert`);
-      }
-    );
-  }
-  window.adminAddRankSection = adminAddRankSection;
-
-  function createRankSection(rankName, rankKey) {
-    const sec = document.createElement('div');
-    sec.className = 'ht-rank-section';
-    sec.setAttribute('data-rank', rankKey);
-    sec.innerHTML = `
-      <div class="ht-rank-header">
-        <i class="ti ti-star ht-rank-icon"></i>
-        <span class="ht-rank-pill" data-editable>${rankName}</span>
-        <div class="ht-rank-line"></div>
-        <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
-      </div>
-      <div class="ht-grid" data-rank="${rankKey}"></div>`;
-    const grid = sec.querySelector('.ht-grid');
-    const addBtn = document.createElement('button');
-    addBtn.className = 'add-member-btn';
-    addBtn.innerHTML = '<i class="ti ti-user-plus"></i> Mitglied hinzufügen';
-    addBtn.onclick = () => adminAddMemberToGrid(grid);
-    grid.appendChild(addBtn);
-    sec.querySelectorAll('[data-editable]').forEach(el => {
-      el.setAttribute('contenteditable', editModeOn?'true':'false');
-      el.addEventListener('input', markUnsaved);
-    });
-    return sec;
-  }
-
-  async function deleteRankSection(btn) {
-    const section = btn.closest('.ht-rank-section');
-    const name = section?.querySelector('.ht-rank-pill')?.textContent.trim() || 'Kategorie';
-    const memberCount = section?.querySelectorAll('.ht-card').length || 0;
-    confirmOpen(
-      `Kategorie "${name}" löschen?`,
-      memberCount > 0 ? `${memberCount} Mitglied(er) werden entfernt.` : 'Die Kategorie wird entfernt.',
-      async () => {
-        section.querySelectorAll('[data-member-id]').forEach(card => {
-          delete IDS[card.getAttribute('data-member-id')];
-        });
-        await saveIdsShared();
-        section.remove();
-        await adminSaveAll();
-        showToast('Kategorie entfernt & gespeichert');
-      }
-    );
-  }
-  window.deleteRankSection = deleteRankSection;
-
-  // ─── SCROLL-TO-TOP ───
-  window.addEventListener('scroll', () => {
-    document.getElementById('toTop').classList.toggle('show', window.scrollY > 400);
+// ── AUTH ──
+function getOAuthUrl(){
+  const state=Math.random().toString(36).slice(2);
+  sessionStorage.setItem('oauth_state',state);
+  return `https://discord.com/api/oauth2/authorize?`+new URLSearchParams({
+    client_id:CLIENT_ID,redirect_uri:REDIRECT_URI,response_type:'token',scope:SCOPES,state
   });
+}
+document.getElementById('discord-login-btn').href = getOAuthUrl();
+
+async function handleCallback(){
+  const hash=window.location.hash.slice(1);
+  if(!hash)return false;
+  const p=new URLSearchParams(hash);
+  const token=p.get('access_token');
+  if(!token)return false;
+  history.replaceState(null,'',window.location.pathname);
+  try{
+    const res=await fetch('https://discord.com/api/users/@me',{headers:{Authorization:`Bearer ${token}`}});
+    if(!res.ok)return false;
+    const user=await res.json();
+    sessionStorage.setItem('prada_token',token);
+    sessionStorage.setItem('prada_user',JSON.stringify(user));
+    showApp(user,token); return true;
+  }catch{return false;}
+}
+
+async function showApp(user,token){
+  dcToken=token||sessionStorage.getItem('prada_token');
+  currentUser=user;
+  document.getElementById('auth-screen').style.display='none';
+  const av=user.avatar?`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=64`:`https://cdn.discordapp.com/embed/avatars/${parseInt(user.discriminator||0)%5}.png`;
+  document.getElementById('topbar-avatar').src=av;
+  document.getElementById('topbar-username').textContent=user.global_name||user.username;
+  document.getElementById('topbar-user').style.display='flex';
+  await loadSharedContent();
+  await loadAnnouncement();
+  await trackVisit(user);
+  const ids=await sharedGet(KEYS.lanyardIds);
+  if(ids)IDS=ids;
+  loadAllLanyard();
+  setInterval(loadAllLanyard,30000);
+  if(user.id===ADMIN_ID){
+    document.body.classList.add('is-admin');
+    document.getElementById('dash-tab-btn').style.display='flex';
+    initAdminMode();
+    startSnapshotTimers();
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem('prada_token'); sessionStorage.removeItem('prada_user');
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('topbar-user').style.display='none';
+  document.getElementById('dash-tab-btn').style.display='none';
+  document.body.classList.remove('is-admin','admin-edit-on','has-unsaved');
+  document.getElementById('discord-login-btn').href=getOAuthUrl();
+  currentUser=null; dcToken=null;
+  stopSnapshotTimers();
+}
+
+(async function initAuth(){
+  const saved=sessionStorage.getItem('prada_user');
+  if(saved){showApp(JSON.parse(saved),sessionStorage.getItem('prada_token'));return;}
+  const handled=await handleCallback();
+  if(!handled)document.getElementById('auth-screen').style.display='flex';
+})();
+
+// ── VISIT TRACKING ──
+async function trackVisit(user){
+  try{
+    const isAdmin=user.id===ADMIN_ID, now=Date.now();
+    let visitors=(await sharedGet(KEYS.visitors))||[];
+    const idx=visitors.findIndex(v=>v.id===user.id);
+    if(idx>=0){
+      visitors[idx].lastSeen=now; visitors[idx].visitCount=(visitors[idx].visitCount||1)+1;
+      visitors[idx].avatar=user.avatar; visitors[idx].global_name=user.global_name||user.username;
+    } else {
+      visitors.push({id:user.id,username:user.username,global_name:user.global_name||user.username,
+        avatar:user.avatar,discriminator:user.discriminator,firstSeen:now,lastSeen:now,visitCount:1,isAdmin});
+    }
+    await sharedSet(KEYS.visitors,visitors);
+    let log=(await sharedGet(KEYS.visitLog))||[];
+    log.unshift({userId:user.id,username:user.global_name||user.username,avatar:user.avatar,ts:now,isAdmin});
+    if(log.length>100)log=log.slice(0,100);
+    await sharedSet(KEYS.visitLog,log);
+  }catch(e){console.error('Track:',e);}
+}
+
+// ── CONTENT LOAD/SAVE ──
+async function loadSharedContent(){
+  try{
+    const c=await sharedGet(KEYS.content);
+    if(!c)return;
+    if(c.einfuehrung)document.getElementById('einfuehrung').innerHTML=c.einfuehrung;
+    if(c.regelwerk)document.getElementById('regelwerk').innerHTML=c.regelwerk;
+    if(c.strafen)document.getElementById('strafen').innerHTML=c.strafen;
+    if(c.highteam)document.getElementById('highteam').innerHTML=c.highteam;
+    if(document.body.classList.contains('is-admin'))initAdminMode();
+  }catch(e){console.error('Load:',e);}
+}
+
+function captureContent(){
+  return {
+    einfuehrung:document.getElementById('einfuehrung').innerHTML,
+    regelwerk:document.getElementById('regelwerk').innerHTML,
+    strafen:document.getElementById('strafen').innerHTML,
+    highteam:document.getElementById('highteam').innerHTML
+  };
+}
+
+async function saveSharedContent(){
+  syncBar('syncing');
+  try{
+    const ok=await sharedSet(KEYS.content,captureContent());
+    syncBar(ok?'saved':'');
+    return ok;
+  }catch(e){console.error('Save:',e);syncBar('');return false;}
+}
+
+async function saveIdsShared(){await sharedSet(KEYS.lanyardIds,IDS);}
+
+// ── CHANGELOG ──
+async function logChange(action){
+  if(!currentUser)return;
+  try{
+    let log=(await sharedGet(KEYS.changelog))||[];
+    log.unshift({ts:Date.now(),user:currentUser.global_name||currentUser.username,avatar:currentUser.avatar,userId:currentUser.id,action});
+    if(log.length>200)log=log.slice(0,200);
+    await sharedSet(KEYS.changelog,log);
+  }catch(e){console.error('Changelog:',e);}
+}
+
+// ── SNAPSHOT SYSTEM ──
+// Snapshots stored as: {s60:{content,ts}, s10m:{content,ts}, s1h:{content,ts}}
+async function saveSnapshot(slot){
+  try{
+    let snaps=(await sharedGet(KEYS.snapshots))||{};
+    snaps[slot]={content:captureContent(),ts:Date.now()};
+    await sharedSet(KEYS.snapshots,snaps);
+  }catch(e){console.error('Snapshot save:',e);}
+}
+
+function startSnapshotTimers(){
+  // Auto-snapshot every 60s (replaces), every 10m (replaces), every 1h (replaces)
+  snapshotTimers['60s']=setInterval(()=>saveSnapshot('s60'),60000);
+  snapshotTimers['10m']=setInterval(()=>saveSnapshot('s10m'),10*60000);
+  snapshotTimers['1h']=setInterval(()=>saveSnapshot('s1h'),60*60000);
+  // Take initial snapshots after a delay
+  setTimeout(()=>saveSnapshot('s60'),5000);
+  setTimeout(()=>saveSnapshot('s10m'),5000);
+  setTimeout(()=>saveSnapshot('s1h'),5000);
+}
+
+function stopSnapshotTimers(){
+  Object.values(snapshotTimers).forEach(t=>clearInterval(t));
+  snapshotTimers={};
+}
+
+async function loadSnapshotUI(){
+  try{
+    const snaps=await sharedGet(KEYS.snapshots)||{};
+    const slots=[
+      {key:'s60',id:'snap-60s',label:'60s'},
+      {key:'s10m',id:'snap-10m',label:'10m'},
+      {key:'s1h',id:'snap-1h',label:'1h'}
+    ];
+    slots.forEach(({key,id})=>{
+      const el=document.getElementById(id);
+      const timeEl=document.getElementById(id+'-time');
+      const agoEl=document.getElementById(id+'-ago');
+      if(snaps[key]){
+        el.classList.add('has-snap');
+        const d=new Date(snaps[key].ts);
+        if(timeEl)timeEl.textContent=d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+        if(agoEl)agoEl.textContent=formatTime(snaps[key].ts);
+      } else {
+        el.classList.remove('has-snap');
+        if(timeEl)timeEl.textContent='–';
+        if(agoEl)agoEl.textContent='Kein Snapshot';
+      }
+    });
+  }catch(e){console.error('Snapshot UI:',e);}
+}
+
+window.restoreSnapshot=async function(slot){
+  const keyMap={'60s':'s60','10m':'s10m','1h':'s1h'};
+  const k=keyMap[slot];
+  if(!k)return;
+  try{
+    const snaps=await sharedGet(KEYS.snapshots)||{};
+    if(!snaps[k]){showToast('Kein Snapshot vorhanden',false,true);return;}
+    const snap=snaps[k];
+    const ago=formatTime(snap.ts);
+    confirmOpen(
+      `Snapshot wiederherstellen?`,
+      `Stand von ${ago} wird für alle Besucher wiederhergestellt. Aktuelle Änderungen gehen verloren.`,
+      async()=>{
+        await sharedSet(KEYS.content,snap.content);
+        await logChange(`Snapshot wiederhergestellt (${ago})`);
+        showToast('Snapshot wiederhergestellt – Seite lädt neu...');
+        setTimeout(()=>location.reload(),900);
+      },
+      'Wiederherstellen'
+    );
+  }catch(e){console.error('Restore:',e);}
+};
+
+window.openResetPanel=function(){
+  const panel=document.getElementById('reset-panel');
+  panel.style.display=panel.style.display==='none'?'block':'none';
+  if(panel.style.display==='block')loadSnapshotUI();
+};
+
+window.adminHardResetConfirm=function(){
+  confirmOpen(
+    'Komplett-Reset?',
+    'Das Regelwerk wird auf den Original-Stand zurückgesetzt. ALLE Änderungen gehen dauerhaft verloren.',
+    async()=>{
+      await sharedDelete(KEYS.content);
+      await sharedDelete(KEYS.lanyardIds);
+      await sharedDelete(KEYS.snapshots);
+      await logChange('Komplett-Reset durchgeführt');
+      showToast('Zurückgesetzt – Seite lädt neu...');
+      setTimeout(()=>location.reload(),900);
+    },
+    'KOMPLETT ZURÜCKSETZEN'
+  );
+};
+
+// ── ANNOUNCEMENT SYSTEM ──
+async function loadAnnouncement(){
+  try{
+    const ann=await sharedGet(KEYS.announcement);
+    if(ann&&ann.text&&ann.active){
+      const banner=document.getElementById('announcement-banner');
+      document.getElementById('announcement-text').textContent=ann.text;
+      banner.classList.add('visible');
+    }
+  }catch(e){console.error('Ann:',e);}
+}
+
+window.closeAnnouncementBanner=function(){
+  document.getElementById('announcement-banner').classList.remove('visible');
+};
+
+window.openAnnouncementAdmin=function(){
+  const panel=document.getElementById('announcement-admin-panel');
+  panel.style.display=panel.style.display==='none'?'block':'none';
+  if(panel.style.display==='block')refreshAnnouncementPanel();
+  if(document.getElementById('dashboard').classList.contains('visible')){}
+  else showTab('dashboard',document.querySelector('[data-tab=dashboard]'));
+};
+
+async function refreshAnnouncementPanel(){
+  try{
+    const ann=await sharedGet(KEYS.announcement);
+    const activeDiv=document.getElementById('active-announcement-display');
+    const noAnnDiv=document.getElementById('no-announcement');
+    if(ann&&ann.text&&ann.active){
+      activeDiv.style.display='block'; noAnnDiv.style.display='none';
+      document.getElementById('active-ann-text').textContent=ann.text;
+      document.getElementById('active-ann-meta').textContent=`Erstellt: ${formatTime(ann.ts)} · von ${ann.by||'Admin'}`;
+    } else {
+      activeDiv.style.display='none'; noAnnDiv.style.display='block';
+    }
+    const desc=document.getElementById('dac-ann-desc');
+    if(desc)desc.textContent=ann&&ann.active?'Aktiv – Banner sichtbar':'Banner verwalten';
+  }catch(e){}
+}
+
+window.publishAnnouncement=async function(){
+  const text=document.getElementById('new-announcement-input').value.trim();
+  if(!text){showToast('Text eingeben',false,true);return;}
+  const ann={text,active:true,ts:Date.now(),by:currentUser?.global_name||'Admin'};
+  await sharedSet(KEYS.announcement,ann);
+  await logChange(`Ankündigung veröffentlicht: "${text.slice(0,40)}${text.length>40?'…':''}"`);
+  document.getElementById('announcement-text').textContent=text;
+  document.getElementById('announcement-banner').classList.add('visible');
+  document.getElementById('new-announcement-input').value='';
+  refreshAnnouncementPanel();
+  showToast('Ankündigung veröffentlicht – für alle sichtbar ✓');
+};
+
+window.clearAnnouncement=async function(){
+  await sharedSet(KEYS.announcement,{active:false,text:'',ts:Date.now()});
+  await logChange('Ankündigung entfernt');
+  document.getElementById('announcement-banner').classList.remove('visible');
+  refreshAnnouncementPanel();
+  showToast('Ankündigung entfernt');
+};
+
+// ── TAB NAVIGATION ──
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const sec=document.getElementById(id);
+  if(sec)sec.classList.add('visible');
+  if(btn)btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='dashboard')loadDashboard();
+}
+window.showTab=showTab;
+window.logout=logout;
+
+// ── DASHBOARD ──
+async function loadDashboard(){
+  if(!currentUser||currentUser.id!==ADMIN_ID)return;
+  const btn=document.getElementById('dash-refresh-btn');
+  btn.classList.add('spinning');
+  try{
+    const [visitors,log,changelog]=await Promise.all([
+      sharedGet(KEYS.visitors)||[],
+      sharedGet(KEYS.visitLog)||[],
+      sharedGet(KEYS.changelog)||[]
+    ]);
+    const vArr=visitors||[], lArr=log||[], cArr=changelog||[];
+    const today=new Date(); today.setHours(0,0,0,0);
+    const todayCount=vArr.filter(v=>v.lastSeen>=today.getTime()).length;
+    const adminVisits=lArr.filter(l=>l.isAdmin).length;
+    document.getElementById('ds-total').textContent=vArr.length;
+    document.getElementById('ds-today').textContent=todayCount;
+    document.getElementById('ds-admins').textContent=adminVisits;
+    document.getElementById('ds-log').textContent=lArr.length;
+    document.getElementById('visitors-count').textContent=vArr.length;
+    document.getElementById('log-count').textContent=lArr.length;
+
+    // Visitors
+    const vList=document.getElementById('visitors-list');
+    if(!vArr.length)vList.innerHTML='<div class="dash-empty">Noch keine Besucher</div>';
+    else{
+      const sorted=[...vArr].sort((a,b)=>b.lastSeen-a.lastSeen);
+      vList.innerHTML=sorted.map(v=>{
+        const au=v.avatar?`https://cdn.discordapp.com/avatars/${v.id}/${v.avatar}.png?size=64`:null;
+        const lt=(v.global_name||'?').charAt(0).toUpperCase();
+        return `<div class="visitor-row">
+          <div class="v-avatar">
+            ${au?`<img src="${au}" alt="" onerror="this.parentElement.innerHTML='<div class=v-avatar-ph>${lt}</div>'">`:`<div class="v-avatar-ph">${lt}</div>`}
+            ${v.isAdmin?'<div class="v-admin-dot"><i class="ti ti-shield-check"></i></div>':''}
+          </div>
+          <div class="v-info">
+            <div class="v-name">${v.global_name||v.username}</div>
+            <div class="v-tag">@${v.username}${v.isAdmin?' <span style="color:var(--inhaber-accent)">· Admin</span>':''}</div>
+            ${v.isAdmin?'<div class="v-admin-badge"><i class="ti ti-shield-check"></i>Admin</div>':''}
+          </div>
+          <div class="v-meta">
+            <div class="v-time">${formatTime(v.lastSeen)}</div>
+            <div class="v-count">${v.visitCount||1}× besucht</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Log
+    const vLog=document.getElementById('visit-log');
+    if(!lArr.length)vLog.innerHTML='<div class="dash-empty">Kein Log</div>';
+    else{
+      vLog.innerHTML=lArr.slice(0,50).map(entry=>{
+        const au=entry.avatar?`https://cdn.discordapp.com/avatars/${entry.userId}/${entry.avatar}.png?size=56`:null;
+        const lt=(entry.username||'?').charAt(0).toUpperCase();
+        return `<div class="log-row">
+          ${entry.isAdmin?'<div class="log-admin-dot"></div>':''}
+          <div class="log-avatar">${au?`<img src="${au}" onerror="this.style.display='none'">`:`<div class="log-avatar-ph">${lt}</div>`}</div>
+          <div class="log-name"><strong>${entry.username}</strong> hat die Seite besucht</div>
+          <div class="log-time">${formatTime(entry.ts)}</div>
+        </div>`;
+      }).join('');
+    }
+
+    // Changelog
+    const clBody=document.getElementById('changelog-body');
+    document.getElementById('changelog-count').textContent=cArr.length;
+    if(!cArr.length)clBody.innerHTML='<div class="dash-empty">Noch keine Änderungen protokolliert.</div>';
+    else{
+      clBody.innerHTML=cArr.slice(0,50).map(e=>`
+        <div class="changelog-entry">
+          <div class="changelog-dot"></div>
+          <div class="changelog-content">
+            <div class="changelog-action"><strong>${e.user||'Admin'}</strong>: ${e.action}</div>
+            <div class="changelog-time">${formatTime(e.ts)}</div>
+          </div>
+        </div>`).join('');
+    }
+
+    // Edit mode quick action card state
+    const editIco=document.getElementById('dac-edit-ico');
+    const editTitle=document.getElementById('dac-edit-title');
+    const editDesc=document.getElementById('dac-edit-desc');
+    if(editModeOn){
+      if(editIco)editIco.className='ti ti-pencil-off';
+      if(editTitle)editTitle.textContent='Editor AKTIV';
+      if(editDesc)editDesc.textContent='Klick zum Beenden';
+    } else {
+      if(editIco)editIco.className='ti ti-pencil';
+      if(editTitle)editTitle.textContent='Editor-Modus';
+      if(editDesc)editDesc.textContent='Inhalte bearbeiten';
+    }
+
+    // Snapshot UI if panel open
+    if(document.getElementById('reset-panel').style.display!=='none')loadSnapshotUI();
+
+  }catch(e){console.error(e);}
+  setTimeout(()=>btn.classList.remove('spinning'),400);
+}
+window.loadDashboard=loadDashboard;
+
+window.exportChangelog=async function(){
+  const cArr=(await sharedGet(KEYS.changelog))||[];
+  if(!cArr.length){showToast('Kein Changelog vorhanden',false,true);return;}
+  const lines=['Prada CL v2 – Änderungsprotokoll','='.repeat(40),''];
+  cArr.forEach(e=>{
+    const d=new Date(e.ts);
+    lines.push(`[${d.toLocaleDateString('de-DE')} ${d.toLocaleTimeString('de-DE')}] ${e.user}: ${e.action}`);
+  });
+  const blob=new Blob([lines.join('\n')],{type:'text/plain'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='prada-changelog.txt'; a.click();
+  showToast('Changelog exportiert');
+};
+
+window.clearAllVisitors=function(){
+  confirmOpen('Besucherdaten löschen?','Alle Besucher-Logs und Besuchshistorie werden unwiderruflich gelöscht.',async()=>{
+    await sharedDelete(KEYS.visitors);
+    await sharedDelete(KEYS.visitLog);
+    await logChange('Besucherdaten gelöscht');
+    showToast('Besucherdaten gelöscht');
+    loadDashboard();
+  },'Alles löschen');
+};
+
+function formatTime(ts){
+  const diff=Date.now()-ts;
+  if(diff<60000)return'Gerade eben';
+  if(diff<3600000)return`vor ${Math.floor(diff/60000)} Min.`;
+  if(diff<86400000)return`vor ${Math.floor(diff/3600000)} Std.`;
+  const d=new Date(ts);
+  return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+}
+
+// ── LANYARD ──
+async function fetchLanyard(discordId,memberId){
+  try{
+    const res=await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
+    if(!res.ok)return;
+    const data=await res.json();
+    if(!data.success)return;
+    const d=data.data;
+    const card=document.querySelector(`[data-member-id="${memberId}"]`);
+    if(!card)return;
+    const wrap=card.querySelector('.dc-avatar-wrap');
+    if(wrap){
+      const uid=d.discord_user.id,h=d.discord_user.avatar;
+      const url=h?`https://cdn.discordapp.com/avatars/${uid}/${h}.${h.startsWith('a_')?'gif':'png'}?size=128`:`https://cdn.discordapp.com/embed/avatars/${parseInt(uid)%5}.png`;
+      let img=wrap.querySelector('img.dc-avatar');
+      const ph=wrap.querySelector('.dc-avatar-placeholder');
+      if(ph)ph.remove();
+      if(!img){img=document.createElement('img');img.className='dc-avatar';wrap.insertBefore(img,wrap.firstChild);}
+      img.src=url;
+    }
+    const status=d.discord_status||'offline';
+    const dot=document.getElementById(`status-${memberId}`);
+    if(dot)dot.className=`dc-status ${status}`;
+    const lbl=document.getElementById(`statuslabel-${memberId}`);
+    if(lbl)lbl.innerHTML=`<span class="ht-card-status-dot ${status}"></span><span>${STATUS_LABELS[status]||'Offline'}</span>`;
+  }catch{}
+}
+function loadAllLanyard(){for(const[mid,did] of Object.entries(IDS))if(did)fetchLanyard(did,mid);}
+
+function openLanyardModal(memberId){
+  if(!document.body.classList.contains('is-admin'))return;
+  currentLanyardMember=memberId;
+  document.getElementById('lanyard-input').value=IDS[memberId]||'';
+  document.getElementById('lanyard-modal-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('lanyard-input').focus(),50);
+}
+window.openLanyardModal=openLanyardModal;
+function closeLanyardModal(){document.getElementById('lanyard-modal-overlay').classList.remove('open');currentLanyardMember=null;}
+window.closeLanyardModal=closeLanyardModal;
+async function saveLanyardId(){
+  const val=document.getElementById('lanyard-input').value.trim();
+  if(!currentLanyardMember)return;
+  if(val&&/^\d{17,20}$/.test(val)){
+    IDS[currentLanyardMember]=val;
+    await saveIdsShared();
+    fetchLanyard(val,currentLanyardMember);
+    closeLanyardModal(); showToast('Discord ID gespeichert ✓');
+  } else if(val===''){
+    delete IDS[currentLanyardMember];
+    await saveIdsShared();
+    const card=document.querySelector(`[data-member-id="${currentLanyardMember}"]`);
+    if(card){
+      const wrap=card.querySelector('.dc-avatar-wrap'),img=wrap&&wrap.querySelector('img.dc-avatar');
+      if(img){
+        const name=card.querySelector('.ht-card-name')?.textContent.trim()||'?';
+        const ph=document.createElement('div');ph.className='dc-avatar-placeholder';
+        ph.textContent=name.charAt(name.lastIndexOf(' ')+1).toUpperCase()||name.charAt(0).toUpperCase();
+        wrap.insertBefore(ph,wrap.firstChild);img.remove();
+      }
+      const sd=document.getElementById(`status-${currentLanyardMember}`);if(sd)sd.className='dc-status';
+      const sl2=document.getElementById(`statuslabel-${currentLanyardMember}`);
+      if(sl2)sl2.innerHTML='<span class="ht-card-status-dot"></span><span>Offline</span>';
+    }
+    closeLanyardModal(); showToast('Discord ID entfernt');
+  } else {
+    document.getElementById('lanyard-input').style.borderColor='#e03c3c';
+    setTimeout(()=>document.getElementById('lanyard-input').style.borderColor='',1200);
+  }
+}
+window.saveLanyardId=saveLanyardId;
+document.getElementById('lanyard-modal-overlay').addEventListener('click',function(e){if(e.target===this)closeLanyardModal();});
+document.getElementById('lanyard-input').addEventListener('keydown',function(e){if(e.key==='Enter')saveLanyardId();if(e.key==='Escape')closeLanyardModal();});
+
+// ── MEMBER EDIT MODAL ──
+function openMemberEditModal(memberId){
+  if(!document.body.classList.contains('is-admin'))return;
+  currentEditMemberId=memberId;
+  const card=document.querySelector(`[data-member-id="${memberId}"]`);
+  if(!card)return;
+  document.getElementById('me-name').value=card.querySelector('.ht-card-name')?.textContent.trim()||'';
+  document.getElementById('me-rank').value=card.querySelector('.ht-card-rank-tag')?.textContent.trim()||'';
+  document.getElementById('me-title').value=card.querySelector('.ht-card-title')?.textContent.trim()||'';
+  document.getElementById('member-edit-sub').textContent=`Bearbeite: ${document.getElementById('me-name').value}`;
+  document.getElementById('member-edit-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('me-name').focus(),50);
+}
+window.openMemberEditModal=openMemberEditModal;
+function closeMemberEditModal(){document.getElementById('member-edit-overlay').classList.remove('open');currentEditMemberId=null;}
+window.closeMemberEditModal=closeMemberEditModal;
+async function saveMemberEdit(){
+  if(!currentEditMemberId)return;
+  const card=document.querySelector(`[data-member-id="${currentEditMemberId}"]`);
+  if(!card){closeMemberEditModal();return;}
+  const newName=document.getElementById('me-name').value.trim();
+  const newRank=document.getElementById('me-rank').value.trim();
+  const newTitle=document.getElementById('me-title').value.trim();
+  if(!newName){showToast('Name darf nicht leer sein',true);return;}
+  const nameEl=card.querySelector('.ht-card-name');if(nameEl)nameEl.textContent=newName;
+  const ph=card.querySelector('.dc-avatar-placeholder');
+  if(ph)ph.textContent=newName.charAt(newName.lastIndexOf(' ')+1).toUpperCase()||newName.charAt(0).toUpperCase();
+  const titleEl=card.querySelector('.ht-card-title');if(titleEl)titleEl.textContent=newTitle;
+  const rankTagEl=card.querySelector('.ht-card-rank-tag');if(rankTagEl&&newRank)rankTagEl.textContent=newRank;
+  if(newRank){
+    const sections=document.querySelectorAll('#ht-rank-sections .ht-rank-section');
+    let tGrid=null,tKey=null;
+    sections.forEach(sec=>{
+      const pill=sec.querySelector('.ht-rank-pill');
+      if(pill&&pill.textContent.trim().toLowerCase()===newRank.toLowerCase()){tGrid=sec.querySelector('.ht-grid');tKey=sec.dataset.rank;}
+    });
+    if(tGrid&&tKey){const ab=tGrid.querySelector('.add-member-btn');if(ab)tGrid.insertBefore(card,ab);else tGrid.appendChild(card);}
+    else{const rk='custom-'+Date.now();const ns=createRankSection(newRank,rk);document.getElementById('ht-rank-sections').appendChild(ns);const ng=ns.querySelector('.ht-grid');const ab=ng.querySelector('.add-member-btn');if(ab)ng.insertBefore(card,ab);else ng.appendChild(card);}
+  }
+  closeMemberEditModal();
+  await adminSaveAll(`Mitglied bearbeitet: ${newName}`);
+}
+window.saveMemberEdit=saveMemberEdit;
+document.getElementById('member-edit-overlay').addEventListener('click',function(e){if(e.target===this)closeMemberEditModal();});
+
+// ── CONFIRM DIALOG ──
+function confirmOpen(title,sub,onYes,yesLabel='Löschen'){
+  document.getElementById('confirm-title').textContent=title;
+  document.getElementById('confirm-sub').textContent=sub;
+  document.getElementById('confirm-yes').textContent=yesLabel;
+  confirmCb=onYes;
+  document.getElementById('confirm-overlay').classList.add('open');
+}
+function confirmClose(){document.getElementById('confirm-overlay').classList.remove('open');confirmCb=null;}
+window.confirmClose=confirmClose;
+document.getElementById('confirm-yes').addEventListener('click',()=>{if(confirmCb){confirmCb();confirmClose();}});
+document.getElementById('confirm-overlay').addEventListener('click',function(e){if(e.target===this)confirmClose();});
+
+// ── TOAST ──
+function showToast(msg,isErr=false,isInfo=false){
+  const t=document.getElementById('save-toast');
+  t.textContent=(isErr?'✕ ':isInfo?'● ':'✓ ')+msg;
+  t.className='save-toast'+(isErr?' err':isInfo?' warn':'');
+  t.classList.add('show');
+  clearTimeout(t._to);
+  t._to=setTimeout(()=>t.classList.remove('show'),3000);
+}
+window.showToast=showToast;
+function markUnsaved(){document.body.classList.add('has-unsaved');}
+function clearUnsaved(){document.body.classList.remove('has-unsaved');}
+
+// ── ADMIN INIT ──
+function initAdminMode(){
+  setupAllEditables();
+  setupAllRuleAdminBars();
+  addAllAddButtons();
+  setupStrafeAdminControls();
+}
+
+function setupAllEditables(){
+  document.querySelectorAll('[data-editable]').forEach(el=>{
+    el.setAttribute('contenteditable',editModeOn?'true':'false');
+    if(!el._editListenerAdded){el.addEventListener('input',markUnsaved);el._editListenerAdded=true;}
+  });
+}
+
+function setupAllRuleAdminBars(){
+  document.querySelectorAll('.rule').forEach(rule=>{
+    let bar=rule.querySelector('.rule-admin-bar');
+    if(!bar){bar=document.createElement('div');bar.className='rule-admin-bar';rule.appendChild(bar);}
+    bar.innerHTML=`
+      <button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
+      <button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
+      <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
+  });
+}
+
+function addAllAddButtons(){
+  document.querySelectorAll('.rules').forEach(c=>{
+    c.querySelectorAll('.add-rule-btn').forEach(b=>b.remove());
+    const btn=document.createElement('button');
+    btn.className='add-rule-btn';btn.innerHTML='<i class="ti ti-plus"></i> Neue Regel';
+    btn.onclick=()=>adminAddRuleToContainer(c);
+    c.appendChild(btn);
+  });
+  document.querySelectorAll('.ht-grid').forEach(g=>{
+    g.querySelectorAll('.add-member-btn').forEach(b=>b.remove());
+    const btn=document.createElement('button');
+    btn.className='add-member-btn';btn.innerHTML='<i class="ti ti-user-plus"></i> Mitglied hinzufügen';
+    btn.onclick=()=>adminAddMemberToGrid(g);
+    g.appendChild(btn);
+  });
+}
+
+// ── STRAFE ADMIN CONTROLS ──
+function setupStrafeAdminControls(){
+  const tbody=document.getElementById('strafen-tbody');
+  if(!tbody)return;
+  Array.from(tbody.rows).forEach(row=>{
+    let td=row.querySelector('.stra-admin-td');
+    if(!td){td=document.createElement('td');td.className='stra-admin-td';row.appendChild(td);}
+    td.innerHTML=`
+      <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
+      <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
+      <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
+  });
+}
+window.setupStrafeAdminControls=setupStrafeAdminControls;
+
+window.moveStrafeRow=function(btn,dir){
+  const row=btn.closest('tr'),tbody=row.parentElement;
+  if(dir==='up'){const p=row.previousElementSibling;if(p)tbody.insertBefore(row,p);}
+  else{const n=row.nextElementSibling;if(n)tbody.insertBefore(n,row);}
+  markUnsaved();
+};
+window.deleteStrafeRow=function(btn){
+  const row=btn.closest('tr'),name=row.querySelector('.vname')?.textContent||'Eintrag';
+  confirmOpen(`"${name}" löschen?`,'Dieser Strafeneintrag wird entfernt.',async()=>{
+    row.remove();await adminSaveAll(`Strafeneintrag gelöscht: ${name}`);showToast('Eintrag gelöscht');
+  });
+};
+
+// ── EDIT MODE TOGGLE ──
+function toggleEditMode(){
+  editModeOn=!editModeOn;
+  document.body.classList.toggle('admin-edit-on',editModeOn);
+  const toolbar=document.getElementById('admin-toolbar');
+  toolbar.classList.toggle('edit-active',editModeOn);
+  const editBtn=document.getElementById('adm-edit-btn');
+  const saveBtn=document.getElementById('adm-save-btn');
+  const discardBtn=document.getElementById('adm-discard-btn');
+  editBtn.classList.toggle('active',editModeOn);
+  editBtn.innerHTML=editModeOn?'<i class="ti ti-pencil-off"></i>Editor Beenden':'<i class="ti ti-pencil"></i>Editor-Modus';
+  if(saveBtn)saveBtn.style.display=editModeOn?'flex':'none';
+  if(discardBtn)discardBtn.style.display=editModeOn?'flex':'none';
+  document.querySelectorAll('[data-editable]').forEach(el=>el.setAttribute('contenteditable',editModeOn?'true':'false'));
+  if(editModeOn){
+    // Take snapshot of current state before editing
+    editSnapshot=captureContent();
+    showToast('Editor-Modus aktiv – Inhalte jetzt bearbeitbar',false,true);
+  } else {
+    editSnapshot=null;
+    adminSaveAll('Inhalte bearbeitet (Editor-Modus)');
+  }
+}
+window.toggleEditMode=toggleEditMode;
+
+window.activateEditMode=function(){
+  if(!editModeOn){
+    showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));
+    setTimeout(toggleEditMode,200);
+  } else {
+    toggleEditMode();
+  }
+};
+
+window.discardEdits=function(){
+  if(!editSnapshot){toggleEditMode();return;}
+  confirmOpen('Änderungen verwerfen?','Alle ungespeicherten Änderungen gehen verloren.',()=>{
+    // Restore snapshot
+    if(editSnapshot.einfuehrung)document.getElementById('einfuehrung').innerHTML=editSnapshot.einfuehrung;
+    if(editSnapshot.regelwerk)document.getElementById('regelwerk').innerHTML=editSnapshot.regelwerk;
+    if(editSnapshot.strafen)document.getElementById('strafen').innerHTML=editSnapshot.strafen;
+    if(editSnapshot.highteam)document.getElementById('highteam').innerHTML=editSnapshot.highteam;
+    editModeOn=true;toggleEditMode(); // will turn it off and save (but content is restored)
+    clearUnsaved();
+    initAdminMode();
+    showToast('Änderungen verworfen');
+  },'Verwerfen');
+};
+
+async function adminSaveAll(changeNote='Inhalte gespeichert'){
+  const ok=await saveSharedContent();
+  if(ok){
+    clearUnsaved();
+    await logChange(changeNote);
+    showToast('Gespeichert – für ALLE Besucher sichtbar ✓');
+  } else showToast('Speichern fehlgeschlagen',true);
+}
+window.adminSaveAll=()=>adminSaveAll();
+
+// ── RULE MOVE / DELETE ──
+window.moveRule=function(btn,dir){
+  const rule=btn.closest('.rule'),c=rule.parentElement;
+  if(dir==='up'){const p=rule.previousElementSibling;if(p&&!p.classList.contains('add-rule-btn'))c.insertBefore(rule,p);}
+  else{const n=rule.nextElementSibling;if(n&&!n.classList.contains('add-rule-btn'))c.insertBefore(n,rule);}
+  markUnsaved();
+};
+window.deleteRuleBtn=function(btn){
+  const rule=btn.closest('.rule');
+  const title=rule.querySelector('.rule-title')?.textContent||'Regel';
+  confirmOpen('Regel löschen?',`"${title}" wird entfernt.`,async()=>{
+    rule.remove();await adminSaveAll(`Regel gelöscht: ${title}`);showToast('Regel gelöscht');
+  });
+};
+
+// ── ADMIN MODAL ──
+function adminModalOpen(title,sub,fields,onConfirm){
+  document.getElementById('admin-modal-title').textContent=title;
+  document.getElementById('admin-modal-sub').textContent=sub;
+  document.getElementById('admin-modal-fields').innerHTML=fields;
+  adminModalCb=onConfirm;
+  document.getElementById('admin-modal-overlay').classList.add('open');
+  setTimeout(()=>{const f=document.querySelector('#admin-modal-fields input,#admin-modal-fields textarea,#admin-modal-fields select');if(f)f.focus();},80);
+}
+function adminModalClose(){document.getElementById('admin-modal-overlay').classList.remove('open');adminModalCb=null;}
+function adminModalConfirm(){if(adminModalCb)adminModalCb();}
+window.adminModalConfirm=adminModalConfirm;window.adminModalClose=adminModalClose;
+document.getElementById('admin-modal-overlay').addEventListener('click',function(e){if(e.target===this)adminModalClose();});
+
+const FS=`style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"`;
+const FTA=`style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"`;
+
+// ── ADD RULE ──
+function adminAddRuleToContainer(container){
+  adminModalOpen('Neue Regel','Regel hinzufügen',
+    `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" ${FS}></div>
+     <div class="admin-field"><label>Badge-Typ</label><select id="af-badge" ${FS}><option value="b-std">Standard</option><option value="b-ok">Pflicht</option><option value="b-warn">Wichtig</option><option value="b-ban">Verboten</option><option value="b-info">Info</option></select></div>
+     <div class="admin-field"><label>Badge-Text</label><input id="af-badge-text" type="text" placeholder="Grundregel" ${FS}></div>
+     <div class="admin-field"><label>Titel</label><input id="af-title" type="text" placeholder="Regelname" ${FS}></div>
+     <div class="admin-field"><label>Beschreibung</label><textarea id="af-text" rows="4" placeholder="Regeltext..." ${FTA}></textarea></div>
+     <div class="admin-field"><label>Stil</label><select id="af-type" ${FS}><option value="">Normal</option><option value="danger">Danger (Rot)</option></select></div>`,
+    async()=>{
+      const id=document.getElementById('af-id')?.value.trim()||'TR — ?';
+      const badge=document.getElementById('af-badge')?.value||'b-std';
+      const badgeText=document.getElementById('af-badge-text')?.value.trim()||'Standard';
+      const title=document.getElementById('af-title')?.value.trim()||'Neue Regel';
+      const text=document.getElementById('af-text')?.value.trim()||'';
+      const type=document.getElementById('af-type')?.value||'';
+      const rule=document.createElement('div');
+      rule.className=`rule${type?' '+type:''}`;
+      rule.innerHTML=`
+        <div class="rule-top"><span class="rule-id" data-editable>${id}</span><span class="badge ${badge}">${badgeText}</span></div>
+        <div class="rule-title" data-editable>${title}</div>
+        <div class="rule-text" data-editable>${text}</div>
+        <div class="rule-admin-bar">
+          <button class="rule-adm-btn" onclick="moveRule(this,'up')"><i class="ti ti-arrow-up"></i></button>
+          <button class="rule-adm-btn" onclick="moveRule(this,'down')"><i class="ti ti-arrow-down"></i></button>
+          <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)"><i class="ti ti-trash"></i></button>
+        </div>`;
+      rule.querySelectorAll('[data-editable]').forEach(el=>{
+        el.setAttribute('contenteditable',editModeOn?'true':'false');
+        el.addEventListener('input',markUnsaved);
+      });
+      const ab=container.querySelector('.add-rule-btn');
+      if(ab)container.insertBefore(rule,ab);else container.appendChild(rule);
+      adminModalClose();
+      await adminSaveAll(`Neue Regel hinzugefügt: ${title}`);
+      showToast('Regel hinzugefügt & gespeichert');
+    }
+  );
+}
+window.adminAddRuleToContainer=adminAddRuleToContainer;
+
+// ── ADD STRAFE ROW ──
+window.adminAddStrafeRow=function(){
+  adminModalOpen('Neuer Strafe-Eintrag','Zur Strafen-Tabelle',
+    `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" ${FS}></div>
+     <div class="admin-field"><label>Kurze Beschreibung</label><input id="sf-desc" type="text" placeholder="Beschreibung" ${FS}></div>
+     <div class="admin-field"><label>Zeit / Strafe</label><input id="sf-time" type="text" placeholder="z.B. 25 Min." ${FS}></div>
+     <div class="admin-field"><label>Schwere</label><select id="sf-sev" ${FS}><option value="low">Niedrig (blau)</option><option value="mid">Mittel (gelb)</option><option value="high">Hoch (rot)</option><option value="perm">Permanent</option></select></div>
+     <div class="admin-field"><label>Beschreibung (lang)</label><textarea id="sf-long" rows="3" placeholder="..." ${FTA}></textarea></div>`,
+    async()=>{
+      const name=document.getElementById('sf-name')?.value.trim()||'Vergehen';
+      const desc=document.getElementById('sf-desc')?.value.trim()||'';
+      const time=document.getElementById('sf-time')?.value.trim()||'?';
+      const sev=document.getElementById('sf-sev')?.value||'low';
+      const long=document.getElementById('sf-long')?.value.trim()||'';
+      const tbody=document.getElementById('strafen-tbody');
+      if(!tbody){adminModalClose();return;}
+      const tr=document.createElement('tr');
+      tr.innerHTML=`
+        <td><div class="vname" data-editable>${name}</div><div class="vdesc" data-editable>${desc}</div></td>
+        <td><span class="zb ${sev}" data-editable>${time}</span></td>
+        <td data-editable>${long}</td>
+        <td class="stra-admin-td">
+          <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')"><i class="ti ti-arrow-up"></i></button>
+          <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')"><i class="ti ti-arrow-down"></i></button>
+          <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)"><i class="ti ti-trash"></i></button>
+        </td>`;
+      tr.querySelectorAll('[data-editable]').forEach(el=>{
+        el.setAttribute('contenteditable',editModeOn?'true':'false');
+        el.addEventListener('input',markUnsaved);
+      });
+      tbody.appendChild(tr);
+      adminModalClose();
+      await adminSaveAll(`Strafeneintrag hinzugefügt: ${name}`);
+      showToast('Eintrag hinzugefügt & gespeichert');
+    }
+  );
+};
+
+// ── ADD MEMBER ──
+function adminAddMemberToGrid(grid){
+  const section=grid.closest('.ht-rank-section');
+  const pill=section?.querySelector('.ht-rank-pill');
+  const rankLabel=pill?.textContent.trim()||'Rang';
+  const rankKey=grid.getAttribute('data-rank')||'custom';
+  const decoMap={inhaber:'INH',sl:'SL',tl:'TL'};
+  const deco=decoMap[rankKey]||rankLabel.slice(0,3).toUpperCase();
+  adminModalOpen('Mitglied hinzufügen',`Rang: ${rankLabel}`,
+    `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" ${FS}></div>
+     <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FS}></div>
+     <div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FS}><div class="field-hint">Leer lassen → später über Discord-Button setzen.</div></div>`,
+    async()=>{
+      const name=document.getElementById('mf-name')?.value.trim()||'Neues Mitglied';
+      const title=document.getElementById('mf-title')?.value.trim()||rankLabel;
+      const dcid=document.getElementById('mf-dcid')?.value.trim()||'';
+      const letter=name.charAt(name.lastIndexOf(' ')+1).toUpperCase()||name.charAt(0).toUpperCase();
+      const uid=`${rankKey}-${Date.now()}`;
+      const card=document.createElement('div');
+      card.className='ht-card';card.setAttribute('data-member-id',uid);
+      card.innerHTML=`
+        <div class="ht-admin-bar">
+          <button class="ht-adm-btn" onclick="openMemberEditModal('${uid}')"><i class="ti ti-pencil"></i></button>
+          <button class="ht-adm-btn" onclick="openLanyardModal('${uid}')"><i class="ti ti-brand-discord"></i></button>
+          <button class="ht-adm-btn del" onclick="deleteMember('${uid}')"><i class="ti ti-trash"></i></button>
+        </div>
+        <div class="ht-card-inner">
+          <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">${letter}</div><span class="dc-status" id="status-${uid}"></span></div>
+          <div class="ht-card-info">
+            <div class="ht-card-rank-tag" data-editable>${rankLabel}</div>
+            <div class="ht-card-name" data-editable>${name}</div>
+            <div class="ht-card-title" data-editable>${title}</div>
+            <div class="ht-card-status" id="statuslabel-${uid}"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+          </div>
+        </div>
+        <div class="ht-card-deco">${deco}</div>`;
+      card.querySelectorAll('[data-editable]').forEach(el=>{el.addEventListener('input',markUnsaved);el.setAttribute('contenteditable',editModeOn?'true':'false');});
+      const ab=grid.querySelector('.add-member-btn');if(ab)grid.insertBefore(card,ab);else grid.appendChild(card);
+      if(dcid&&/^\d{17,20}$/.test(dcid)){IDS[uid]=dcid;await saveIdsShared();fetchLanyard(dcid,uid);}
+      adminModalClose();
+      await adminSaveAll(`Mitglied hinzugefügt: ${name} (${rankLabel})`);
+      showToast('Mitglied hinzugefügt & für alle gespeichert');
+    }
+  );
+}
+window.adminAddMemberToGrid=adminAddMemberToGrid;
+
+window.deleteMember=async function(memberId){
+  const card=document.querySelector(`[data-member-id="${memberId}"]`);if(!card)return;
+  const name=card.querySelector('.ht-card-name')?.textContent||'Mitglied';
+  confirmOpen('Mitglied entfernen?',`"${name}" wird aus dem High-Team entfernt.`,async()=>{
+    card.remove();delete IDS[memberId];await saveIdsShared();
+    await adminSaveAll(`Mitglied entfernt: ${name}`);
+    showToast('Mitglied entfernt & gespeichert');
+  });
+};
+
+// ── ADD RANK SECTION ──
+window.adminAddRankSection=function(){
+  showTab('highteam',document.querySelector('[data-tab=highteam]'));
+  adminModalOpen('Neue Rang-Kategorie','Neue Kategorie erstellen',
+    `<div class="admin-field"><label>Rang-Name</label><input id="rs-name" type="text" placeholder="z.B. Co-Inhaber, Moderator..." ${FS}></div>`,
+    async()=>{
+      const name=document.getElementById('rs-name')?.value.trim();
+      if(!name){showToast('Name darf nicht leer sein',true);return;}
+      const rk='custom-'+Date.now();
+      const ns=createRankSection(name,rk);
+      document.getElementById('ht-rank-sections').appendChild(ns);
+      adminModalClose();
+      await adminSaveAll(`Rang-Kategorie hinzugefügt: ${name}`);
+      showToast(`Kategorie "${name}" erstellt & gespeichert`);
+    }
+  );
+};
+
+function createRankSection(rankName,rankKey){
+  const sec=document.createElement('div');
+  sec.className='ht-rank-section';sec.setAttribute('data-rank',rankKey);
+  sec.innerHTML=`
+    <div class="ht-rank-header">
+      <i class="ti ti-star ht-rank-icon"></i>
+      <span class="ht-rank-pill" data-editable>${rankName}</span>
+      <div class="ht-rank-line"></div>
+      <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
+    </div>
+    <div class="ht-grid" data-rank="${rankKey}"></div>`;
+  const grid=sec.querySelector('.ht-grid');
+  const ab=document.createElement('button');
+  ab.className='add-member-btn';ab.innerHTML='<i class="ti ti-user-plus"></i> Mitglied hinzufügen';
+  ab.onclick=()=>adminAddMemberToGrid(grid);grid.appendChild(ab);
+  sec.querySelectorAll('[data-editable]').forEach(el=>{
+    el.setAttribute('contenteditable',editModeOn?'true':'false');
+    el.addEventListener('input',markUnsaved);
+  });
+  return sec;
+}
+
+window.deleteRankSection=async function(btn){
+  const section=btn.closest('.ht-rank-section');
+  const name=section?.querySelector('.ht-rank-pill')?.textContent.trim()||'Kategorie';
+  const mc=section?.querySelectorAll('.ht-card').length||0;
+  confirmOpen(`Kategorie "${name}" löschen?`,
+    mc>0?`${mc} Mitglied(er) werden entfernt.`:'Die Kategorie wird entfernt.',
+    async()=>{
+      section.querySelectorAll('[data-member-id]').forEach(card=>delete IDS[card.getAttribute('data-member-id')]);
+      await saveIdsShared();section.remove();
+      await adminSaveAll(`Rang-Kategorie gelöscht: ${name}`);
+      showToast('Kategorie entfernt & gespeichert');
+    }
+  );
+};
+
+// ── SCROLL TO TOP ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('toTop').classList.toggle('show',window.scrollY>400);
+});
+
 </script>
 </body>
 </html>
