@@ -1,4 +1,4 @@
-html = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -619,10 +619,10 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   const ADMIN_ID = '1477023843489939487';
   const CLIENT_ID = '1505344005054005428';
   const REDIRECT_URI = window.location.origin + window.location.pathname;
-  const SCOPES = 'identify';
+  // *** FIX: guilds.members.read hinzugefügt ***
+  const SCOPES = 'identify guilds.members.read';
   const SHARED_KEYS = { content:'prada-content-v2', lanyardIds:'prada-lanyard-ids', visitors:'prada-visitors', visitLog:'prada-visitlog' };
 
-  // ─── ROLE CHECK via Vercel API ───
   async function checkTeamRole(userId) {
     try {
       const res = await fetch('/api/check-role', {
@@ -691,7 +691,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       if (!res.ok) return false;
       const user = await res.json();
 
-      // ── Rolle prüfen BEVOR Zugang gewährt wird ──
       const authSubEl = document.querySelector('#auth-screen .auth-sub');
       if (authSubEl) authSubEl.innerHTML = '\u23f3 Überprüfe Team-Mitgliedschaft...';
       const check = await checkTeamRole(user.id);
@@ -741,12 +740,10 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     currentUser = null; dcToken = null;
   }
 
-  // Beim Start: gespeicherte Session AUCH auf Rolle prüfen
   (async function initAuth() {
     const saved = sessionStorage.getItem('prada_user');
     if (saved) {
       const user = JSON.parse(saved);
-      // Admin überspringt Re-Check (Performance)
       if (user.id === ADMIN_ID) { showApp(user, sessionStorage.getItem('prada_token')); return; }
       const check = await checkTeamRole(user.id);
       if (!check.allowed) {
@@ -1204,10 +1201,4 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   window.addEventListener('scroll',()=>{document.getElementById('toTop').classList.toggle('show',window.scrollY>400);});
 </script>
 </body>
-</html>"""
-
-with open('/mnt/user-data/outputs/index.html', 'w', encoding='utf-8') as f:
-    f.write(html)
-print("Done! Size:", len(html), "chars")
-PYEOF
-python3 /tmp/build.py
+</html>
