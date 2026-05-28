@@ -139,22 +139,33 @@ body.is-admin .stra-admin-th,body.is-admin .stra-admin-td{display:table-cell;}
 .ht-rank-section{margin-bottom:3rem;}
 .ht-rank-header{display:flex;align-items:center;gap:12px;margin-bottom:1.4rem;}
 .ht-rank-pill{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.28em;text-transform:uppercase;padding:5px 14px;border:1px solid;flex-shrink:0;color:var(--text-dim);border-color:var(--border-hi);background:rgba(255,255,255,0.04);}
+.ht-rank-pill.inhaber,.ht-rank-pill.sl,.ht-rank-pill.tl,.ht-rank-pill.custom{color:var(--text-dim);border-color:var(--border-hi);background:rgba(255,255,255,0.04);}
 .ht-rank-icon{font-size:15px;flex-shrink:0;color:var(--text-dim);}
+.ht-rank-icon.inhaber,.ht-rank-icon.sl,.ht-rank-icon.tl,.ht-rank-icon.custom{color:var(--text-dim);}
 .ht-rank-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-hi),transparent);}
+.ht-rank-line.inhaber,.ht-rank-line.sl,.ht-rank-line.tl,.ht-rank-line.custom{background:linear-gradient(90deg,var(--border-hi),transparent);}
 .ht-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;}
 .ht-card{position:relative;overflow:hidden;padding:22px 22px 18px;border:1px solid var(--border-hi);background:var(--card);transition:all 0.2s ease;}
 .ht-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.07);}
 .ht-card:hover{background:var(--card-hi);border-color:rgba(255,255,255,0.22);transform:translateY(-2px);box-shadow:0 4px 24px rgba(0,0,0,0.4);}
+.ht-card.inhaber,.ht-card.sl,.ht-card.tl,.ht-card.custom{border-color:var(--border-hi);background:var(--card);}
+.ht-card.inhaber::before,.ht-card.sl::after{display:none;}
+.ht-card.sl::after{display:none;}
+.ht-card.tl{border-top:none;}
+.ht-card.inhaber:hover,.ht-card.sl:hover,.ht-card.tl:hover,.ht-card.custom:hover{border-color:rgba(255,255,255,0.22);background:var(--card-hi);box-shadow:0 4px 24px rgba(0,0,0,0.4);transform:translateY(-2px);}
 .ht-card-inner{display:flex;align-items:center;gap:16px;}
 .dc-avatar-wrap{position:relative;flex-shrink:0;}
 .dc-avatar{width:56px;height:56px;border-radius:50%;border:2px solid var(--border-hi);object-fit:cover;background:var(--card-hi);display:block;}
+.dc-avatar.inhaber,.dc-avatar.sl,.dc-avatar.tl,.dc-avatar.custom{border-color:var(--border-hi);}
 .dc-avatar-placeholder{width:56px;height:56px;border-radius:50%;border:2px solid var(--border-hi);background:var(--card-hi);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--text-muted);flex-shrink:0;}
 .dc-status{position:absolute;bottom:1px;right:1px;width:14px;height:14px;border-radius:50%;border:2.5px solid var(--bg);background:#747f8d;}
 .dc-status.online{background:#23a559;}.dc-status.idle{background:#f0b232;}.dc-status.dnd{background:#f23f43;}.dc-status.streaming{background:#593695;}
 .ht-card-info{flex:1;min-width:0;}
 .ht-card-rank-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:5px;opacity:0.6;color:var(--text-muted);}
+.ht-card-rank-tag.inhaber,.ht-card-rank-tag.sl,.ht-card-rank-tag.tl,.ht-card-rank-tag.custom{color:var(--text-muted);}
 .ht-card-name{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:0.07em;color:var(--white);line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .ht-card-title{font-size:11px;font-weight:400;margin-top:4px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.25);}
+.ht-card-title.inhaber,.ht-card-title.sl,.ht-card-title.tl,.ht-card-title.custom{color:rgba(255,255,255,0.25);}
 .ht-card-status{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;gap:5px;}
 .ht-card-status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:#747f8d;}
 .ht-card-status-dot.online{background:#23a559;}.ht-card-status-dot.idle{background:#f0b232;}.ht-card-status-dot.dnd{background:#f23f43;}.ht-card-status-dot.streaming{background:#593695;}
@@ -317,7 +328,7 @@ body.is-admin .rank-section-del-btn{display:flex;}
 .confirm-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.08em;color:var(--white);margin-bottom:8px;}
 .confirm-sub{font-size:12px;color:var(--text-muted);margin-bottom:20px;line-height:1.5;}
 .confirm-actions{display:flex;gap:8px;}
-.confirm-btn{flex:1;padding:10px;border:1px solid;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.14px;}
+.confirm-btn{flex:1;padding:10px;border:1px solid;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.14s;}
 .confirm-btn.del{background:rgba(224,60,60,0.12);border-color:rgba(224,60,60,0.5);color:#ff9090;}
 .confirm-btn.del:hover{background:rgba(224,60,60,0.22);}
 .confirm-btn.cancel{background:transparent;border-color:var(--border-hi);color:var(--text-muted);}
@@ -353,6 +364,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 
 <div class="sync-bar" id="sync-bar"></div>
 
+<!-- AUTH SCREEN -->
 <div id="auth-screen">
   <div class="auth-bg"></div>
   <div class="auth-box">
@@ -371,6 +383,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   </div>
 </div>
 
+<!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar-logo">
     <img src="https://cdn.discordapp.com/attachments/1477088048499134575/1509206572314919095/90186232-73a4-40ad-bb23-8c423dafdbc2.png?ex=6a1855a6&is=6a170426&hm=27ddcc6e0288d62469ee438720a43f3366b7f7a68ae073049ad6a55e3edf022e&" alt="Logo">
@@ -391,6 +404,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Team-Regelwerk · Intern &amp; Vertraulich</div>
@@ -407,6 +421,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 </section>
 
 <div class="content">
+  <!-- EINFÜHRUNG -->
   <div class="section visible" id="einfuehrung">
     <div class="bc">Prada CL v2 <span class="bc-sep">›</span> <em>Einführung</em></div>
     <div class="sec-hdr">
@@ -428,12 +443,28 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     <div class="info warn"><i class="ti ti-alert-triangle"></i>Das Einführungsvideo ist vor dem ersten Dienst vollständig anzusehen.</div>
     <div class="sh">Pflichten beim Einstieg</div>
     <div class="rules" id="rules-einfuehrung">
-      <div class="rule"><div class="rule-top"><span class="rule-id" data-editable>INTRO — 01</span><span class="badge b-ok">Pflicht</span></div><div class="rule-title" data-editable>Video vollständig ansehen</div><div class="rule-text" data-editable>Das Einführungsvideo ist vor dem ersten Dienst vollständig anzusehen. Es gilt als verbindlicher Teil der Teameinweisung. Wer das Video nicht gesehen hat, darf keine Adminrechte nutzen.</div><div class="rule-admin-bar"></div></div>
-      <div class="rule"><div class="rule-top"><span class="rule-id" data-editable>INTRO — 02</span><span class="badge b-ok">Pflicht</span></div><div class="rule-title" data-editable>Regelwerk lesen &amp; bestätigen</div><div class="rule-text" data-editable>Nach dem Video ist das gesamte Regelwerk zu lesen. Die Bestätigung erfolgt über den Discord-Kanal mit einem Haken als Reaktion. Unwissenheit schützt nicht vor Strafe.</div><div class="rule-admin-bar"></div></div>
-      <div class="rule"><div class="rule-top"><span class="rule-id" data-editable>INTRO — 03</span><span class="badge b-info">Probezeit</span></div><div class="rule-title" data-editable>Dreitägige Probezeit</div><div class="rule-text" data-editable>Neue Test Supporter durchlaufen eine 3-tägige Probezeit unter Aufsicht einer Teamleitung. Bans oder schwere Verstöße in der Probezeit führen zur sofortigen Entlassung ohne Abmahnung.</div><div class="rule-admin-bar"></div></div>
+      <div class="rule">
+        <div class="rule-top"><span class="rule-id" data-editable>INTRO — 01</span><span class="badge b-ok">Pflicht</span></div>
+        <div class="rule-title" data-editable>Video vollständig ansehen</div>
+        <div class="rule-text" data-editable>Das Einführungsvideo ist vor dem ersten Dienst vollständig anzusehen. Es gilt als verbindlicher Teil der Teameinweisung. Wer das Video nicht gesehen hat, darf keine Adminrechte nutzen.</div>
+        <div class="rule-admin-bar"></div>
+      </div>
+      <div class="rule">
+        <div class="rule-top"><span class="rule-id" data-editable>INTRO — 02</span><span class="badge b-ok">Pflicht</span></div>
+        <div class="rule-title" data-editable>Regelwerk lesen &amp; bestätigen</div>
+        <div class="rule-text" data-editable>Nach dem Video ist das gesamte Regelwerk zu lesen. Die Bestätigung erfolgt über den Discord-Kanal mit einem Haken als Reaktion. Unwissenheit schützt nicht vor Strafe.</div>
+        <div class="rule-admin-bar"></div>
+      </div>
+      <div class="rule">
+        <div class="rule-top"><span class="rule-id" data-editable>INTRO — 03</span><span class="badge b-info">Probezeit</span></div>
+        <div class="rule-title" data-editable>Dreitägige Probezeit</div>
+        <div class="rule-text" data-editable>Neue Test Supporter durchlaufen eine 3-tägige Probezeit unter Aufsicht einer Teamleitung. Bans oder schwere Verstöße in der Probezeit führen zur sofortigen Entlassung ohne Abmahnung.</div>
+        <div class="rule-admin-bar"></div>
+      </div>
     </div>
   </div>
 
+  <!-- TEAMREGELWERK -->
   <div class="section" id="regelwerk">
     <div class="bc">Prada CL v2 <span class="bc-sep">›</span> <em>Teamregelwerk</em></div>
     <div class="sec-hdr">
@@ -472,6 +503,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     </div>
   </div>
 
+  <!-- STRAFEN -->
   <div class="section" id="strafen">
     <div class="bc">Prada CL v2 <span class="bc-sep">›</span> <em>Strafenkatalog</em></div>
     <div class="sec-hdr">
@@ -481,7 +513,14 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     <div class="info"><i class="ti ti-info-circle"></i>Wiederholungsverstöße werden härter geahndet. Alle Maßnahmen sind mit Beweisen zu dokumentieren.</div>
     <div class="sh">Vergehen &amp; Sperrzeiten</div>
     <table class="stra-table" id="strafen-table">
-      <thead><tr><th>Vergehen</th><th>Adminjail</th><th>Beschreibung</th><th class="stra-admin-th">Aktionen</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Vergehen</th>
+          <th>Adminjail</th>
+          <th>Beschreibung</th>
+          <th class="stra-admin-th">Aktionen</th>
+        </tr>
+      </thead>
       <tbody id="strafen-tbody">
         <tr><td><div class="vname" data-editable>Reaktionszeit</div><div class="vdesc" data-editable>Keine Reaktion auf Admin-Anfragen</div></td><td><span class="zb low" data-editable>10 Min.</span></td><td data-editable>Spieler reagiert nicht auf mehrfache Kontaktversuche durch einen Admin.</td><td class="stra-admin-td"></td></tr>
         <tr><td><div class="vname" data-editable>Beleidigung</div><div class="vdesc" data-editable>Einfache Beleidigung eines Spielers</div></td><td><span class="zb low" data-editable>10 Min.</span></td><td data-editable>Beleidigende Äußerungen gegenüber anderen Spielern im Chat oder Voice.</td><td class="stra-admin-td"></td></tr>
@@ -496,6 +535,7 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     <button class="add-rule-btn" id="add-strafe-btn" onclick="adminAddStrafeRow()"><i class="ti ti-plus"></i> Eintrag hinzufügen</button>
   </div>
 
+  <!-- HIGH-TEAM -->
   <div class="section" id="highteam">
     <div class="bc">Prada CL v2 <span class="bc-sep">›</span> <em>High-Team</em></div>
     <div class="sec-hdr">
@@ -504,43 +544,188 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     </div>
     <div id="ht-rank-sections">
       <div class="ht-rank-section" data-rank="inhaber">
-        <div class="ht-rank-header"><i class="ti ti-crown ht-rank-icon inhaber"></i><span class="ht-rank-pill inhaber" data-editable>Inhaber</span><div class="ht-rank-line inhaber"></div><button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button></div>
+        <div class="ht-rank-header">
+          <i class="ti ti-crown ht-rank-icon inhaber"></i>
+          <span class="ht-rank-pill inhaber" data-editable>Inhaber</span>
+          <div class="ht-rank-line inhaber"></div>
+          <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
+        </div>
         <div class="ht-grid" data-rank="inhaber">
-          <div class="ht-card inhaber" data-member-id="inhaber-1"><div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('inhaber-1')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('inhaber-1')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('inhaber-1')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">P</div><span class="dc-status" id="status-inhaber-1"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag inhaber">Inhaber</div><div class="ht-card-name">P I Piskopat</div><div class="ht-card-title inhaber">Projektinhaber</div><div class="ht-card-status" id="statuslabel-inhaber-1"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">INH</div></div>
-          <div class="ht-card inhaber" data-member-id="inhaber-2"><div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('inhaber-2')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('inhaber-2')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('inhaber-2')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">Q</div><span class="dc-status" id="status-inhaber-2"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag inhaber">Inhaber</div><div class="ht-card-name">P I Qrayray</div><div class="ht-card-title inhaber">Projektinhaber</div><div class="ht-card-status" id="statuslabel-inhaber-2"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">INH</div></div>
+          <div class="ht-card inhaber" data-member-id="inhaber-1">
+            <div class="ht-admin-bar">
+              <button class="ht-adm-btn" onclick="openMemberEditModal('inhaber-1')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('inhaber-1')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('inhaber-1')"><i class="ti ti-trash"></i></button>
+            </div>
+            <div class="ht-card-inner">
+              <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">P</div><span class="dc-status" id="status-inhaber-1"></span></div>
+              <div class="ht-card-info">
+                <div class="ht-card-rank-tag inhaber">Inhaber</div>
+                <div class="ht-card-name">P I Piskopat</div>
+                <div class="ht-card-title inhaber">Projektinhaber</div>
+                <div class="ht-card-status" id="statuslabel-inhaber-1"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+              </div>
+            </div>
+            <div class="ht-card-deco">INH</div>
+          </div>
+          <div class="ht-card inhaber" data-member-id="inhaber-2">
+            <div class="ht-admin-bar">
+              <button class="ht-adm-btn" onclick="openMemberEditModal('inhaber-2')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('inhaber-2')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('inhaber-2')"><i class="ti ti-trash"></i></button>
+            </div>
+            <div class="ht-card-inner">
+              <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">Q</div><span class="dc-status" id="status-inhaber-2"></span></div>
+              <div class="ht-card-info">
+                <div class="ht-card-rank-tag inhaber">Inhaber</div>
+                <div class="ht-card-name">P I Qrayray</div>
+                <div class="ht-card-title inhaber">Projektinhaber</div>
+                <div class="ht-card-status" id="statuslabel-inhaber-2"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+              </div>
+            </div>
+            <div class="ht-card-deco">INH</div>
+          </div>
         </div>
       </div>
       <div class="ht-rank-section" data-rank="sl">
-        <div class="ht-rank-header"><i class="ti ti-shield-half ht-rank-icon sl"></i><span class="ht-rank-pill sl" data-editable>Serverleitung</span><div class="ht-rank-line sl"></div><button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button></div>
+        <div class="ht-rank-header">
+          <i class="ti ti-shield-half ht-rank-icon sl"></i>
+          <span class="ht-rank-pill sl" data-editable>Serverleitung</span>
+          <div class="ht-rank-line sl"></div>
+          <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
+        </div>
         <div class="ht-grid" data-rank="sl">
-          <div class="ht-card sl" data-member-id="sl-1"><div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('sl-1')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('sl-1')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('sl-1')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">B</div><span class="dc-status" id="status-sl-1"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag sl">Serverleitung</div><div class="ht-card-name">P I Bsavv</div><div class="ht-card-title sl">Serverleitung</div><div class="ht-card-status" id="statuslabel-sl-1"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">SL</div></div>
-          <div class="ht-card sl" data-member-id="sl-2"><div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('sl-2')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('sl-2')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('sl-2')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">L</div><span class="dc-status" id="status-sl-2"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag sl">Serverleitung</div><div class="ht-card-name">P I Layca</div><div class="ht-card-title sl">Serverleitung</div><div class="ht-card-status" id="statuslabel-sl-2"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">SL</div></div>
+          <div class="ht-card sl" data-member-id="sl-1">
+            <div class="ht-admin-bar">
+              <button class="ht-adm-btn" onclick="openMemberEditModal('sl-1')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('sl-1')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('sl-1')"><i class="ti ti-trash"></i></button>
+            </div>
+            <div class="ht-card-inner">
+              <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">B</div><span class="dc-status" id="status-sl-1"></span></div>
+              <div class="ht-card-info">
+                <div class="ht-card-rank-tag sl">Serverleitung</div>
+                <div class="ht-card-name">P I Bsavv</div>
+                <div class="ht-card-title sl">Serverleitung</div>
+                <div class="ht-card-status" id="statuslabel-sl-1"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+              </div>
+            </div>
+            <div class="ht-card-deco">SL</div>
+          </div>
+          <div class="ht-card sl" data-member-id="sl-2">
+            <div class="ht-admin-bar">
+              <button class="ht-adm-btn" onclick="openMemberEditModal('sl-2')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('sl-2')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('sl-2')"><i class="ti ti-trash"></i></button>
+            </div>
+            <div class="ht-card-inner">
+              <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">L</div><span class="dc-status" id="status-sl-2"></span></div>
+              <div class="ht-card-info">
+                <div class="ht-card-rank-tag sl">Serverleitung</div>
+                <div class="ht-card-name">P I Layca</div>
+                <div class="ht-card-title sl">Serverleitung</div>
+                <div class="ht-card-status" id="statuslabel-sl-2"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+              </div>
+            </div>
+            <div class="ht-card-deco">SL</div>
+          </div>
         </div>
       </div>
       <div class="ht-rank-section" data-rank="tl">
-        <div class="ht-rank-header"><i class="ti ti-users-group ht-rank-icon tl"></i><span class="ht-rank-pill tl" data-editable>Teamleitung</span><div class="ht-rank-line tl"></div><button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button></div>
+        <div class="ht-rank-header">
+          <i class="ti ti-users-group ht-rank-icon tl"></i>
+          <span class="ht-rank-pill tl" data-editable>Teamleitung</span>
+          <div class="ht-rank-line tl"></div>
+          <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
+        </div>
         <div class="ht-grid" data-rank="tl">
-          <div class="ht-card tl" data-member-id="tl-1"><div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('tl-1')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('tl-1')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('tl-1')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">A</div><span class="dc-status" id="status-tl-1"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag tl">Teamleitung</div><div class="ht-card-name">P I Aymen</div><div class="ht-card-title tl">Teamleitung</div><div class="ht-card-status" id="statuslabel-tl-1"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">TL</div></div>
-          <div class="ht-card tl" data-member-id="tl-2"><div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('tl-2')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('tl-2')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('tl-2')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">L</div><span class="dc-status" id="status-tl-2"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag tl">Teamleitung</div><div class="ht-card-name">P I Levin</div><div class="ht-card-title tl">Teamleitung</div><div class="ht-card-status" id="statuslabel-tl-2"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">TL</div></div>
-          <div class="ht-card tl" data-member-id="tl-3"><div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('tl-3')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('tl-3')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('tl-3')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">S</div><span class="dc-status" id="status-tl-3"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag tl">Teamleitung</div><div class="ht-card-name">P I SG</div><div class="ht-card-title tl">Teamleitung</div><div class="ht-card-status" id="statuslabel-tl-3"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">TL</div></div>
+          <div class="ht-card tl" data-member-id="tl-1">
+            <div class="ht-admin-bar">
+              <button class="ht-adm-btn" onclick="openMemberEditModal('tl-1')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('tl-1')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('tl-1')"><i class="ti ti-trash"></i></button>
+            </div>
+            <div class="ht-card-inner">
+              <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">A</div><span class="dc-status" id="status-tl-1"></span></div>
+              <div class="ht-card-info">
+                <div class="ht-card-rank-tag tl">Teamleitung</div>
+                <div class="ht-card-name">P I Aymen</div>
+                <div class="ht-card-title tl">Teamleitung</div>
+                <div class="ht-card-status" id="statuslabel-tl-1"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+              </div>
+            </div>
+            <div class="ht-card-deco">TL</div>
+          </div>
+          <div class="ht-card tl" data-member-id="tl-2">
+            <div class="ht-admin-bar">
+              <button class="ht-adm-btn" onclick="openMemberEditModal('tl-2')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('tl-2')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('tl-2')"><i class="ti ti-trash"></i></button>
+            </div>
+            <div class="ht-card-inner">
+              <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">L</div><span class="dc-status" id="status-tl-2"></span></div>
+              <div class="ht-card-info">
+                <div class="ht-card-rank-tag tl">Teamleitung</div>
+                <div class="ht-card-name">P I Levin</div>
+                <div class="ht-card-title tl">Teamleitung</div>
+                <div class="ht-card-status" id="statuslabel-tl-2"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+              </div>
+            </div>
+            <div class="ht-card-deco">TL</div>
+          </div>
+          <div class="ht-card tl" data-member-id="tl-3">
+            <div class="ht-admin-bar">
+              <button class="ht-adm-btn" onclick="openMemberEditModal('tl-3')"><i class="ti ti-pencil"></i></button>
+              <button class="ht-adm-btn" onclick="openLanyardModal('tl-3')"><i class="ti ti-brand-discord"></i></button>
+              <button class="ht-adm-btn del" onclick="deleteMember('tl-3')"><i class="ti ti-trash"></i></button>
+            </div>
+            <div class="ht-card-inner">
+              <div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">S</div><span class="dc-status" id="status-tl-3"></span></div>
+              <div class="ht-card-info">
+                <div class="ht-card-rank-tag tl">Teamleitung</div>
+                <div class="ht-card-name">P I SG</div>
+                <div class="ht-card-title tl">Teamleitung</div>
+                <div class="ht-card-status" id="statuslabel-tl-3"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+              </div>
+            </div>
+            <div class="ht-card-deco">TL</div>
+          </div>
         </div>
       </div>
     </div>
-    <button class="add-rank-section-btn" id="add-rank-section-btn" onclick="adminAddRankSection()"><i class="ti ti-plus"></i> Neue Rang-Kategorie hinzufügen</button>
+    <button class="add-rank-section-btn" id="add-rank-section-btn" onclick="adminAddRankSection()">
+      <i class="ti ti-plus"></i> Neue Rang-Kategorie hinzufügen
+    </button>
   </div>
 
+  <!-- DASHBOARD -->
   <div class="section" id="dashboard">
     <div class="bc">Prada CL v2 <span class="bc-sep">›</span> <em>Admin-Dashboard</em></div>
     <div class="dash-header">
       <div style="display:flex;align-items:center;justify-content:space-between;">
-        <div><div class="dash-header-title">Admin Dashboard</div><div class="dash-header-sub">Besucherübersicht · Shared Storage · Alle Admins</div></div>
+        <div>
+          <div class="dash-header-title">Admin Dashboard</div>
+          <div class="dash-header-sub">Besucherübersicht · Shared Storage · Alle Admins</div>
+        </div>
         <button class="dash-refresh" id="dash-refresh-btn" onclick="loadDashboard()"><i class="ti ti-refresh"></i></button>
       </div>
     </div>
     <div class="dash-admin-strip">
-      <div class="dash-admin-card" style="--c:var(--inhaber-accent)" onclick="showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));setTimeout(()=>document.getElementById('adm-edit-btn').click(),300)"><div class="dac-ico" style="color:var(--inhaber-accent)"><i class="ti ti-pencil"></i></div><div class="dac-title">Regelwerk bearbeiten</div><div class="dac-desc">Edit-Modus aktivieren</div></div>
-      <div class="dash-admin-card" style="--c:var(--tl-accent)" onclick="showTab('highteam',document.querySelector('[data-tab=highteam]'))"><div class="dac-ico" style="color:#aaa"><i class="ti ti-crown"></i></div><div class="dac-title">High-Team verwalten</div><div class="dac-desc">Mitglieder · Ränge · Discord IDs</div></div>
-      <div class="dash-admin-card" style="--c:var(--red)" onclick="adminResetConfirm()"><div class="dac-ico" style="color:var(--red)"><i class="ti ti-rotate-clockwise-2"></i></div><div class="dac-title">Reset</div><div class="dac-desc">Alle Änderungen zurücksetzen</div></div>
+      <div class="dash-admin-card" style="--c:var(--inhaber-accent)" onclick="showTab('regelwerk',document.querySelector('[data-tab=regelwerk]'));setTimeout(()=>document.getElementById('adm-edit-btn').click(),300)">
+        <div class="dac-ico" style="color:var(--inhaber-accent)"><i class="ti ti-pencil"></i></div>
+        <div class="dac-title">Regelwerk bearbeiten</div>
+        <div class="dac-desc">Edit-Modus aktivieren</div>
+      </div>
+      <div class="dash-admin-card" style="--c:var(--tl-accent)" onclick="showTab('highteam',document.querySelector('[data-tab=highteam]'))">
+        <div class="dac-ico" style="color:#aaa"><i class="ti ti-crown"></i></div>
+        <div class="dac-title">High-Team verwalten</div>
+        <div class="dac-desc">Mitglieder · Ränge · Discord IDs</div>
+      </div>
+      <div class="dash-admin-card" style="--c:var(--red)" onclick="adminResetConfirm()">
+        <div class="dac-ico" style="color:var(--red)"><i class="ti ti-rotate-clockwise-2"></i></div>
+        <div class="dac-title">Reset</div>
+        <div class="dac-desc">Alle Änderungen zurücksetzen</div>
+      </div>
     </div>
     <div class="dash-stats" id="dash-stats">
       <div class="dash-stat"><div class="dash-stat-n purple" id="ds-total">–</div><div class="dash-stat-l">Besucher gesamt</div></div>
@@ -549,23 +734,80 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       <div class="dash-stat"><div class="dash-stat-n red" id="ds-log">–</div><div class="dash-stat-l">Log-Einträge</div></div>
     </div>
     <div class="dash-grid">
-      <div class="dash-panel"><div class="dash-panel-hdr"><div class="dash-panel-title"><i class="ti ti-users"></i>Alle Besucher</div><span class="dash-panel-count" id="visitors-count">0</span></div><div class="dash-panel-body" id="visitors-list"><div class="dash-empty">Lädt...</div></div></div>
-      <div class="dash-panel"><div class="dash-panel-hdr"><div class="dash-panel-title"><i class="ti ti-history"></i>Letzte Besuche</div><span class="dash-panel-count" id="log-count">0</span></div><div class="dash-panel-body" id="visit-log"><div class="dash-empty">Lädt...</div></div></div>
+      <div class="dash-panel">
+        <div class="dash-panel-hdr">
+          <div class="dash-panel-title"><i class="ti ti-users"></i>Alle Besucher</div>
+          <span class="dash-panel-count" id="visitors-count">0</span>
+        </div>
+        <div class="dash-panel-body" id="visitors-list"><div class="dash-empty">Lädt...</div></div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-hdr">
+          <div class="dash-panel-title"><i class="ti ti-history"></i>Letzte Besuche</div>
+          <span class="dash-panel-count" id="log-count">0</span>
+        </div>
+        <div class="dash-panel-body" id="visit-log"><div class="dash-empty">Lädt...</div></div>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- LANYARD MODAL -->
 <div class="modal-overlay" id="lanyard-modal-overlay">
-  <div class="modal"><div class="modal-title">Discord ID</div><div class="modal-sub">Lanyard API · Echtzeit-Status</div><label class="modal-label">Discord User ID</label><input class="modal-input" id="lanyard-input" type="text" placeholder="z.B. 123456789012345678" maxlength="20"><div class="modal-actions"><button class="modal-btn modal-btn-confirm" onclick="saveLanyardId()">Speichern</button><button class="modal-btn modal-btn-cancel" onclick="closeLanyardModal()">Abbrechen</button></div></div>
+  <div class="modal">
+    <div class="modal-title">Discord ID</div>
+    <div class="modal-sub">Lanyard API · Echtzeit-Status</div>
+    <label class="modal-label">Discord User ID</label>
+    <input class="modal-input" id="lanyard-input" type="text" placeholder="z.B. 123456789012345678" maxlength="20">
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-confirm" onclick="saveLanyardId()">Speichern</button>
+      <button class="modal-btn modal-btn-cancel" onclick="closeLanyardModal()">Abbrechen</button>
+    </div>
+  </div>
 </div>
+
+<!-- MEMBER EDIT MODAL -->
 <div class="modal-overlay" id="member-edit-overlay">
-  <div class="modal" style="width:440px;"><div class="modal-title">Mitglied bearbeiten</div><div class="modal-sub" id="member-edit-sub">High-Team</div><label class="modal-label">Name</label><input class="modal-input" id="me-name" type="text" placeholder="P I Name"><label class="modal-label">Rang-Kategorie</label><input class="modal-input" id="me-rank" type="text" placeholder="z.B. Teamleitung, Serverleitung..."><label class="modal-label">Titel</label><input class="modal-input" id="me-title" type="text" placeholder="z.B. Projektinhaber"><div class="modal-actions"><button class="modal-btn modal-btn-confirm" onclick="saveMemberEdit()">Speichern</button><button class="modal-btn modal-btn-cancel" onclick="closeMemberEditModal()">Abbrechen</button></div></div>
+  <div class="modal" style="width:440px;">
+    <div class="modal-title">Mitglied bearbeiten</div>
+    <div class="modal-sub" id="member-edit-sub">High-Team</div>
+    <label class="modal-label">Name</label>
+    <input class="modal-input" id="me-name" type="text" placeholder="P I Name">
+    <label class="modal-label">Rang-Kategorie</label>
+    <input class="modal-input" id="me-rank" type="text" placeholder="z.B. Teamleitung, Serverleitung...">
+    <label class="modal-label">Titel</label>
+    <input class="modal-input" id="me-title" type="text" placeholder="z.B. Projektinhaber">
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-confirm" onclick="saveMemberEdit()">Speichern</button>
+      <button class="modal-btn modal-btn-cancel" onclick="closeMemberEditModal()">Abbrechen</button>
+    </div>
+  </div>
 </div>
+
+<!-- ADMIN MODAL -->
 <div id="admin-modal-overlay">
-  <div class="admin-modal"><div class="admin-modal-title" id="admin-modal-title">Neue Regel</div><div class="admin-modal-sub" id="admin-modal-sub">Regel hinzufügen</div><div id="admin-modal-fields"></div><div class="admin-modal-actions"><button class="admin-modal-btn confirm" onclick="adminModalConfirm()">Speichern</button><button class="admin-modal-btn cancel" onclick="adminModalClose()">Abbrechen</button></div></div>
+  <div class="admin-modal">
+    <div class="admin-modal-title" id="admin-modal-title">Neue Regel</div>
+    <div class="admin-modal-sub" id="admin-modal-sub">Regel hinzufügen</div>
+    <div id="admin-modal-fields"></div>
+    <div class="admin-modal-actions">
+      <button class="admin-modal-btn confirm" onclick="adminModalConfirm()">Speichern</button>
+      <button class="admin-modal-btn cancel" onclick="adminModalClose()">Abbrechen</button>
+    </div>
+  </div>
 </div>
+
+<!-- CONFIRM -->
 <div id="confirm-overlay">
-  <div class="confirm-box"><div class="confirm-icon"><i class="ti ti-alert-triangle"></i></div><div class="confirm-title" id="confirm-title">Sicher?</div><div class="confirm-sub" id="confirm-sub">Diese Aktion kann nicht rückgängig gemacht werden.</div><div class="confirm-actions"><button class="confirm-btn del" id="confirm-yes">Löschen</button><button class="confirm-btn cancel" onclick="confirmClose()">Abbrechen</button></div></div>
+  <div class="confirm-box">
+    <div class="confirm-icon"><i class="ti ti-alert-triangle"></i></div>
+    <div class="confirm-title" id="confirm-title">Sicher?</div>
+    <div class="confirm-sub" id="confirm-sub">Diese Aktion kann nicht rückgängig gemacht werden.</div>
+    <div class="confirm-actions">
+      <button class="confirm-btn del" id="confirm-yes">Löschen</button>
+      <button class="confirm-btn cancel" onclick="confirmClose()">Abbrechen</button>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -607,51 +849,37 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   window.__db = db;
 
   async function sharedGet(key) {
-    try { const ref = doc(db,"prada",key); const snap = await getDoc(ref); return snap.exists()?snap.data().value:null; } catch(e){console.error("sharedGet",key,e);return null;}
+    try {
+      const ref = doc(db, "prada", key);
+      const snap = await getDoc(ref);
+      return snap.exists() ? snap.data().value : null;
+    } catch(e) { console.error("sharedGet", key, e); return null; }
   }
-  async function sharedSet(key,value) {
-    try { const ref = doc(db,"prada",key); await setDoc(ref,{value}); return true; } catch(e){console.error("sharedSet",key,e);return false;}
+  async function sharedSet(key, value) {
+    try {
+      const ref = doc(db, "prada", key);
+      await setDoc(ref, { value });
+      return true;
+    } catch(e) { console.error("sharedSet", key, e); return false; }
   }
   async function sharedDelete(key) {
-    try { const ref = doc(db,"prada",key); await deleteDoc(ref); return true; } catch(e){console.error("sharedDelete",key,e);return false;}
+    try {
+      const ref = doc(db, "prada", key);
+      await deleteDoc(ref);
+      return true;
+    } catch(e) { console.error("sharedDelete", key, e); return false; }
   }
 
   const ADMIN_ID = '1477023843489939487';
   const CLIENT_ID = '1505344005054005428';
   const REDIRECT_URI = window.location.origin + window.location.pathname;
-  // *** FIX: guilds.members.read hinzugefügt ***
-  const SCOPES = 'identify guilds.members.read';
-  const SHARED_KEYS = { content:'prada-content-v2', lanyardIds:'prada-lanyard-ids', visitors:'prada-visitors', visitLog:'prada-visitlog' };
-
-  async function checkTeamRole(userId) {
-    try {
-      const res = await fetch('/api/check-role', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId })
-      });
-      if (!res.ok) return { allowed: false, reason: 'api_error' };
-      return await res.json();
-    } catch (e) {
-      console.error('Role check failed:', e);
-      return { allowed: false, reason: 'network_error' };
-    }
-  }
-
-  function showAccessDenied(reason) {
-    const screen = document.getElementById('auth-screen');
-    screen.style.display = 'flex';
-    const sub = screen.querySelector('.auth-sub');
-    const btn = document.getElementById('discord-login-btn');
-    if (reason === 'not_in_server') {
-      sub.innerHTML = '\u26d4 <strong>Kein Zugang.</strong><br>Du bist kein Mitglied im Team-Server.';
-    } else {
-      sub.innerHTML = '\u26d4 <strong>Kein Zugang.</strong><br>Du hast nicht die erforderliche Team-Rolle.';
-    }
-    btn.style.opacity = '0.4';
-    btn.style.pointerEvents = 'none';
-    btn.textContent = 'Kein Zugang';
-  }
+  const SCOPES = 'identify';
+  const SHARED_KEYS = {
+    content: 'prada-content-v2',
+    lanyardIds: 'prada-lanyard-ids',
+    visitors: 'prada-visitors',
+    visitLog: 'prada-visitlog',
+  };
 
   let currentUser = null;
   let dcToken = null;
@@ -666,9 +894,10 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
   function syncBar(state) {
     const bar = document.getElementById('sync-bar');
     bar.className = 'sync-bar ' + state;
-    if (state==='saved') setTimeout(()=>bar.className='sync-bar',1200);
+    if (state === 'saved') setTimeout(() => bar.className = 'sync-bar', 1200);
   }
 
+  // ─── AUTH ───
   function getOAuthUrl() {
     const state = Math.random().toString(36).slice(2);
     sessionStorage.setItem('oauth_state', state);
@@ -690,15 +919,6 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       const res = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } });
       if (!res.ok) return false;
       const user = await res.json();
-
-      const authSubEl = document.querySelector('#auth-screen .auth-sub');
-      if (authSubEl) authSubEl.innerHTML = '\u23f3 Überprüfe Team-Mitgliedschaft...';
-      const check = await checkTeamRole(user.id);
-      if (!check.allowed) {
-        showAccessDenied(check.reason || 'no_role');
-        return false;
-      }
-
       sessionStorage.setItem('prada_token', token);
       sessionStorage.setItem('prada_user', JSON.stringify(user));
       showApp(user, token);
@@ -742,49 +962,50 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
 
   (async function initAuth() {
     const saved = sessionStorage.getItem('prada_user');
-    if (saved) {
-      const user = JSON.parse(saved);
-      if (user.id === ADMIN_ID) { showApp(user, sessionStorage.getItem('prada_token')); return; }
-      const check = await checkTeamRole(user.id);
-      if (!check.allowed) {
-        sessionStorage.removeItem('prada_token');
-        sessionStorage.removeItem('prada_user');
-        showAccessDenied(check.reason || 'no_role');
-        return;
-      }
-      showApp(user, sessionStorage.getItem('prada_token'));
-      return;
-    }
+    if (saved) { showApp(JSON.parse(saved), sessionStorage.getItem('prada_token')); return; }
     const handled = await handleCallback();
     if (!handled) document.getElementById('auth-screen').style.display = 'flex';
   })();
 
+  // ─── VISIT TRACKING ───
   async function trackVisit(user) {
     try {
       const isAdmin = user.id === ADMIN_ID;
       const now = Date.now();
       let visitors = (await sharedGet(SHARED_KEYS.visitors)) || [];
-      const idx = visitors.findIndex(v=>v.id===user.id);
-      if (idx>=0) { visitors[idx].lastSeen=now; visitors[idx].visitCount=(visitors[idx].visitCount||1)+1; visitors[idx].avatar=user.avatar; visitors[idx].global_name=user.global_name||user.username; }
-      else { visitors.push({id:user.id,username:user.username,global_name:user.global_name||user.username,avatar:user.avatar,discriminator:user.discriminator,firstSeen:now,lastSeen:now,visitCount:1,isAdmin}); }
+      const idx = visitors.findIndex(v => v.id === user.id);
+      if (idx >= 0) {
+        visitors[idx].lastSeen = now;
+        visitors[idx].visitCount = (visitors[idx].visitCount || 1) + 1;
+        visitors[idx].avatar = user.avatar;
+        visitors[idx].global_name = user.global_name || user.username;
+      } else {
+        visitors.push({
+          id: user.id, username: user.username, global_name: user.global_name || user.username,
+          avatar: user.avatar, discriminator: user.discriminator,
+          firstSeen: now, lastSeen: now, visitCount: 1, isAdmin
+        });
+      }
       await sharedSet(SHARED_KEYS.visitors, visitors);
       let log = (await sharedGet(SHARED_KEYS.visitLog)) || [];
-      log.unshift({userId:user.id,username:user.global_name||user.username,avatar:user.avatar,ts:now,isAdmin});
-      if (log.length>100) log=log.slice(0,100);
+      log.unshift({ userId: user.id, username: user.global_name || user.username, avatar: user.avatar, ts: now, isAdmin });
+      if (log.length > 100) log = log.slice(0, 100);
       await sharedSet(SHARED_KEYS.visitLog, log);
-    } catch(e){console.error('Track error:',e);}
+    } catch(e) { console.error('Track error:', e); }
   }
 
+  // ─── CONTENT LOAD/SAVE ───
   async function loadSharedContent() {
     try {
       const c = await sharedGet(SHARED_KEYS.content);
       if (!c) return;
       if (c.einfuehrung) document.getElementById('einfuehrung').innerHTML = c.einfuehrung;
-      if (c.regelwerk)   document.getElementById('regelwerk').innerHTML   = c.regelwerk;
-      if (c.strafen)     document.getElementById('strafen').innerHTML     = c.strafen;
-      if (c.highteam)    document.getElementById('highteam').innerHTML    = c.highteam;
+      if (c.regelwerk) document.getElementById('regelwerk').innerHTML = c.regelwerk;
+      if (c.strafen) document.getElementById('strafen').innerHTML = c.strafen;
+      if (c.highteam) document.getElementById('highteam').innerHTML = c.highteam;
+      // Re-init admin mode after content reload to rewire all button handlers
       if (document.body.classList.contains('is-admin')) initAdminMode();
-    } catch(e){console.error('Load content error:',e);}
+    } catch(e) { console.error('Load content error:', e); }
   }
 
   async function saveSharedContent() {
@@ -792,29 +1013,34 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
     try {
       const c = {
         einfuehrung: document.getElementById('einfuehrung').innerHTML,
-        regelwerk:   document.getElementById('regelwerk').innerHTML,
-        strafen:     document.getElementById('strafen').innerHTML,
-        highteam:    document.getElementById('highteam').innerHTML
+        regelwerk: document.getElementById('regelwerk').innerHTML,
+        strafen: document.getElementById('strafen').innerHTML,
+        highteam: document.getElementById('highteam').innerHTML
       };
       const ok = await sharedSet(SHARED_KEYS.content, c);
-      if (ok){syncBar('saved');return true;} else{syncBar('');return false;}
-    } catch(e){console.error('Save error:',e);syncBar('');return false;}
+      if (ok) { syncBar('saved'); return true; }
+      else { syncBar(''); return false; }
+    } catch(e) { console.error('Save error:', e); syncBar(''); return false; }
   }
 
-  async function saveIdsShared() { await sharedSet(SHARED_KEYS.lanyardIds, IDS); }
+  async function saveIdsShared() {
+    await sharedSet(SHARED_KEYS.lanyardIds, IDS);
+  }
 
+  // ─── TAB NAVIGATION ───
   function showTab(id, btn) {
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     const sec = document.getElementById(id);
     if (sec) sec.classList.add('visible');
     if (btn) btn.classList.add('active');
     window.scrollTo({top:0,behavior:'smooth'});
-    if (id==='dashboard') loadDashboard();
+    if (id === 'dashboard') loadDashboard();
   }
   window.showTab = showTab;
   window.logout = logout;
 
+  // ─── DASHBOARD ───
   async function loadDashboard() {
     if (!currentUser || currentUser.id !== ADMIN_ID) return;
     const btn = document.getElementById('dash-refresh-btn');
@@ -823,8 +1049,8 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       const visitors = (await sharedGet(SHARED_KEYS.visitors)) || [];
       const log = (await sharedGet(SHARED_KEYS.visitLog)) || [];
       const today = new Date(); today.setHours(0,0,0,0);
-      const todayCount = visitors.filter(v=>v.lastSeen>=today.getTime()).length;
-      const adminVisits = log.filter(l=>l.isAdmin).length;
+      const todayCount = visitors.filter(v => v.lastSeen >= today.getTime()).length;
+      const adminVisits = log.filter(l => l.isAdmin).length;
       document.getElementById('ds-total').textContent = visitors.length;
       document.getElementById('ds-today').textContent = todayCount;
       document.getElementById('ds-admins').textContent = adminVisits;
@@ -832,38 +1058,60 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       document.getElementById('visitors-count').textContent = visitors.length;
       document.getElementById('log-count').textContent = log.length;
       const vList = document.getElementById('visitors-list');
-      if (!visitors.length) vList.innerHTML='<div class="dash-empty">Noch keine Besucher</div>';
+      if (!visitors.length) vList.innerHTML = '<div class="dash-empty">Noch keine Besucher</div>';
       else {
-        const sorted = [...visitors].sort((a,b)=>b.lastSeen-a.lastSeen);
-        vList.innerHTML = sorted.map(v=>{
-          const avatarUrl = v.avatar?`https://cdn.discordapp.com/avatars/${v.id}/${v.avatar}.png?size=64`:null;
+        const sorted = [...visitors].sort((a,b)=>b.lastSeen - a.lastSeen);
+        vList.innerHTML = sorted.map(v => {
+          const avatarUrl = v.avatar ? `https://cdn.discordapp.com/avatars/${v.id}/${v.avatar}.png?size=64` : null;
           const letter = (v.global_name||'?').charAt(0).toUpperCase();
-          return `<div class="visitor-row"><div class="v-avatar">${avatarUrl?`<img src="${avatarUrl}" alt="" onerror="this.parentElement.innerHTML='<div class=v-avatar-ph>${letter}</div>'">`:`<div class="v-avatar-ph">${letter}</div>`}${v.isAdmin?'<div class="v-admin-dot"><i class="ti ti-shield-check"></i></div>':''}</div><div class="v-info"><div class="v-name">${v.global_name||v.username}</div><div class="v-tag">@${v.username}${v.isAdmin?' <span style="color:var(--inhaber-accent)">· Admin</span>':''}</div>${v.isAdmin?'<div class="v-admin-badge"><i class="ti ti-shield-check"></i>Admin</div>':''}</div><div class="v-meta"><div class="v-time">${formatTime(v.lastSeen)}</div><div class="v-count">${v.visitCount||1}× besucht</div></div></div>`;
+          return `<div class="visitor-row">
+            <div class="v-avatar">
+              ${avatarUrl ? `<img src="${avatarUrl}" alt="" onerror="this.parentElement.innerHTML='<div class=v-avatar-ph>${letter}</div>'">` : `<div class="v-avatar-ph">${letter}</div>`}
+              ${v.isAdmin ? '<div class="v-admin-dot"><i class="ti ti-shield-check"></i></div>' : ''}
+            </div>
+            <div class="v-info">
+              <div class="v-name">${v.global_name||v.username}</div>
+              <div class="v-tag">@${v.username}${v.isAdmin?' <span style="color:var(--inhaber-accent)">· Admin</span>':''}</div>
+              ${v.isAdmin ? '<div class="v-admin-badge"><i class="ti ti-shield-check"></i>Admin</div>' : ''}
+            </div>
+            <div class="v-meta">
+              <div class="v-time">${formatTime(v.lastSeen)}</div>
+              <div class="v-count">${v.visitCount||1}× besucht</div>
+            </div>
+          </div>`;
         }).join('');
       }
       const vLog = document.getElementById('visit-log');
-      if (!log.length) vLog.innerHTML='<div class="dash-empty">Kein Log</div>';
+      if (!log.length) vLog.innerHTML = '<div class="dash-empty">Kein Log</div>';
       else {
-        vLog.innerHTML = log.slice(0,50).map(entry=>{
-          const avatarUrl = entry.avatar?`https://cdn.discordapp.com/avatars/${entry.userId}/${entry.avatar}.png?size=56`:null;
+        vLog.innerHTML = log.slice(0,50).map(entry => {
+          const avatarUrl = entry.avatar ? `https://cdn.discordapp.com/avatars/${entry.userId}/${entry.avatar}.png?size=56` : null;
           const letter = (entry.username||'?').charAt(0).toUpperCase();
-          return `<div class="log-row">${entry.isAdmin?'<div class="log-admin-dot"></div>':''}<div class="log-avatar">${avatarUrl?`<img src="${avatarUrl}" onerror="this.style.display='none'">`:`<div class="log-avatar-ph">${letter}</div>`}</div><div class="log-name"><strong>${entry.username}</strong> hat die Seite besucht</div><div class="log-time">${formatTime(entry.ts)}</div></div>`;
+          return `<div class="log-row">
+            ${entry.isAdmin ? '<div class="log-admin-dot"></div>' : ''}
+            <div class="log-avatar">
+              ${avatarUrl ? `<img src="${avatarUrl}" onerror="this.style.display='none'">` : `<div class="log-avatar-ph">${letter}</div>`}
+            </div>
+            <div class="log-name"><strong>${entry.username}</strong> hat die Seite besucht</div>
+            <div class="log-time">${formatTime(entry.ts)}</div>
+          </div>`;
         }).join('');
       }
-    } catch(e){console.error(e);}
-    setTimeout(()=>btn.classList.remove('spinning'),400);
+    } catch(e) { console.error(e); }
+    setTimeout(() => btn.classList.remove('spinning'), 400);
   }
   window.loadDashboard = loadDashboard;
 
   function formatTime(ts) {
-    const diff = Date.now()-ts;
-    if (diff<60000) return 'Gerade eben';
-    if (diff<3600000) return `vor ${Math.floor(diff/60000)} Min.`;
-    if (diff<86400000) return `vor ${Math.floor(diff/3600000)} Std.`;
+    const diff = Date.now() - ts;
+    if (diff < 60000) return 'Gerade eben';
+    if (diff < 3600000) return `vor ${Math.floor(diff/60000)} Min.`;
+    if (diff < 86400000) return `vor ${Math.floor(diff/3600000)} Std.`;
     const d = new Date(ts);
-    return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+    return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'}) + ' ' + d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
   }
 
+  // ─── LANYARD ───
   async function fetchLanyard(discordId, memberId) {
     try {
       const res = await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
@@ -875,330 +1123,570 @@ footer img{width:16px;height:16px;border-radius:50%;filter:grayscale(1)brightnes
       if (!card) return;
       const wrap = card.querySelector('.dc-avatar-wrap');
       if (wrap) {
-        const uid=d.discord_user.id, h=d.discord_user.avatar;
-        const url = h?`https://cdn.discordapp.com/avatars/${uid}/${h}.${h.startsWith('a_')?'gif':'png'}?size=128`:`https://cdn.discordapp.com/embed/avatars/${parseInt(uid)%5}.png`;
+        const uid = d.discord_user.id, h = d.discord_user.avatar;
+        const url = h ? `https://cdn.discordapp.com/avatars/${uid}/${h}.${h.startsWith('a_')?'gif':'png'}?size=128`
+                      : `https://cdn.discordapp.com/embed/avatars/${parseInt(uid)%5}.png`;
         let img = wrap.querySelector('img.dc-avatar');
         const ph = wrap.querySelector('.dc-avatar-placeholder');
         if (ph) ph.remove();
-        if (!img){img=document.createElement('img');img.className='dc-avatar';wrap.insertBefore(img,wrap.firstChild);}
+        if (!img) {
+          img = document.createElement('img');
+          img.className = 'dc-avatar';
+          wrap.insertBefore(img, wrap.firstChild);
+        }
         img.src = url;
       }
-      const status = d.discord_status||'offline';
+      const status = d.discord_status || 'offline';
       const dot = document.getElementById(`status-${memberId}`);
-      if (dot) dot.className=`dc-status ${status}`;
+      if (dot) dot.className = `dc-status ${status}`;
       const lbl = document.getElementById(`statuslabel-${memberId}`);
-      if (lbl) lbl.innerHTML=`<span class="ht-card-status-dot ${status}"></span><span>${STATUS_LABELS[status]||'Offline'}</span>`;
+      if (lbl) lbl.innerHTML = `<span class="ht-card-status-dot ${status}"></span><span>${STATUS_LABELS[status]||'Offline'}</span>`;
     } catch {}
   }
 
-  function loadAllLanyard() { for (const [mid,did] of Object.entries(IDS)) if(did) fetchLanyard(did,mid); }
+  function loadAllLanyard() {
+    for (const [mid, did] of Object.entries(IDS)) if (did) fetchLanyard(did, mid);
+  }
 
   function openLanyardModal(memberId) {
     if (!document.body.classList.contains('is-admin')) return;
     currentLanyardMember = memberId;
-    document.getElementById('lanyard-input').value = IDS[memberId]||'';
+    document.getElementById('lanyard-input').value = IDS[memberId] || '';
     document.getElementById('lanyard-modal-overlay').classList.add('open');
-    setTimeout(()=>document.getElementById('lanyard-input').focus(),50);
+    setTimeout(() => document.getElementById('lanyard-input').focus(), 50);
   }
   window.openLanyardModal = openLanyardModal;
 
-  function closeLanyardModal() { document.getElementById('lanyard-modal-overlay').classList.remove('open'); currentLanyardMember=null; }
+  function closeLanyardModal() {
+    document.getElementById('lanyard-modal-overlay').classList.remove('open');
+    currentLanyardMember = null;
+  }
   window.closeLanyardModal = closeLanyardModal;
 
   async function saveLanyardId() {
     const val = document.getElementById('lanyard-input').value.trim();
     if (!currentLanyardMember) return;
     if (val && /^\d{17,20}$/.test(val)) {
-      IDS[currentLanyardMember]=val; await saveIdsShared(); fetchLanyard(val,currentLanyardMember); closeLanyardModal(); showToast('Discord ID gespeichert – für alle sichtbar ✓');
-    } else if (val==='') {
-      delete IDS[currentLanyardMember]; await saveIdsShared();
+      IDS[currentLanyardMember] = val;
+      await saveIdsShared();
+      fetchLanyard(val, currentLanyardMember);
+      closeLanyardModal(); showToast('Discord ID gespeichert – für alle sichtbar ✓');
+    } else if (val === '') {
+      delete IDS[currentLanyardMember];
+      await saveIdsShared();
       const card = document.querySelector(`[data-member-id="${currentLanyardMember}"]`);
       if (card) {
-        const wrap=card.querySelector('.dc-avatar-wrap'); const img=wrap&&wrap.querySelector('img.dc-avatar');
-        if (img) { const name=card.querySelector('.ht-card-name')?.textContent.trim()||'?'; const ph=document.createElement('div'); ph.className='dc-avatar-placeholder'; ph.textContent=name.charAt(name.lastIndexOf(' ')+1).toUpperCase()||name.charAt(0).toUpperCase(); wrap.insertBefore(ph,wrap.firstChild); img.remove(); }
-        const sd=document.getElementById(`status-${currentLanyardMember}`); if(sd) sd.className='dc-status';
-        const sl2=document.getElementById(`statuslabel-${currentLanyardMember}`); if(sl2) sl2.innerHTML='<span class="ht-card-status-dot"></span><span>Offline</span>';
+        const wrap = card.querySelector('.dc-avatar-wrap');
+        const img = wrap && wrap.querySelector('img.dc-avatar');
+        if (img) {
+          const name = card.querySelector('.ht-card-name')?.textContent.trim() || '?';
+          const ph = document.createElement('div');
+          ph.className = 'dc-avatar-placeholder';
+          ph.textContent = name.charAt(name.lastIndexOf(' ')+1).toUpperCase() || name.charAt(0).toUpperCase();
+          wrap.insertBefore(ph, wrap.firstChild); img.remove();
+        }
+        const sd = document.getElementById(`status-${currentLanyardMember}`);
+        if (sd) sd.className = 'dc-status';
+        const sl2 = document.getElementById(`statuslabel-${currentLanyardMember}`);
+        if (sl2) sl2.innerHTML = '<span class="ht-card-status-dot"></span><span>Offline</span>';
       }
       closeLanyardModal(); showToast('Discord ID entfernt');
-    } else { document.getElementById('lanyard-input').style.borderColor='#e03c3c'; setTimeout(()=>document.getElementById('lanyard-input').style.borderColor='',1200); }
+    } else {
+      document.getElementById('lanyard-input').style.borderColor = '#e03c3c';
+      setTimeout(() => document.getElementById('lanyard-input').style.borderColor = '', 1200);
+    }
   }
   window.saveLanyardId = saveLanyardId;
 
-  document.getElementById('lanyard-modal-overlay').addEventListener('click',function(e){if(e.target===this)closeLanyardModal();});
-  document.getElementById('lanyard-input').addEventListener('keydown',function(e){if(e.key==='Enter')saveLanyardId();if(e.key==='Escape')closeLanyardModal();});
+  document.getElementById('lanyard-modal-overlay').addEventListener('click', function(e){ if(e.target===this) closeLanyardModal(); });
+  document.getElementById('lanyard-input').addEventListener('keydown', function(e){ if(e.key==='Enter') saveLanyardId(); if(e.key==='Escape') closeLanyardModal(); });
 
+  // ─── MEMBER EDIT MODAL ───
   function openMemberEditModal(memberId) {
     if (!document.body.classList.contains('is-admin')) return;
     currentEditMemberId = memberId;
     const card = document.querySelector(`[data-member-id="${memberId}"]`);
     if (!card) return;
-    document.getElementById('me-name').value = card.querySelector('.ht-card-name')?.textContent.trim()||'';
-    document.getElementById('me-rank').value = card.querySelector('.ht-card-rank-tag')?.textContent.trim()||'';
-    document.getElementById('me-title').value = card.querySelector('.ht-card-title')?.textContent.trim()||'';
-    document.getElementById('member-edit-sub').textContent = `Bearbeite: ${card.querySelector('.ht-card-name')?.textContent.trim()||''}`;
+    const name = card.querySelector('.ht-card-name')?.textContent.trim() || '';
+    const rankTag = card.querySelector('.ht-card-rank-tag')?.textContent.trim() || '';
+    const title = card.querySelector('.ht-card-title')?.textContent.trim() || '';
+    document.getElementById('me-name').value = name;
+    document.getElementById('me-rank').value = rankTag;
+    document.getElementById('me-title').value = title;
+    document.getElementById('member-edit-sub').textContent = `Bearbeite: ${name}`;
     document.getElementById('member-edit-overlay').classList.add('open');
-    setTimeout(()=>document.getElementById('me-name').focus(),50);
+    setTimeout(() => document.getElementById('me-name').focus(), 50);
   }
   window.openMemberEditModal = openMemberEditModal;
 
-  function closeMemberEditModal() { document.getElementById('member-edit-overlay').classList.remove('open'); currentEditMemberId=null; }
+  function closeMemberEditModal() {
+    document.getElementById('member-edit-overlay').classList.remove('open');
+    currentEditMemberId = null;
+  }
   window.closeMemberEditModal = closeMemberEditModal;
 
   async function saveMemberEdit() {
     if (!currentEditMemberId) return;
     const card = document.querySelector(`[data-member-id="${currentEditMemberId}"]`);
-    if (!card){closeMemberEditModal();return;}
-    const newName=document.getElementById('me-name').value.trim();
-    const newRankInput=document.getElementById('me-rank').value.trim();
-    const newTitle=document.getElementById('me-title').value.trim();
-    if (!newName){showToast('Name darf nicht leer sein',true);return;}
-    const nameEl=card.querySelector('.ht-card-name'); if(nameEl)nameEl.textContent=newName;
-    const ph=card.querySelector('.dc-avatar-placeholder'); if(ph)ph.textContent=newName.charAt(newName.lastIndexOf(' ')+1).toUpperCase()||newName.charAt(0).toUpperCase();
-    const titleEl=card.querySelector('.ht-card-title'); if(titleEl)titleEl.textContent=newTitle;
-    const rankTagEl=card.querySelector('.ht-card-rank-tag'); if(rankTagEl&&newRankInput)rankTagEl.textContent=newRankInput;
+    if (!card) { closeMemberEditModal(); return; }
+    const newName = document.getElementById('me-name').value.trim();
+    const newRankInput = document.getElementById('me-rank').value.trim();
+    const newTitle = document.getElementById('me-title').value.trim();
+    if (!newName) { showToast('Name darf nicht leer sein', true); return; }
+    const nameEl = card.querySelector('.ht-card-name');
+    if (nameEl) nameEl.textContent = newName;
+    const ph = card.querySelector('.dc-avatar-placeholder');
+    if (ph) ph.textContent = newName.charAt(newName.lastIndexOf(' ')+1).toUpperCase() || newName.charAt(0).toUpperCase();
+    const titleEl = card.querySelector('.ht-card-title');
+    if (titleEl) titleEl.textContent = newTitle;
+    const rankTagEl = card.querySelector('.ht-card-rank-tag');
+    if (rankTagEl && newRankInput) rankTagEl.textContent = newRankInput;
     if (newRankInput) {
-      let targetGrid=null, targetRankKey=null;
-      document.querySelectorAll('#ht-rank-sections .ht-rank-section').forEach(sec=>{
-        const pill=sec.querySelector('.ht-rank-pill');
-        if(pill&&pill.textContent.trim().toLowerCase()===newRankInput.toLowerCase()){targetGrid=sec.querySelector('.ht-grid');targetRankKey=sec.dataset.rank;}
+      const rankSections = document.querySelectorAll('#ht-rank-sections .ht-rank-section');
+      let targetGrid = null, targetRankKey = null;
+      rankSections.forEach(sec => {
+        const pill = sec.querySelector('.ht-rank-pill');
+        if (pill && pill.textContent.trim().toLowerCase() === newRankInput.toLowerCase()) {
+          targetGrid = sec.querySelector('.ht-grid');
+          targetRankKey = sec.dataset.rank;
+        }
       });
-      if (targetGrid&&targetRankKey) { const addBtn=targetGrid.querySelector('.add-member-btn'); if(addBtn)targetGrid.insertBefore(card,addBtn);else targetGrid.appendChild(card); }
-      else { const rankKey='custom-'+Date.now(); const newSection=createRankSection(newRankInput,rankKey); document.getElementById('ht-rank-sections').appendChild(newSection); const newGrid=newSection.querySelector('.ht-grid'); const addBtn=newGrid.querySelector('.add-member-btn'); if(addBtn)newGrid.insertBefore(card,addBtn);else newGrid.appendChild(card); }
+      if (targetGrid && targetRankKey) {
+        const addBtn = targetGrid.querySelector('.add-member-btn');
+        if (addBtn) targetGrid.insertBefore(card, addBtn); else targetGrid.appendChild(card);
+      } else {
+        const rankKey = 'custom-' + Date.now();
+        const newSection = createRankSection(newRankInput, rankKey);
+        document.getElementById('ht-rank-sections').appendChild(newSection);
+        const newGrid = newSection.querySelector('.ht-grid');
+        const addBtn = newGrid.querySelector('.add-member-btn');
+        if (addBtn) newGrid.insertBefore(card, addBtn); else newGrid.appendChild(card);
+      }
     }
-    closeMemberEditModal(); await adminSaveAll();
+    closeMemberEditModal();
+    await adminSaveAll();
   }
   window.saveMemberEdit = saveMemberEdit;
 
-  document.getElementById('member-edit-overlay').addEventListener('click',function(e){if(e.target===this)closeMemberEditModal();});
+  document.getElementById('member-edit-overlay').addEventListener('click', function(e){ if(e.target===this) closeMemberEditModal(); });
 
-  function confirmOpen(title,sub,onYes,yesLabel='Löschen') {
-    document.getElementById('confirm-title').textContent=title;
-    document.getElementById('confirm-sub').textContent=sub;
-    document.getElementById('confirm-yes').textContent=yesLabel;
-    confirmCallback=onYes;
+  // ─── CONFIRM DIALOG ───
+  function confirmOpen(title, sub, onYes, yesLabel='Löschen') {
+    document.getElementById('confirm-title').textContent = title;
+    document.getElementById('confirm-sub').textContent = sub;
+    document.getElementById('confirm-yes').textContent = yesLabel;
+    confirmCallback = onYes;
     document.getElementById('confirm-overlay').classList.add('open');
   }
-  function confirmClose(){document.getElementById('confirm-overlay').classList.remove('open');confirmCallback=null;}
-  window.confirmClose=confirmClose;
-  document.getElementById('confirm-yes').addEventListener('click',()=>{if(confirmCallback){confirmCallback();confirmClose();}});
-  document.getElementById('confirm-overlay').addEventListener('click',function(e){if(e.target===this)confirmClose();});
+  function confirmClose() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
+  window.confirmClose = confirmClose;
+  document.getElementById('confirm-yes').addEventListener('click', () => { if(confirmCallback){confirmCallback();confirmClose();} });
+  document.getElementById('confirm-overlay').addEventListener('click', function(e){ if(e.target===this) confirmClose(); });
 
-  function showToast(msg,isErr=false,isInfo=false){
-    const t=document.getElementById('save-toast');
-    t.textContent=(isErr?'✕ ':isInfo?'● ':'✓ ')+msg;
-    t.className='save-toast'+(isErr?' err':isInfo?' warn':'');
+  // ─── TOAST ───
+  function showToast(msg, isErr=false, isInfo=false) {
+    const t = document.getElementById('save-toast');
+    t.textContent = (isErr ? '✕ ' : isInfo ? '● ' : '✓ ') + msg;
+    t.className = 'save-toast' + (isErr?' err':isInfo?' warn':'');
     t.classList.add('show');
     clearTimeout(t._to);
-    t._to=setTimeout(()=>t.classList.remove('show'),3000);
+    t._to = setTimeout(() => t.classList.remove('show'), 3000);
   }
-  window.showToast=showToast;
+  window.showToast = showToast;
 
-  function markUnsaved(){document.body.classList.add('has-unsaved');}
-  function clearUnsaved(){document.body.classList.remove('has-unsaved');}
+  function markUnsaved() { document.body.classList.add('has-unsaved'); }
+  function clearUnsaved() { document.body.classList.remove('has-unsaved'); }
 
-  function initAdminMode(){setupAllEditables();setupAllRuleAdminBars();addAllAddButtons();setupStrafeAdminControls();}
+  // ─── ADMIN INIT ───
+  function initAdminMode() {
+    setupAllEditables();
+    setupAllRuleAdminBars();
+    addAllAddButtons();       // ← jetzt immer neu verdrahtet
+    setupStrafeAdminControls();
+  }
 
-  function setupAllEditables(){
-    document.querySelectorAll('[data-editable]').forEach(el=>{
-      el.setAttribute('contenteditable',editModeOn?'true':'false');
-      if(!el._editListenerAdded){el.addEventListener('input',markUnsaved);el._editListenerAdded=true;}
+  function setupAllEditables() {
+    document.querySelectorAll('[data-editable]').forEach(el => {
+      el.setAttribute('contenteditable', editModeOn ? 'true' : 'false');
+      if (!el._editListenerAdded) {
+        el.addEventListener('input', markUnsaved);
+        el._editListenerAdded = true;
+      }
     });
   }
 
-  function setupAllRuleAdminBars(){
-    document.querySelectorAll('.rule').forEach(rule=>{
-      let bar=rule.querySelector('.rule-admin-bar');
-      if(!bar){bar=document.createElement('div');bar.className='rule-admin-bar';rule.appendChild(bar);}
-      bar.innerHTML=`<button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button><button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button><button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
+  function setupAllRuleAdminBars() {
+    document.querySelectorAll('.rule').forEach(rule => {
+      let bar = rule.querySelector('.rule-admin-bar');
+      if (!bar) { bar = document.createElement('div'); bar.className='rule-admin-bar'; rule.appendChild(bar); }
+      bar.innerHTML = `
+        <button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
+        <button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
+        <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
     });
   }
 
-  function addAllAddButtons(){
-    document.querySelectorAll('.rules').forEach(c=>{
-      c.querySelectorAll('.add-rule-btn').forEach(b=>b.remove());
-      const btn=document.createElement('button');btn.className='add-rule-btn';btn.innerHTML='<i class="ti ti-plus"></i> Neue Regel';btn.onclick=()=>adminAddRuleToContainer(c);c.appendChild(btn);
+  // ─── FIX: Buttons immer neu erstellen — nie per if-Guard überspringen ───
+  // Nach Firebase-Reload (innerHTML-Überschreibung) gehen .onclick-Handler verloren.
+  // Alte Buttons werden deshalb immer entfernt und neu eingefügt.
+  function addAllAddButtons() {
+    document.querySelectorAll('.rules').forEach(c => {
+      // Alte Buttons raus, neue rein — damit der onclick-Handler frisch gesetzt wird
+      c.querySelectorAll('.add-rule-btn').forEach(b => b.remove());
+      const btn = document.createElement('button');
+      btn.className = 'add-rule-btn';
+      btn.innerHTML = '<i class="ti ti-plus"></i> Neue Regel';
+      btn.onclick = () => adminAddRuleToContainer(c);
+      c.appendChild(btn);
     });
-    document.querySelectorAll('.ht-grid').forEach(g=>{
-      g.querySelectorAll('.add-member-btn').forEach(b=>b.remove());
-      const btn=document.createElement('button');btn.className='add-member-btn';btn.innerHTML='<i class="ti ti-user-plus"></i> Mitglied hinzufügen';btn.onclick=()=>adminAddMemberToGrid(g);g.appendChild(btn);
+    document.querySelectorAll('.ht-grid').forEach(g => {
+      // Alte Buttons raus, neue rein
+      g.querySelectorAll('.add-member-btn').forEach(b => b.remove());
+      const btn = document.createElement('button');
+      btn.className = 'add-member-btn';
+      btn.innerHTML = '<i class="ti ti-user-plus"></i> Mitglied hinzufügen';
+      btn.onclick = () => adminAddMemberToGrid(g);
+      g.appendChild(btn);
     });
   }
 
-  function setupStrafeAdminControls(){
-    const tbody=document.getElementById('strafen-tbody');
-    if(!tbody)return;
-    Array.from(tbody.rows).forEach(row=>{
-      let adminTd=row.querySelector('.stra-admin-td');
-      if(!adminTd){adminTd=document.createElement('td');adminTd.className='stra-admin-td';row.appendChild(adminTd);}
-      adminTd.innerHTML=`<button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button><button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button><button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
+  // ─── STRAFEN TABLE ADMIN CONTROLS ───
+  function setupStrafeAdminControls() {
+    const tbody = document.getElementById('strafen-tbody');
+    if (!tbody) return;
+    Array.from(tbody.rows).forEach(row => {
+      let adminTd = row.querySelector('.stra-admin-td');
+      if (!adminTd) {
+        adminTd = document.createElement('td');
+        adminTd.className = 'stra-admin-td';
+        row.appendChild(adminTd);
+      }
+      adminTd.innerHTML = `
+        <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
+        <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
+        <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>`;
     });
   }
-  window.setupStrafeAdminControls=setupStrafeAdminControls;
+  window.setupStrafeAdminControls = setupStrafeAdminControls;
 
-  function moveStrafeRow(btn,dir){const row=btn.closest('tr');const tbody=row.parentElement;if(dir==='up'){const prev=row.previousElementSibling;if(prev)tbody.insertBefore(row,prev);}else{const next=row.nextElementSibling;if(next)tbody.insertBefore(next,row);}markUnsaved();}
-  window.moveStrafeRow=moveStrafeRow;
-
-  function deleteStrafeRow(btn){const row=btn.closest('tr');const name=row.querySelector('.vname')?.textContent||'Eintrag';confirmOpen(`"${name}" löschen?`,'Dieser Strafeneintrag wird entfernt.',async()=>{row.remove();await adminSaveAll();showToast('Eintrag gelöscht');});}
-  window.deleteStrafeRow=deleteStrafeRow;
-
-  function toggleEditMode(){
-    editModeOn=!editModeOn;
-    document.body.classList.toggle('admin-edit-on',editModeOn);
-    const btn=document.getElementById('adm-edit-btn');
-    btn.classList.toggle('active',editModeOn);
-    btn.innerHTML=editModeOn?'<i class="ti ti-pencil-off"></i>Beenden':'<i class="ti ti-pencil"></i>Bearbeiten';
-    document.querySelectorAll('[data-editable]').forEach(el=>el.setAttribute('contenteditable',editModeOn?'true':'false'));
-    if(!editModeOn)adminSaveAll();
-  }
-  window.toggleEditMode=toggleEditMode;
-
-  async function adminSaveAll(){const ok=await saveSharedContent();if(ok){clearUnsaved();showToast('Gespeichert – für ALLE Besucher sichtbar ✓');}else showToast('Speichern fehlgeschlagen',true);}
-  window.adminSaveAll=adminSaveAll;
-
-  async function adminResetConfirm(){
-    confirmOpen('Alle Änderungen zurücksetzen?','Das Regelwerk wird auf den Originalstand zurückgesetzt.',async()=>{
-      await sharedDelete(SHARED_KEYS.content);await sharedDelete(SHARED_KEYS.lanyardIds);clearUnsaved();showToast('Zurückgesetzt – Seite lädt neu...');setTimeout(()=>location.reload(),900);
-    },'Zurücksetzen');
-  }
-  window.adminResetConfirm=adminResetConfirm;
-
-  function moveRule(btn,dir){
-    const rule=btn.closest('.rule');const c=rule.parentElement;
-    if(dir==='up'){const p=rule.previousElementSibling;if(p&&!p.classList.contains('add-rule-btn'))c.insertBefore(rule,p);}
-    else{const n=rule.nextElementSibling;if(n&&!n.classList.contains('add-rule-btn'))c.insertBefore(n,rule);}
+  function moveStrafeRow(btn, dir) {
+    const row = btn.closest('tr');
+    const tbody = row.parentElement;
+    if (dir === 'up') {
+      const prev = row.previousElementSibling;
+      if (prev) tbody.insertBefore(row, prev);
+    } else {
+      const next = row.nextElementSibling;
+      if (next) tbody.insertBefore(next, row);
+    }
     markUnsaved();
   }
-  window.moveRule=moveRule;
+  window.moveStrafeRow = moveStrafeRow;
 
-  function deleteRuleBtn(btn){const rule=btn.closest('.rule');const title=rule.querySelector('.rule-title')?.textContent||'Regel';confirmOpen('Regel löschen?',`"${title}" wird entfernt.`,async()=>{rule.remove();await adminSaveAll();showToast('Regel gelöscht');});}
-  window.deleteRuleBtn=deleteRuleBtn;
+  function deleteStrafeRow(btn) {
+    const row = btn.closest('tr');
+    const name = row.querySelector('.vname')?.textContent || 'Eintrag';
+    confirmOpen(`"${name}" löschen?`, 'Dieser Strafeneintrag wird entfernt.',
+      async () => { row.remove(); await adminSaveAll(); showToast('Eintrag gelöscht'); });
+  }
+  window.deleteStrafeRow = deleteStrafeRow;
 
-  function adminModalOpen(title,sub,fields,onConfirm){
-    document.getElementById('admin-modal-title').textContent=title;
-    document.getElementById('admin-modal-sub').textContent=sub;
-    document.getElementById('admin-modal-fields').innerHTML=fields;
-    adminModalCallback=onConfirm;
+  function toggleEditMode() {
+    editModeOn = !editModeOn;
+    document.body.classList.toggle('admin-edit-on', editModeOn);
+    const btn = document.getElementById('adm-edit-btn');
+    btn.classList.toggle('active', editModeOn);
+    btn.innerHTML = editModeOn ? '<i class="ti ti-pencil-off"></i>Beenden' : '<i class="ti ti-pencil"></i>Bearbeiten';
+    document.querySelectorAll('[data-editable]').forEach(el => el.setAttribute('contenteditable', editModeOn ? 'true' : 'false'));
+    if (!editModeOn) adminSaveAll();
+  }
+  window.toggleEditMode = toggleEditMode;
+
+  async function adminSaveAll() {
+    const ok = await saveSharedContent();
+    if (ok) { clearUnsaved(); showToast('Gespeichert – für ALLE Besucher sichtbar ✓'); }
+    else showToast('Speichern fehlgeschlagen', true);
+  }
+  window.adminSaveAll = adminSaveAll;
+
+  async function adminResetConfirm() {
+    confirmOpen('Alle Änderungen zurücksetzen?', 'Das Regelwerk wird auf den Originalstand zurückgesetzt.', async () => {
+      await sharedDelete(SHARED_KEYS.content);
+      await sharedDelete(SHARED_KEYS.lanyardIds);
+      clearUnsaved();
+      showToast('Zurückgesetzt – Seite lädt neu...');
+      setTimeout(() => location.reload(), 900);
+    }, 'Zurücksetzen');
+  }
+  window.adminResetConfirm = adminResetConfirm;
+
+  // ─── RULE MOVE / DELETE ───
+  function moveRule(btn, dir) {
+    const rule = btn.closest('.rule');
+    const c = rule.parentElement;
+    if (dir==='up') {
+      const p = rule.previousElementSibling;
+      if (p && !p.classList.contains('add-rule-btn')) c.insertBefore(rule, p);
+    } else {
+      const n = rule.nextElementSibling;
+      if (n && !n.classList.contains('add-rule-btn')) c.insertBefore(n, rule);
+    }
+    markUnsaved();
+  }
+  window.moveRule = moveRule;
+
+  function deleteRuleBtn(btn) {
+    const rule = btn.closest('.rule');
+    const title = rule.querySelector('.rule-title')?.textContent || 'Regel';
+    confirmOpen('Regel löschen?', `"${title}" wird entfernt.`,
+      async () => { rule.remove(); await adminSaveAll(); showToast('Regel gelöscht'); });
+  }
+  window.deleteRuleBtn = deleteRuleBtn;
+
+  // ─── ADMIN MODAL ───
+  function adminModalOpen(title, sub, fields, onConfirm) {
+    document.getElementById('admin-modal-title').textContent = title;
+    document.getElementById('admin-modal-sub').textContent = sub;
+    document.getElementById('admin-modal-fields').innerHTML = fields;
+    adminModalCallback = onConfirm;
     document.getElementById('admin-modal-overlay').classList.add('open');
-    setTimeout(()=>{const first=document.querySelector('#admin-modal-fields input,#admin-modal-fields textarea,#admin-modal-fields select');if(first)first.focus();},80);
+    setTimeout(() => {
+      const first = document.querySelector('#admin-modal-fields input, #admin-modal-fields textarea, #admin-modal-fields select');
+      if (first) first.focus();
+    }, 80);
   }
-  function adminModalClose(){document.getElementById('admin-modal-overlay').classList.remove('open');adminModalCallback=null;}
-  function adminModalConfirm(){if(adminModalCallback)adminModalCallback();}
-  window.adminModalConfirm=adminModalConfirm;
-  window.adminModalClose=adminModalClose;
-  document.getElementById('admin-modal-overlay').addEventListener('click',function(e){if(e.target===this)adminModalClose();});
+  function adminModalClose() {
+    document.getElementById('admin-modal-overlay').classList.remove('open');
+    adminModalCallback = null;
+  }
+  function adminModalConfirm() { if(adminModalCallback) adminModalCallback(); }
+  window.adminModalConfirm = adminModalConfirm;
+  window.adminModalClose = adminModalClose;
+  document.getElementById('admin-modal-overlay').addEventListener('click', function(e){ if(e.target===this) adminModalClose(); });
 
-  const FS=`style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"`;
-  const TA=`style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"`;
+  const FIELD_STYLE = `style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;"`;
+  const TEXTAREA_STYLE = `style="background:var(--surface);border:1px solid var(--border-hi);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:9px 12px;outline:none;width:100%;resize:vertical;"`;
 
-  function adminAddRuleToContainer(container){
-    adminModalOpen('Neue Regel','Regel hinzufügen',
-      `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" ${FS}></div><div class="admin-field"><label>Badge-Typ</label><select id="af-badge" ${FS}><option value="b-std">Standard</option><option value="b-ok">Pflicht</option><option value="b-warn">Wichtig</option><option value="b-ban">Verboten</option><option value="b-info">Info</option></select></div><div class="admin-field"><label>Badge-Text</label><input id="af-badge-text" type="text" placeholder="Grundregel" ${FS}></div><div class="admin-field"><label>Titel</label><input id="af-title" type="text" placeholder="Regelname" ${FS}></div><div class="admin-field"><label>Beschreibung</label><textarea id="af-text" rows="4" placeholder="Regeltext..." ${TA}></textarea></div><div class="admin-field"><label>Stil</label><select id="af-type" ${FS}><option value="">Normal</option><option value="danger">Danger (Rot)</option></select></div>`,
-      async()=>{
-        const id=document.getElementById('af-id')?.value.trim()||'TR — ?';
-        const badge=document.getElementById('af-badge')?.value||'b-std';
-        const badgeText=document.getElementById('af-badge-text')?.value.trim()||'Standard';
-        const title=document.getElementById('af-title')?.value.trim()||'Neue Regel';
-        const text=document.getElementById('af-text')?.value.trim()||'';
-        const type=document.getElementById('af-type')?.value||'';
-        const rule=document.createElement('div');rule.className=`rule${type?' '+type:''}`;
-        rule.innerHTML=`<div class="rule-top"><span class="rule-id" data-editable>${id}</span><span class="badge ${badge}">${badgeText}</span></div><div class="rule-title" data-editable>${title}</div><div class="rule-text" data-editable>${text}</div><div class="rule-admin-bar"><button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button><button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button><button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button></div>`;
-        rule.querySelectorAll('[data-editable]').forEach(el=>{el.setAttribute('contenteditable',editModeOn?'true':'false');el.addEventListener('input',markUnsaved);});
-        const addBtn=container.querySelector('.add-rule-btn');if(addBtn)container.insertBefore(rule,addBtn);else container.appendChild(rule);
-        adminModalClose();await adminSaveAll();showToast('Regel hinzugefügt & gespeichert');
+  // ─── ADD RULE ───
+  function adminAddRuleToContainer(container) {
+    adminModalOpen('Neue Regel', 'Regel hinzufügen',
+      `<div class="admin-field"><label>Regel-ID</label><input id="af-id" type="text" placeholder="TR — 21" ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Badge-Typ</label><select id="af-badge" ${FIELD_STYLE}><option value="b-std">Standard</option><option value="b-ok">Pflicht</option><option value="b-warn">Wichtig</option><option value="b-ban">Verboten</option><option value="b-info">Info</option></select></div>
+       <div class="admin-field"><label>Badge-Text</label><input id="af-badge-text" type="text" placeholder="Grundregel" ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Titel</label><input id="af-title" type="text" placeholder="Regelname" ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Beschreibung</label><textarea id="af-text" rows="4" placeholder="Regeltext..." ${TEXTAREA_STYLE}></textarea></div>
+       <div class="admin-field"><label>Stil</label><select id="af-type" ${FIELD_STYLE}><option value="">Normal</option><option value="danger">Danger (Rot)</option></select></div>`,
+      async () => {
+        const id = document.getElementById('af-id')?.value.trim() || 'TR — ?';
+        const badge = document.getElementById('af-badge')?.value || 'b-std';
+        const badgeText = document.getElementById('af-badge-text')?.value.trim() || 'Standard';
+        const title = document.getElementById('af-title')?.value.trim() || 'Neue Regel';
+        const text = document.getElementById('af-text')?.value.trim() || '';
+        const type = document.getElementById('af-type')?.value || '';
+        const rule = document.createElement('div');
+        rule.className = `rule${type?' '+type:''}`;
+        rule.innerHTML = `
+          <div class="rule-top"><span class="rule-id" data-editable>${id}</span><span class="badge ${badge}">${badgeText}</span></div>
+          <div class="rule-title" data-editable>${title}</div>
+          <div class="rule-text" data-editable>${text}</div>
+          <div class="rule-admin-bar">
+            <button class="rule-adm-btn" onclick="moveRule(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
+            <button class="rule-adm-btn" onclick="moveRule(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
+            <button class="rule-adm-btn del" onclick="deleteRuleBtn(this)" title="Löschen"><i class="ti ti-trash"></i></button>
+          </div>`;
+        rule.querySelectorAll('[data-editable]').forEach(el => {
+          el.setAttribute('contenteditable', editModeOn?'true':'false');
+          el.addEventListener('input', markUnsaved);
+        });
+        const addBtn = container.querySelector('.add-rule-btn');
+        if (addBtn) container.insertBefore(rule, addBtn); else container.appendChild(rule);
+        adminModalClose();
+        await adminSaveAll();
+        showToast('Regel hinzugefügt & gespeichert');
       }
     );
   }
-  window.adminAddRuleToContainer=adminAddRuleToContainer;
+  window.adminAddRuleToContainer = adminAddRuleToContainer;
 
-  function adminAddStrafeRow(){
-    adminModalOpen('Neuer Strafe-Eintrag','Zur Strafen-Tabelle',
-      `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" ${FS}></div><div class="admin-field"><label>Kurze Beschreibung</label><input id="sf-desc" type="text" placeholder="Beschreibung" ${FS}></div><div class="admin-field"><label>Zeit / Strafe</label><input id="sf-time" type="text" placeholder="z.B. 25 Min." ${FS}></div><div class="admin-field"><label>Schwere</label><select id="sf-sev" ${FS}><option value="low">Niedrig (blau)</option><option value="mid">Mittel (gelb)</option><option value="high">Hoch (rot)</option><option value="perm">Permanent</option></select></div><div class="admin-field"><label>Beschreibung (lang)</label><textarea id="sf-long" rows="3" placeholder="..." ${TA}></textarea></div>`,
-      async()=>{
-        const name=document.getElementById('sf-name')?.value.trim()||'Vergehen';
-        const desc=document.getElementById('sf-desc')?.value.trim()||'';
-        const time=document.getElementById('sf-time')?.value.trim()||'?';
-        const sev=document.getElementById('sf-sev')?.value||'low';
-        const long=document.getElementById('sf-long')?.value.trim()||'';
-        const tbody=document.getElementById('strafen-tbody');if(!tbody){adminModalClose();return;}
-        const tr=document.createElement('tr');
-        tr.innerHTML=`<td><div class="vname" data-editable>${name}</div><div class="vdesc" data-editable>${desc}</div></td><td><span class="zb ${sev}" data-editable>${time}</span></td><td data-editable>${long}</td><td class="stra-admin-td"><button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button><button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button><button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button></td>`;
-        tr.querySelectorAll('[data-editable]').forEach(el=>{el.setAttribute('contenteditable',editModeOn?'true':'false');el.addEventListener('input',markUnsaved);});
-        tbody.appendChild(tr);adminModalClose();await adminSaveAll();showToast('Eintrag hinzugefügt & gespeichert');
+  // ─── ADD STRAFE ROW ───
+  function adminAddStrafeRow() {
+    adminModalOpen('Neuer Strafe-Eintrag', 'Zur Strafen-Tabelle',
+      `<div class="admin-field"><label>Vergehen (Name)</label><input id="sf-name" type="text" placeholder="Vergehen" ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Kurze Beschreibung</label><input id="sf-desc" type="text" placeholder="Beschreibung" ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Zeit / Strafe</label><input id="sf-time" type="text" placeholder="z.B. 25 Min." ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Schwere</label><select id="sf-sev" ${FIELD_STYLE}><option value="low">Niedrig (blau)</option><option value="mid">Mittel (gelb)</option><option value="high">Hoch (rot)</option><option value="perm">Permanent</option></select></div>
+       <div class="admin-field"><label>Beschreibung (lang)</label><textarea id="sf-long" rows="3" placeholder="..." ${TEXTAREA_STYLE}></textarea></div>`,
+      async () => {
+        const name = document.getElementById('sf-name')?.value.trim() || 'Vergehen';
+        const desc = document.getElementById('sf-desc')?.value.trim() || '';
+        const time = document.getElementById('sf-time')?.value.trim() || '?';
+        const sev = document.getElementById('sf-sev')?.value || 'low';
+        const long = document.getElementById('sf-long')?.value.trim() || '';
+        const tbody = document.getElementById('strafen-tbody');
+        if (!tbody) { adminModalClose(); return; }
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><div class="vname" data-editable>${name}</div><div class="vdesc" data-editable>${desc}</div></td>
+          <td><span class="zb ${sev}" data-editable>${time}</span></td>
+          <td data-editable>${long}</td>
+          <td class="stra-admin-td">
+            <button class="stra-adm-btn" onclick="moveStrafeRow(this,'up')" title="Hoch"><i class="ti ti-arrow-up"></i></button>
+            <button class="stra-adm-btn" onclick="moveStrafeRow(this,'down')" title="Runter"><i class="ti ti-arrow-down"></i></button>
+            <button class="stra-adm-btn del" onclick="deleteStrafeRow(this)" title="Löschen"><i class="ti ti-trash"></i></button>
+          </td>`;
+        tr.querySelectorAll('[data-editable]').forEach(el => {
+          el.setAttribute('contenteditable', editModeOn?'true':'false');
+          el.addEventListener('input', markUnsaved);
+        });
+        tbody.appendChild(tr);
+        adminModalClose();
+        await adminSaveAll();
+        showToast('Eintrag hinzugefügt & gespeichert');
       }
     );
   }
-  window.adminAddStrafeRow=adminAddStrafeRow;
+  window.adminAddStrafeRow = adminAddStrafeRow;
 
-  function adminAddMemberToGrid(grid){
-    const section=grid.closest('.ht-rank-section');
-    const pill=section?.querySelector('.ht-rank-pill');
-    const rankLabel=pill?.textContent.trim()||'Rang';
-    const rankKey=grid.getAttribute('data-rank')||'custom';
-    const decoMap={inhaber:'INH',sl:'SL',tl:'TL'};
-    const deco=decoMap[rankKey]||rankLabel.slice(0,3).toUpperCase();
-    adminModalOpen('Mitglied hinzufügen',`Rang: ${rankLabel}`,
-      `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" ${FS}></div><div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FS}></div><div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FS}><div class="field-hint">Leer lassen → später über Discord-Button setzen.</div></div>`,
-      async()=>{
-        const name=document.getElementById('mf-name')?.value.trim()||'Neues Mitglied';
-        const title=document.getElementById('mf-title')?.value.trim()||rankLabel;
-        const dcid=document.getElementById('mf-dcid')?.value.trim()||'';
-        const letter=name.charAt(name.lastIndexOf(' ')+1).toUpperCase()||name.charAt(0).toUpperCase();
-        const uid=`${rankKey}-${Date.now()}`;
-        const card=document.createElement('div');card.className='ht-card';card.setAttribute('data-member-id',uid);
-        card.innerHTML=`<div class="ht-admin-bar"><button class="ht-adm-btn" onclick="openMemberEditModal('${uid}')"><i class="ti ti-pencil"></i></button><button class="ht-adm-btn" onclick="openLanyardModal('${uid}')"><i class="ti ti-brand-discord"></i></button><button class="ht-adm-btn del" onclick="deleteMember('${uid}')"><i class="ti ti-trash"></i></button></div><div class="ht-card-inner"><div class="dc-avatar-wrap"><div class="dc-avatar-placeholder">${letter}</div><span class="dc-status" id="status-${uid}"></span></div><div class="ht-card-info"><div class="ht-card-rank-tag" data-editable>${rankLabel}</div><div class="ht-card-name" data-editable>${name}</div><div class="ht-card-title" data-editable>${title}</div><div class="ht-card-status" id="statuslabel-${uid}"><span class="ht-card-status-dot"></span><span>Offline</span></div></div></div><div class="ht-card-deco">${deco}</div>`;
-        card.querySelectorAll('[data-editable]').forEach(el=>{el.addEventListener('input',markUnsaved);el.setAttribute('contenteditable',editModeOn?'true':'false');});
-        const addBtn=grid.querySelector('.add-member-btn');if(addBtn)grid.insertBefore(card,addBtn);else grid.appendChild(card);
-        if(dcid&&/^\d{17,20}$/.test(dcid)){IDS[uid]=dcid;await saveIdsShared();fetchLanyard(dcid,uid);}
-        adminModalClose();await adminSaveAll();showToast('Mitglied hinzugefügt & für alle gespeichert');
+  // ─── ADD MEMBER ───
+  function adminAddMemberToGrid(grid) {
+    const section = grid.closest('.ht-rank-section');
+    const pill = section?.querySelector('.ht-rank-pill');
+    const rankLabel = pill?.textContent.trim() || 'Rang';
+    const rankKey = grid.getAttribute('data-rank') || 'custom';
+    const decoMap = {inhaber:'INH', sl:'SL', tl:'TL'};
+    const deco = decoMap[rankKey] || rankLabel.slice(0,3).toUpperCase();
+
+    adminModalOpen('Mitglied hinzufügen', `Rang: ${rankLabel}`,
+      `<div class="admin-field"><label>Name</label><input id="mf-name" type="text" placeholder="P I Name" ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Titel</label><input id="mf-title" type="text" placeholder="${rankLabel}" ${FIELD_STYLE}></div>
+       <div class="admin-field"><label>Discord ID (Lanyard, optional)</label><input id="mf-dcid" type="text" placeholder="123456789012345678" ${FIELD_STYLE}><div class="field-hint">Leer lassen → später über Discord-Button setzen.</div></div>`,
+      async () => {
+        const name = document.getElementById('mf-name')?.value.trim() || 'Neues Mitglied';
+        const title = document.getElementById('mf-title')?.value.trim() || rankLabel;
+        const dcid = document.getElementById('mf-dcid')?.value.trim() || '';
+        const letter = name.charAt(name.lastIndexOf(' ')+1).toUpperCase() || name.charAt(0).toUpperCase();
+        const uid = `${rankKey}-${Date.now()}`;
+
+        const card = document.createElement('div');
+        card.className = `ht-card`;
+        card.setAttribute('data-member-id', uid);
+        card.innerHTML = `
+          <div class="ht-admin-bar">
+            <button class="ht-adm-btn" onclick="openMemberEditModal('${uid}')"><i class="ti ti-pencil"></i></button>
+            <button class="ht-adm-btn" onclick="openLanyardModal('${uid}')"><i class="ti ti-brand-discord"></i></button>
+            <button class="ht-adm-btn del" onclick="deleteMember('${uid}')"><i class="ti ti-trash"></i></button>
+          </div>
+          <div class="ht-card-inner">
+            <div class="dc-avatar-wrap">
+              <div class="dc-avatar-placeholder">${letter}</div>
+              <span class="dc-status" id="status-${uid}"></span>
+            </div>
+            <div class="ht-card-info">
+              <div class="ht-card-rank-tag" data-editable>${rankLabel}</div>
+              <div class="ht-card-name" data-editable>${name}</div>
+              <div class="ht-card-title" data-editable>${title}</div>
+              <div class="ht-card-status" id="statuslabel-${uid}"><span class="ht-card-status-dot"></span><span>Offline</span></div>
+            </div>
+          </div>
+          <div class="ht-card-deco">${deco}</div>`;
+        card.querySelectorAll('[data-editable]').forEach(el => {
+          el.addEventListener('input', markUnsaved);
+          el.setAttribute('contenteditable', editModeOn?'true':'false');
+        });
+        const addBtn = grid.querySelector('.add-member-btn');
+        if (addBtn) grid.insertBefore(card, addBtn); else grid.appendChild(card);
+        if (dcid && /^\d{17,20}$/.test(dcid)) { IDS[uid]=dcid; await saveIdsShared(); fetchLanyard(dcid, uid); }
+        adminModalClose();
+        await adminSaveAll();
+        showToast('Mitglied hinzugefügt & für alle gespeichert');
       }
     );
   }
-  window.adminAddMemberToGrid=adminAddMemberToGrid;
+  window.adminAddMemberToGrid = adminAddMemberToGrid;
 
-  async function deleteMember(memberId){
-    const card=document.querySelector(`[data-member-id="${memberId}"]`);if(!card)return;
-    const name=card.querySelector('.ht-card-name')?.textContent||'Mitglied';
-    confirmOpen('Mitglied entfernen?',`"${name}" wird aus dem High-Team entfernt.`,async()=>{card.remove();delete IDS[memberId];await saveIdsShared();await adminSaveAll();showToast('Mitglied entfernt & gespeichert');});
+  async function deleteMember(memberId) {
+    const card = document.querySelector(`[data-member-id="${memberId}"]`);
+    if (!card) return;
+    const name = card.querySelector('.ht-card-name')?.textContent || 'Mitglied';
+    confirmOpen('Mitglied entfernen?', `"${name}" wird aus dem High-Team entfernt.`,
+      async () => {
+        card.remove();
+        delete IDS[memberId];
+        await saveIdsShared();
+        await adminSaveAll();
+        showToast('Mitglied entfernt & gespeichert');
+      });
   }
-  window.deleteMember=deleteMember;
+  window.deleteMember = deleteMember;
 
-  function adminAddRankSection(){
-    showTab('highteam',document.querySelector('[data-tab=highteam]'));
-    adminModalOpen('Neue Rang-Kategorie','Neue Kategorie erstellen',
-      `<div class="admin-field"><label>Rang-Name</label><input id="rs-name" type="text" placeholder="z.B. Co-Inhaber, Moderator..." ${FS}></div>`,
-      async()=>{
-        const name=document.getElementById('rs-name')?.value.trim();
-        if(!name){showToast('Name darf nicht leer sein',true);return;}
-        const rankKey='custom-'+Date.now();
-        const newSection=createRankSection(name,rankKey);
+  // ─── ADD RANK SECTION ───
+  function adminAddRankSection() {
+    showTab('highteam', document.querySelector('[data-tab=highteam]'));
+    adminModalOpen('Neue Rang-Kategorie', 'Neue Kategorie erstellen',
+      `<div class="admin-field"><label>Rang-Name</label><input id="rs-name" type="text" placeholder="z.B. Co-Inhaber, Moderator..." ${FIELD_STYLE}></div>`,
+      async () => {
+        const name = document.getElementById('rs-name')?.value.trim();
+        if (!name) { showToast('Name darf nicht leer sein', true); return; }
+        const rankKey = 'custom-' + Date.now();
+        const newSection = createRankSection(name, rankKey);
         document.getElementById('ht-rank-sections').appendChild(newSection);
-        adminModalClose();await adminSaveAll();showToast(`Kategorie "${name}" erstellt & gespeichert`);
+        adminModalClose();
+        await adminSaveAll();
+        showToast(`Kategorie "${name}" erstellt & gespeichert`);
       }
     );
   }
-  window.adminAddRankSection=adminAddRankSection;
+  window.adminAddRankSection = adminAddRankSection;
 
-  function createRankSection(rankName,rankKey){
-    const sec=document.createElement('div');sec.className='ht-rank-section';sec.setAttribute('data-rank',rankKey);
-    sec.innerHTML=`<div class="ht-rank-header"><i class="ti ti-star ht-rank-icon"></i><span class="ht-rank-pill" data-editable>${rankName}</span><div class="ht-rank-line"></div><button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button></div><div class="ht-grid" data-rank="${rankKey}"></div>`;
-    const grid=sec.querySelector('.ht-grid');
-    const addBtn=document.createElement('button');addBtn.className='add-member-btn';addBtn.innerHTML='<i class="ti ti-user-plus"></i> Mitglied hinzufügen';addBtn.onclick=()=>adminAddMemberToGrid(grid);grid.appendChild(addBtn);
-    sec.querySelectorAll('[data-editable]').forEach(el=>{el.setAttribute('contenteditable',editModeOn?'true':'false');el.addEventListener('input',markUnsaved);});
+  function createRankSection(rankName, rankKey) {
+    const sec = document.createElement('div');
+    sec.className = 'ht-rank-section';
+    sec.setAttribute('data-rank', rankKey);
+    sec.innerHTML = `
+      <div class="ht-rank-header">
+        <i class="ti ti-star ht-rank-icon"></i>
+        <span class="ht-rank-pill" data-editable>${rankName}</span>
+        <div class="ht-rank-line"></div>
+        <button class="rank-section-del-btn" onclick="deleteRankSection(this)"><i class="ti ti-trash"></i></button>
+      </div>
+      <div class="ht-grid" data-rank="${rankKey}"></div>`;
+    const grid = sec.querySelector('.ht-grid');
+    const addBtn = document.createElement('button');
+    addBtn.className = 'add-member-btn';
+    addBtn.innerHTML = '<i class="ti ti-user-plus"></i> Mitglied hinzufügen';
+    addBtn.onclick = () => adminAddMemberToGrid(grid);
+    grid.appendChild(addBtn);
+    sec.querySelectorAll('[data-editable]').forEach(el => {
+      el.setAttribute('contenteditable', editModeOn?'true':'false');
+      el.addEventListener('input', markUnsaved);
+    });
     return sec;
   }
 
-  async function deleteRankSection(btn){
-    const section=btn.closest('.ht-rank-section');
-    const name=section?.querySelector('.ht-rank-pill')?.textContent.trim()||'Kategorie';
-    const memberCount=section?.querySelectorAll('.ht-card').length||0;
-    confirmOpen(`Kategorie "${name}" löschen?`,memberCount>0?`${memberCount} Mitglied(er) werden entfernt.`:'Die Kategorie wird entfernt.',async()=>{
-      section.querySelectorAll('[data-member-id]').forEach(card=>{delete IDS[card.getAttribute('data-member-id')];});
-      await saveIdsShared();section.remove();await adminSaveAll();showToast('Kategorie entfernt & gespeichert');
-    });
+  async function deleteRankSection(btn) {
+    const section = btn.closest('.ht-rank-section');
+    const name = section?.querySelector('.ht-rank-pill')?.textContent.trim() || 'Kategorie';
+    const memberCount = section?.querySelectorAll('.ht-card').length || 0;
+    confirmOpen(
+      `Kategorie "${name}" löschen?`,
+      memberCount > 0 ? `${memberCount} Mitglied(er) werden entfernt.` : 'Die Kategorie wird entfernt.',
+      async () => {
+        section.querySelectorAll('[data-member-id]').forEach(card => {
+          delete IDS[card.getAttribute('data-member-id')];
+        });
+        await saveIdsShared();
+        section.remove();
+        await adminSaveAll();
+        showToast('Kategorie entfernt & gespeichert');
+      }
+    );
   }
-  window.deleteRankSection=deleteRankSection;
+  window.deleteRankSection = deleteRankSection;
 
-  window.addEventListener('scroll',()=>{document.getElementById('toTop').classList.toggle('show',window.scrollY>400);});
+  // ─── SCROLL-TO-TOP ───
+  window.addEventListener('scroll', () => {
+    document.getElementById('toTop').classList.toggle('show', window.scrollY > 400);
+  });
 </script>
 </body>
 </html>
